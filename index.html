@@ -2678,14 +2678,14 @@
           appendChatMessage('model', reply);
         } else {
           const errData = await response.json().catch(() => ({}));
-          throw new Error(errData.error || 'Error al conectar con el servidor.');
+          throw new Error(errData.error || ('Error ' + response.status + ' al conectar con el servidor.'));
         }
       } catch (err) {
         removeChatLoading(loadingBubbleId);
         console.warn('Chat request failed, providing local agronomist knowledge:', err.message);
         
         // Smart contextual fallback based on Sopachuy agriculture
-        let fallbackReply = `(Respuesta local): Para cultivos en Sopachuy recomendamos mantener buenas zanjas de drenaje y aplicar abono orgánico fermentado. Si tienes problemas de plagas como gusano cogollero, usa ceniza o caldo de ajo y ají.`;
+        let fallbackReply = `(Respuesta local - la IA no respondió: ${err.message}): Para cultivos en Sopachuy recomendamos mantener buenas zanjas de drenaje y aplicar abono orgánico fermentado. Si tienes problemas de plagas como gusano cogollero, usa ceniza o caldo de ajo y ají.`;
         if (text.toLowerCase().includes('tizón') || text.toLowerCase().includes('lancha')) {
           fallbackReply = `Para el tizón tardío en Sopachuy: Aplica Caldo Bordelés al 1% preventivamente tras lluvias continuas. Asegúrate de aporcar alto y cosechar a tiempo.`;
         } else if (text.toLowerCase().includes('siembra') || text.toLowerCase().includes('fecha')) {
