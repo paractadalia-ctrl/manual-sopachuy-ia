@@ -1,0 +1,8 @@
+{
+  "name": "Manual Digital Agrícola de Sopachuy",
+  "description": "Manual técnico e interactivo de cultivos, plagas y calendario agrícola para los productores y estudiantes de Sopachuy, Chuquisaca, Bolivia. Por Claudio Jimenez Aramayo.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

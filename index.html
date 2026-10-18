@@ -1,0 +1,3123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Manual Digital Agrícola de Sopachuy</title>
+  <meta name="description" content="Manual técnico e interactivo de cultivos, plagas y calendario agrícola para los productores y estudiantes de Sopachuy, Chuquisaca, Bolivia. Por Claudio Jimenez Aramayo." />
+  <meta property="og:title" content="Manual Digital Agrícola de Sopachuy" />
+  <meta property="og:description" content="Guía agrícola de valle: cultivos, plagas, abonos orgánicos y calendario lunar/climático de Sopachuy, Chuquisaca." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#15803d" />
+
+  <!-- Tailwind CSS via CDN with custom agricultural palette -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            agro: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              200: '#bbf7d0',
+              300: '#86efac',
+              400: '#4ade80',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d', // Verde bosque principal
+              800: '#166534',
+              900: '#14532d',
+            },
+            earth: {
+              50: '#fffbeb',
+              100: '#fef3c7',
+              200: '#fde68a',
+              300: '#fcd34d',
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+              700: '#b45309', // Tono tierra/ámbar
+              800: '#92400e',
+              900: '#78350f',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Lucide Icons via CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Custom scrollbar and accessibility styles */
+    html {
+      scroll-behavior: smooth;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      background-color: #f8fafc;
+      color: #0f172a;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+    .touch-target {
+      min-height: 44px;
+      min-width: 44px;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-50 selection:bg-agro-200 selection:text-agro-900 pb-20 md:pb-8">
+
+  <!-- TOP BAR / HEADER -->
+  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+      <!-- Brand & Project Info -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-agro-700 text-white flex items-center justify-center shadow-xs shrink-0">
+          <i data-lucide="sprout" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <h1 class="text-base sm:text-lg font-bold text-slate-900 leading-tight">
+            Manual Digital Agrícola de Sopachuy
+          </h1>
+          <p class="text-xs text-slate-500 font-medium truncate max-w-[240px] sm:max-w-md">
+            Sopachuy, Chuquisaca · Claudio Jimenez Aramayo (6to A)
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick AI Tools Triggers -->
+      <div class="flex items-center gap-2">
+        <button
+          id="btnOpenChatbot"
+          class="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-lg bg-agro-700 text-white hover:bg-agro-800 transition-colors shadow-xs touch-target"
+          title="Abrir Asistente Agrónomo IA"
+          aria-label="Abrir Asistente Agrónomo Virtual IA"
+        >
+          <i data-lucide="bot" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Asistente IA</span>
+        </button>
+
+        <button
+          id="btnOpenImageGen"
+          class="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-lg bg-earth-700 text-white hover:bg-earth-800 transition-colors shadow-xs touch-target"
+          title="Generador de Imágenes Agrícolas IA"
+          aria-label="Abrir Generador de Imágenes Agrícolas IA"
+        >
+          <i data-lucide="image" class="w-4 h-4"></i>
+          <span class="hidden md:inline">Generar Imagen</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-6xl mx-auto px-4 py-5 flex-1 w-full space-y-6">
+
+    <!-- HERO & CONTEXT BANNER -->
+    <section class="bg-gradient-to-br from-agro-800 via-agro-700 to-earth-800 rounded-2xl text-white p-5 sm:p-7 shadow-sm relative overflow-hidden">
+      <div class="relative z-10 max-w-2xl space-y-2">
+        <div class="inline-flex items-center gap-2 text-xs font-medium bg-white/20 backdrop-blur-xs px-2.5 py-1 rounded-md text-agro-50">
+          <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+          <span>Valles de Chuquisaca · 2.000 a 2.400 msnm</span>
+        </div>
+        <h2 class="text-xl sm:text-3xl font-extrabold tracking-tight">
+          Guía Técnica para Productores y Estudiantes
+        </h2>
+        <p class="text-sm sm:text-base text-agro-100 leading-relaxed">
+          Consulta de siembras, cosechas, abonos orgánicos, identificación de plagas y labores mensuales adaptadas al clima de valle de Sopachuy. Acceso libre sin registro.
+        </p>
+
+        <!-- Quechua term tag helper -->
+        <div class="pt-2 flex flex-wrap items-center gap-2 text-xs text-agro-200">
+          <span class="font-semibold text-white">Vocabulario Quechua:</span>
+          <span class="bg-black/20 px-2 py-0.5 rounded">Tarpuy (Siembra)</span>
+          <span class="bg-black/20 px-2 py-0.5 rounded">Aymoray (Cosecha)</span>
+          <span class="bg-black/20 px-2 py-0.5 rounded">Allpa (Tierra)</span>
+          <span class="bg-black/20 px-2 py-0.5 rounded">Wanu (Abono)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODULE: MICROCLIMAS CERCANOS Y UBICACIÓN GPS (Google Maps & Search Grounding + Biociencias) -->
+    <section class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-2xs space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-xl bg-agro-100 text-agro-800 flex items-center justify-center font-bold">
+            <i data-lucide="compass" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h3 class="text-sm sm:text-base font-bold text-slate-900">
+              Ajuste por Ubicación y Microclimas de Sopachuy
+            </h3>
+            <p class="text-xs text-slate-500">
+              Calibra fechas de siembra y labores según altitud, topografía y datos botánicos C3/C4
+            </p>
+          </div>
+        </div>
+
+        <!-- Location action buttons -->
+        <div class="flex items-center gap-2">
+          <button
+            id="btnDetectGPS"
+            onclick="detectUserLocation();"
+            class="inline-flex items-center gap-1.5 px-3 py-2 bg-agro-700 hover:bg-agro-800 text-white rounded-xl text-xs font-semibold shadow-xs touch-target transition-all"
+            aria-label="Detectar mi ubicación actual con GPS"
+          >
+            <i data-lucide="crosshair" class="w-3.5 h-3.5"></i>
+            <span id="btnDetectGPSText">Detectar Ubicación GPS</span>
+          </button>
+
+          <button
+            id="btnLiveWeather"
+            onclick="fetchLiveWeather();"
+            class="inline-flex items-center gap-1.5 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold touch-target transition-all border border-slate-200"
+            aria-label="Consultar clima en vivo con Google Search"
+          >
+            <i data-lucide="cloud-rain" class="w-3.5 h-3.5 text-blue-600"></i>
+            <span class="hidden sm:inline">Clima en Vivo</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Microclimate Selectors -->
+      <div class="space-y-2">
+        <div class="flex items-center justify-between text-xs text-slate-600">
+          <span class="font-semibold">Zonas y microclimas de Sopachuy:</span>
+          <span id="gpsCoordsBadge" class="hidden font-mono text-[11px] text-agro-700 bg-agro-50 px-2 py-0.5 rounded"></span>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2" id="microclimateZoneButtons">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
+      <!-- Active Microclimate Recommendation Panel -->
+      <div id="microclimateSummaryCard" class="bg-agro-50/70 border border-agro-200 rounded-xl p-4 space-y-3 transition-all">
+        <!-- Injected via JS -->
+      </div>
+    </section>
+
+    <!-- MODULE A: BUSCADOR EN TIEMPO REAL & FILTROS RÁPIDOS -->
+    <section class="space-y-3">
+      <!-- Search Bar -->
+      <div class="relative">
+        <label for="searchInput" class="sr-only">Buscar por cultivo, variedad o síntoma</label>
+        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+          <i data-lucide="search" class="w-5 h-5"></i>
+        </div>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Busca cultivo ('papa', 'maíz') o síntoma ('hojas amarillas', 'gusano', 'manchas')..."
+          class="w-full pl-11 pr-10 py-3.5 bg-white border border-slate-300 rounded-xl text-slate-900 placeholder-slate-400 text-sm sm:text-base focus:outline-hidden focus:ring-2 focus:ring-agro-600 focus:border-agro-600 shadow-2xs transition-all"
+        />
+        <button
+          id="btnClearSearch"
+          class="hidden absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600"
+          aria-label="Limpiar búsqueda"
+        >
+          <i data-lucide="x-circle" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Quick Filter Buttons / Segmented Tabs -->
+      <div class="flex items-center gap-1.5 p-1 bg-slate-200/70 rounded-xl overflow-x-auto custom-scrollbar">
+        <button
+          data-filter="all"
+          class="filter-tab flex-1 min-w-[75px] py-2 px-3 text-xs sm:text-sm font-semibold rounded-lg transition-all text-center touch-target bg-white text-slate-900 shadow-xs"
+        >
+          Todos
+        </button>
+        <button
+          data-filter="cultivos"
+          class="filter-tab flex-1 min-w-[85px] py-2 px-3 text-xs sm:text-sm font-semibold rounded-lg transition-all text-center touch-target text-slate-600 hover:text-slate-900"
+        >
+          Cultivos
+        </button>
+        <button
+          data-filter="plagas"
+          class="filter-tab flex-1 min-w-[150px] py-2 px-3 text-xs sm:text-sm font-semibold rounded-lg transition-all text-center touch-target text-slate-600 hover:text-slate-900"
+        >
+          Plagas y Enfermedades
+        </button>
+        <button
+          data-filter="calendario"
+          class="filter-tab flex-1 min-w-[95px] py-2 px-3 text-xs sm:text-sm font-semibold rounded-lg transition-all text-center touch-target text-slate-600 hover:text-slate-900"
+        >
+          Calendario
+        </button>
+      </div>
+
+      <!-- Active Search Summary -->
+      <div id="searchFeedback" class="hidden text-xs text-slate-500 px-1 flex items-center justify-between">
+        <span id="searchFeedbackText">Mostrando resultados...</span>
+        <button id="btnResetFilters" class="text-agro-700 hover:underline font-medium">Restablecer filtros</button>
+      </div>
+    </section>
+
+    <!-- CONTENT DISPLAY CONTAINER -->
+    <div id="contentSection" class="space-y-8">
+
+      <!-- SECTION: CULTIVOS -->
+      <section id="sectionCultivos" class="space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+          <div class="flex items-center gap-2">
+            <div class="w-7 h-7 rounded-lg bg-agro-100 text-agro-700 flex items-center justify-center">
+              <i data-lucide="sprout" class="w-4 h-4"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900">Fichas de Cultivos de Sopachuy</h3>
+          </div>
+          <span id="badgeCountCultivos" class="text-xs font-semibold text-slate-500"></span>
+        </div>
+
+        <div id="gridCultivos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Dynamic Crop Cards injected via JS -->
+        </div>
+      </section>
+
+      <!-- SECTION: PLAGAS Y ENFERMEDADES -->
+      <section id="sectionPlagas" class="space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+          <div class="flex items-center gap-2">
+            <div class="w-7 h-7 rounded-lg bg-earth-100 text-earth-800 flex items-center justify-center">
+              <i data-lucide="shield-alert" class="w-4 h-4"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900">Identificación de Plagas y Enfermedades</h3>
+          </div>
+          <span id="badgeCountPlagas" class="text-xs font-semibold text-slate-500"></span>
+        </div>
+
+        <div id="gridPlagas" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Dynamic Pest Cards injected via JS -->
+        </div>
+      </section>
+
+      <!-- SECTION: CALENDARIO AGRÍCOLA DIGITAL INTERACTIVO -->
+      <section id="sectionCalendario" class="space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+          <div class="flex items-center gap-2">
+            <div class="w-7 h-7 rounded-lg bg-agro-100 text-agro-700 flex items-center justify-center">
+              <i data-lucide="calendar" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-slate-900">Calendario Agrícola Digital de Sopachuy</h3>
+              <p class="text-xs text-slate-500">Ciclos de siembra, cosecha y labores del valle mes a mes</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Monthly Navigation Pills -->
+        <div class="bg-white p-3 rounded-2xl border border-slate-200 shadow-2xs space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-700 uppercase tracking-wide">Selecciona el mes a consultar:</span>
+            <span id="currentMonthIndicator" class="text-xs font-semibold text-agro-700 bg-agro-50 px-2 py-0.5 rounded"></span>
+          </div>
+
+          <!-- 12 Months Horizontal Scroller -->
+          <div id="monthSelectorContainer" class="flex gap-2 overflow-x-auto pb-1 custom-scrollbar">
+            <!-- Injected month buttons (Ene - Dic) -->
+          </div>
+        </div>
+
+        <!-- Month Detailed Card View -->
+        <div id="monthDetailCard" class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4 transition-all">
+          <!-- Injected dynamically based on selected month -->
+        </div>
+      </section>
+
+      <!-- EMPTY SEARCH RESULT STATE -->
+      <div id="noResultsState" class="hidden text-center py-12 px-4 bg-white rounded-2xl border border-dashed border-slate-300 space-y-3">
+        <div class="w-12 h-12 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto">
+          <i data-lucide="search-x" class="w-6 h-6"></i>
+        </div>
+        <h4 class="text-base font-bold text-slate-800">No se encontraron resultados</h4>
+        <p class="text-xs text-slate-500 max-w-sm mx-auto">
+          Intenta con otros términos como "papa", "maíz", "gusano", "tizón", o limpia la barra de búsqueda.
+        </p>
+        <button
+          onclick="document.getElementById('searchInput').value = ''; handleSearch();"
+          class="px-4 py-2 bg-agro-700 text-white rounded-lg text-xs font-semibold hover:bg-agro-800 transition-colors"
+        >
+          Ver todo el catálogo
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="mt-auto bg-slate-900 text-slate-300 py-6 border-t border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+      <div class="text-center sm:text-left space-y-1">
+        <p class="font-bold text-white text-sm">Manual Digital Agrícola de Sopachuy</p>
+        <p class="text-slate-400">
+          Proyecto académico desarrollado por <strong class="text-agro-400">Claudio Jimenez Aramayo</strong> (6to A, Sistemas Informáticos).
+        </p>
+        <p class="text-slate-500">Municipio de Sopachuy, Provincia Tomina, Chuquisaca, Bolivia.</p>
+      </div>
+
+      <!-- Discreet Admin Button -->
+      <div class="flex items-center gap-3">
+        <button
+          id="btnOpenAdminModal"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs border border-slate-700 transition-colors touch-target"
+          title="Panel de Administración (requiere PIN)"
+          aria-label="Abrir Panel de Administración"
+        >
+          <i data-lucide="lock" class="w-3.5 h-3.5"></i>
+          <span>Panel Admin</span>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MOBILE BOTTOM BAR (Touch-First Quick Actions) -->
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-4 py-2 flex items-center justify-around shadow-lg">
+    <button
+      onclick="setFilterTab('cultivos');"
+      class="flex flex-col items-center gap-0.5 text-slate-600 hover:text-agro-700 touch-target focus:outline-hidden"
+    >
+      <i data-lucide="sprout" class="w-5 h-5"></i>
+      <span class="text-[10px] font-medium">Cultivos</span>
+    </button>
+    <button
+      onclick="setFilterTab('plagas');"
+      class="flex flex-col items-center gap-0.5 text-slate-600 hover:text-earth-700 touch-target focus:outline-hidden"
+    >
+      <i data-lucide="shield-alert" class="w-5 h-5"></i>
+      <span class="text-[10px] font-medium">Plagas</span>
+    </button>
+    <button
+      onclick="setFilterTab('calendario');"
+      class="flex flex-col items-center gap-0.5 text-slate-600 hover:text-agro-700 touch-target focus:outline-hidden"
+    >
+      <i data-lucide="calendar" class="w-5 h-5"></i>
+      <span class="text-[10px] font-medium">Calendario</span>
+    </button>
+    <button
+      onclick="openChatModal();"
+      class="flex flex-col items-center gap-0.5 text-agro-700 font-semibold touch-target focus:outline-hidden"
+    >
+      <i data-lucide="bot" class="w-5 h-5"></i>
+      <span class="text-[10px]">Asistente IA</span>
+    </button>
+  </nav>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: DETALLE DE CULTIVO O PLAGA -->
+  <!-- ======================================================== -->
+  <div id="detailModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden my-auto animate-in fade-in zoom-in-95 duration-150">
+      
+      <!-- Modal Header -->
+      <div id="detailModalHeader" class="px-6 py-4 bg-agro-700 text-white flex items-start justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span id="detailBadgeCategory" class="text-xs uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-white/20"></span>
+            <span id="detailQuechua" class="text-xs text-agro-100 font-medium"></span>
+          </div>
+          <h3 id="detailTitle" class="text-xl sm:text-2xl font-black mt-1"></h3>
+          <p id="detailSubtitle" class="text-xs sm:text-sm text-agro-100"></p>
+        </div>
+        <button
+          onclick="closeDetailModal();"
+          class="text-white/80 hover:text-white p-1 rounded-lg touch-target flex items-center justify-center"
+          aria-label="Cerrar ventana"
+        >
+          <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+      </div>
+
+      <!-- Modal Body (Scrollable) -->
+      <div id="detailModalBody" class="p-6 space-y-5 overflow-y-auto custom-scrollbar flex-1 text-sm text-slate-700">
+        <!-- Injected dynamically -->
+      </div>
+
+      <!-- Modal Footer with TTS Speech Audio button -->
+      <div class="px-6 py-3 bg-slate-50 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3">
+        <button
+          id="btnPlayDetailTTS"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-agro-700 hover:bg-agro-800 text-white rounded-xl text-xs sm:text-sm font-semibold transition-all shadow-xs touch-target"
+        >
+          <i data-lucide="volume-2" class="w-4 h-4"></i>
+          <span id="btnPlayDetailTTSText">Escuchar Ficha (Audio TTS)</span>
+        </button>
+
+        <button
+          onclick="closeDetailModal();"
+          class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-800 rounded-xl text-xs sm:text-sm font-semibold transition-all touch-target"
+        >
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: ASISTENTE AGRÓNOMO VIRTUAL IA (Chatbot Multi-Turn) -->
+  <!-- ======================================================== -->
+  <div id="chatModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-900/60 backdrop-blur-xs">
+    <div class="bg-white rounded-3xl max-w-2xl w-full h-[85vh] sm:h-[80vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
+      
+      <!-- Chat Header -->
+      <div class="px-5 py-3.5 bg-agro-800 text-white flex items-center justify-between gap-3 border-b border-agro-700">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-agro-600 flex items-center justify-center text-white">
+            <i data-lucide="bot" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-sm sm:text-base font-bold leading-tight">Asistente Agrónomo IA de Sopachuy</h3>
+            <p class="text-[11px] text-agro-200">Asesoramiento técnico de valle y agroecología</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <!-- Model selector for user control -->
+          <select
+            id="chatModelSelect"
+            class="bg-agro-900 text-agro-100 text-[11px] py-1 px-2 rounded-lg border border-agro-600 focus:outline-hidden"
+            title="Seleccionar modelo Gemini"
+          >
+            <option value="gemini-3.8-flash" selected>gemini-3.8-flash (General)</option>
+            <option value="gemini-4-argon">gemini-4-argon (Razonamiento Complejo)</option>
+            <option value="gemini-3.1-flash-lite">gemini-3.1-flash-lite (Rápido)</option>
+          </select>
+
+          <button
+            onclick="closeChatModal();"
+            class="text-white/80 hover:text-white p-1 rounded-lg touch-target flex items-center justify-center"
+            aria-label="Cerrar Chatbot"
+          >
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick prompts for farmers -->
+      <div class="px-4 py-2 bg-agro-50 border-b border-agro-100 flex items-center gap-2 overflow-x-auto custom-scrollbar text-xs">
+        <span class="text-agro-800 font-semibold whitespace-nowrap text-[11px]">Sugerencias:</span>
+        <button onclick="sendQuickPrompt('¿Cómo preparo caldo bordelés para el tizón en Sopachuy?');" class="bg-white border border-agro-200 text-agro-800 px-2.5 py-1 rounded-full whitespace-nowrap hover:bg-agro-100 transition-colors">
+          Caldo bordelés
+        </button>
+        <button onclick="sendQuickPrompt('¿Cuál es la mejor fecha de siembra de papa Imilla?');" class="bg-white border border-agro-200 text-agro-800 px-2.5 py-1 rounded-full whitespace-nowrap hover:bg-agro-100 transition-colors">
+          Siembra de papa
+        </button>
+        <button onclick="sendQuickPrompt('¿Cómo combatir el gusano cogollero del maíz orgánicamente?');" class="bg-white border border-agro-200 text-agro-800 px-2.5 py-1 rounded-full whitespace-nowrap hover:bg-agro-100 transition-colors">
+          Gusano cogollero
+        </button>
+        <button onclick="sendQuickPrompt('¿Qué cuidados requiere el duraznero en julio y agosto?');" class="bg-white border border-agro-200 text-agro-800 px-2.5 py-1 rounded-full whitespace-nowrap hover:bg-agro-100 transition-colors">
+          Poda de durazno
+        </button>
+      </div>
+
+      <!-- Messages Thread (Scrollable) -->
+      <div id="chatMessagesThread" class="flex-1 p-4 overflow-y-auto custom-scrollbar space-y-3 bg-slate-50 text-sm">
+        <!-- Initial greeting -->
+        <div class="flex items-start gap-2.5 max-w-[85%]">
+          <div class="w-7 h-7 rounded-lg bg-agro-700 text-white flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="bot" class="w-4 h-4"></i>
+          </div>
+          <div class="bg-white p-3.5 rounded-2xl rounded-tl-xs border border-slate-200 shadow-2xs text-slate-800 space-y-1">
+            <p class="font-semibold text-agro-800 text-xs">Asistente Agrónomo de Sopachuy</p>
+            <p>
+              ¡Allianllachu, estimado productor o estudiante! Soy tu asistente técnico para el valle de Sopachuy. Puedes consultarme sobre siembras, control de plagas, preparación de bioles, abonos y rotación de cultivos. ¿En qué labor de tu parcela te puedo orientar hoy?
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chat Input Area -->
+      <form id="chatForm" onsubmit="handleChatSubmit(event);" class="p-3 bg-white border-t border-slate-200 flex items-center gap-2">
+        <input
+          type="text"
+          id="chatInput"
+          placeholder="Escribe tu consulta agrícola para Sopachuy..."
+          class="flex-1 px-4 py-2.5 bg-slate-100 border border-slate-300 rounded-xl text-sm focus:outline-hidden focus:ring-2 focus:ring-agro-600 focus:bg-white transition-all"
+          autocomplete="off"
+        />
+        <button
+          type="submit"
+          id="btnSendChat"
+          class="px-4 py-2.5 bg-agro-700 hover:bg-agro-800 text-white rounded-xl text-sm font-semibold transition-colors flex items-center gap-1.5 touch-target shadow-xs"
+        >
+          <span>Enviar</span>
+          <i data-lucide="send" class="w-4 h-4"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: GENERADOR DE IMÁGENES AGRÍCOLAS IA (gemini-3-pro-image-preview) -->
+  <!-- ======================================================== -->
+  <div id="imageGenModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-xl w-full shadow-2xl border border-slate-200 overflow-hidden my-auto">
+      
+      <!-- Header -->
+      <div class="px-5 py-4 bg-earth-800 text-white flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-xl bg-earth-600 flex items-center justify-center">
+            <i data-lucide="image" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-bold">Generador de Imágenes Agrícolas IA</h3>
+            <p class="text-xs text-earth-200">Modelo Gemini 3 Pro con selección de resolución</p>
+          </div>
+        </div>
+        <button onclick="closeImageGenModal();" class="text-white/80 hover:text-white p-1 rounded-lg">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Body -->
+      <div class="p-5 space-y-4 text-sm text-slate-700">
+        <div>
+          <label for="imagePromptInput" class="block text-xs font-bold text-slate-800 mb-1">
+            Descripción de la planta, cultivo o plaga:
+          </label>
+          <textarea
+            id="imagePromptInput"
+            rows="3"
+            placeholder="Ejemplo: Parcela de maíz choclero en floración en las laderas del valle de Sopachuy con cielo azul despejado y surcos de tierra negra fértil..."
+            class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm focus:outline-hidden focus:ring-2 focus:ring-earth-600"
+          ></textarea>
+        </div>
+
+        <!-- Size Affordance: 1K, 2K, 4K as required -->
+        <div>
+          <label class="block text-xs font-bold text-slate-800 mb-1.5">
+            Resolución de Imagen (Tamaño):
+          </label>
+          <div class="grid grid-cols-3 gap-2">
+            <label class="flex items-center justify-center gap-1.5 p-2 rounded-xl border border-slate-200 text-xs font-semibold cursor-pointer has-checked:border-earth-700 has-checked:bg-earth-50 has-checked:text-earth-900">
+              <input type="radio" name="imageResolution" value="1K" checked class="accent-earth-700" />
+              <span>1K (Estándar)</span>
+            </label>
+            <label class="flex items-center justify-center gap-1.5 p-2 rounded-xl border border-slate-200 text-xs font-semibold cursor-pointer has-checked:border-earth-700 has-checked:bg-earth-50 has-checked:text-earth-900">
+              <input type="radio" name="imageResolution" value="2K" class="accent-earth-700" />
+              <span>2K (Alta Calidad)</span>
+            </label>
+            <label class="flex items-center justify-center gap-1.5 p-2 rounded-xl border border-slate-200 text-xs font-semibold cursor-pointer has-checked:border-earth-700 has-checked:bg-earth-50 has-checked:text-earth-900">
+              <input type="radio" name="imageResolution" value="4K" class="accent-earth-700" />
+              <span>4K (Ultra Alta)</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Action Button -->
+        <button
+          id="btnGenerateImage"
+          onclick="triggerImageGeneration();"
+          class="w-full py-3 bg-earth-700 hover:bg-earth-800 text-white rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 shadow-sm touch-target"
+        >
+          <i data-lucide="sparkles" class="w-4 h-4"></i>
+          <span id="btnGenerateImageText">Generar Fotografía con IA</span>
+        </button>
+
+        <!-- Preview Container -->
+        <div id="imagePreviewContainer" class="hidden space-y-2 pt-2">
+          <p class="text-xs font-bold text-slate-700">Resultado Generado:</p>
+          <div class="relative rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 flex items-center justify-center min-h-[220px]">
+            <img id="generatedImageResult" alt="Imagen agrícola generada por Gemini" class="w-full h-auto object-cover max-h-80" />
+          </div>
+          <div class="flex items-center justify-between text-xs pt-1">
+            <span id="generatedImageMeta" class="text-slate-500"></span>
+            <a id="btnDownloadGenImage" download="cultivo_sopachuy.png" class="text-earth-700 font-bold hover:underline flex items-center gap-1">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i>
+              <span>Descargar imagen</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: CLIMA EN VIVO (Google Search Grounding) -->
+  <!-- ======================================================== -->
+  <div id="weatherModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-xl w-full shadow-2xl border border-slate-200 overflow-hidden my-auto animate-in fade-in zoom-in-95 duration-150">
+      <div class="px-5 py-4 bg-blue-800 text-white flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center">
+            <i data-lucide="cloud-sun" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-bold">Reporte Agroclimático en Vivo</h3>
+            <p class="text-xs text-blue-200">Datos verificados en tiempo real con Google Search</p>
+          </div>
+        </div>
+        <button onclick="closeWeatherModal();" class="text-white/80 hover:text-white p-1 rounded-lg">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="p-5 space-y-4 text-sm text-slate-700">
+        <div id="weatherContentContainer" class="space-y-3">
+          <div class="flex items-center gap-2 text-slate-500 text-xs py-4 justify-center">
+            <i data-lucide="loader" class="w-4 h-4 animate-spin text-blue-600"></i>
+            <span>Consultando fuentes meteorológicas para Sopachuy y Tomina...</span>
+          </div>
+        </div>
+
+        <!-- Google Search Grounding Sources -->
+        <div id="weatherSourcesContainer" class="hidden border-t border-slate-200 pt-3 space-y-2">
+          <p class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+            <i data-lucide="search" class="w-3.5 h-3.5 text-blue-600"></i>
+            <span>Fuentes Web Verificadas (Google Search Grounding):</span>
+          </p>
+          <div id="weatherSourcesList" class="flex flex-col gap-1.5 text-xs"></div>
+        </div>
+
+        <div class="flex items-center justify-end gap-2 pt-2 border-t border-slate-100">
+          <button onclick="closeWeatherModal();" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-800 font-semibold rounded-xl text-xs">
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: PANEL DE ADMINISTRACIÓN (PIN: 1234) -->
+  <!-- ======================================================== -->
+  <div id="adminModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[92vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden my-auto">
+      
+      <!-- Admin Header -->
+      <div class="px-6 py-4 bg-slate-900 text-white flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-xl bg-agro-600 flex items-center justify-center">
+            <i data-lucide="settings" class="w-4 h-4 text-white"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-bold">Panel de Administración</h3>
+            <p class="text-xs text-slate-400">Gestión de Cultivos, Plagas y Calendario de Sopachuy</p>
+          </div>
+        </div>
+        <button onclick="closeAdminModal();" class="text-slate-400 hover:text-white p-1 rounded-lg">
+          <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+      </div>
+
+      <!-- Admin PIN Auth Gate -->
+      <div id="adminPinGate" class="p-8 text-center space-y-4 max-w-sm mx-auto my-auto">
+        <div class="w-12 h-12 rounded-2xl bg-slate-100 text-slate-700 flex items-center justify-center mx-auto">
+          <i data-lucide="lock" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <h4 class="text-lg font-bold text-slate-900">Ingreso Administrativo</h4>
+          <p class="text-xs text-slate-500">Ingresa la clave de administración para modificar los datos (PIN por defecto: <strong>1234</strong>)</p>
+        </div>
+        <form onsubmit="handleAdminLogin(event);" class="space-y-3">
+          <input
+            type="password"
+            id="adminPinInput"
+            maxlength="10"
+            placeholder="PIN de acceso (ej. 1234)"
+            class="w-full text-center text-lg tracking-widest font-mono py-2.5 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-agro-600 focus:outline-hidden"
+          />
+          <button
+            type="submit"
+            class="w-full py-2.5 bg-agro-700 hover:bg-agro-800 text-white font-bold rounded-xl text-sm transition-colors shadow-xs"
+          >
+            Acceder al Panel
+          </button>
+          <p id="adminPinError" class="hidden text-xs text-red-600 font-semibold">PIN incorrecto. Intenta con 1234.</p>
+        </form>
+      </div>
+
+      <!-- Admin Dashboard Content (Visible after login) -->
+      <div id="adminDashboard" class="hidden flex-1 flex flex-col overflow-hidden">
+        
+        <!-- Tabs within Admin -->
+        <div class="px-6 py-2.5 bg-slate-100 border-b border-slate-200 flex items-center justify-between gap-2 overflow-x-auto">
+          <div class="flex items-center gap-1">
+            <button onclick="switchAdminTab('cultivos');" id="adminTabBtnCultivos" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-900 shadow-xs">
+              Cultivos
+            </button>
+            <button onclick="switchAdminTab('plagas');" id="adminTabBtnPlagas" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-900">
+              Plagas
+            </button>
+            <button onclick="switchAdminTab('calendario');" id="adminTabBtnCalendario" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-900">
+              Calendario
+            </button>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button
+              onclick="resetToDefaultData();"
+              class="px-2.5 py-1 text-xs font-medium text-red-600 hover:bg-red-50 rounded-lg border border-red-200 transition-colors"
+              title="Restablecer a datos originales de Sopachuy"
+            >
+              Restablecer datos
+            </button>
+            <button
+              onclick="adminLogout();"
+              class="px-2.5 py-1 text-xs font-medium text-slate-600 hover:bg-slate-200 rounded-lg"
+            >
+              Cerrar sesión
+            </button>
+          </div>
+        </div>
+
+        <!-- Admin Tab Panes (Scrollable) -->
+        <div class="p-6 overflow-y-auto custom-scrollbar flex-1 space-y-6">
+          
+          <!-- TAB 1: CULTIVOS ADMIN -->
+          <div id="adminPaneCultivos" class="space-y-6">
+            <div class="flex items-center justify-between">
+              <h4 class="text-sm font-bold text-slate-800">Listado y Registro de Cultivos</h4>
+              <button onclick="openCreateCropForm();" class="px-3 py-1.5 bg-agro-700 text-white rounded-lg text-xs font-bold hover:bg-agro-800 flex items-center gap-1">
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                <span>Nuevo Cultivo</span>
+              </button>
+            </div>
+
+            <!-- Crop Form (Hidden unless creating/editing) -->
+            <form id="formCrop" onsubmit="handleSaveCrop(event);" class="hidden bg-slate-50 border border-slate-300 rounded-2xl p-4 space-y-3">
+              <h5 id="formCropTitle" class="text-xs font-bold uppercase tracking-wider text-agro-800">Agregar Nuevo Cultivo</h5>
+              <input type="hidden" id="cropFormId" />
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                <div>
+                  <label class="block font-semibold text-slate-700 mb-1">Nombre del Cultivo *</label>
+                  <input type="text" id="cropFormName" required placeholder="Ej. Papa" class="w-full p-2 border rounded-lg bg-white" />
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-700 mb-1">Variedad *</label>
+                  <input type="text" id="cropFormVariety" required placeholder="Ej. Variedad Imilla" class="w-full p-2 border rounded-lg bg-white" />
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-700 mb-1">Nombre en Quechua (opcional)</label>
+                  <input type="text" id="cropFormQuechua" placeholder="Ej. Ch'oqe / Papa" class="w-full p-2 border rounded-lg bg-white" />
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-700 mb-1">Época de Siembra *</label>
+                  <input type="text" id="cropFormSowing" required placeholder="Ej. Octubre - Noviembre" class="w-full p-2 border rounded-lg bg-white" />
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-700 mb-1">Época de Cosecha *</label>
+                  <input type="text" id="cropFormHarvest" required placeholder="Ej. Marzo - Abril" class="w-full p-2 border rounded-lg bg-white" />
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-700 mb-1">Riego *</label>
+                  <input type="text" id="cropFormIrrigation" required placeholder="Ej. Riego por surcos semanal" class="w-full p-2 border rounded-lg bg-white" />
+                </div>
+              </div>
+
+              <div class="space-y-2 text-xs">
+                <div>
+                  <label class="block font-semibold text-slate-700 mb-1">Manejo del Suelo *</label>
+                  <textarea id="cropFormSoil" rows="2" required placeholder="Preparación del terreno y aporque..." class="w-full p-2 border rounded-lg bg-white"></textarea>
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-700 mb-1">Abono Orgánico *</label>
+                  <textarea id="cropFormManure" rows="2" required placeholder="Estiércol, compost, biol..." class="w-full p-2 border rounded-lg bg-white"></textarea>
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-700 mb-1">Cuidados Generales y Consejos de Valle *</label>
+                  <textarea id="cropFormCare" rows="2" required placeholder="Deshierbe, prevención de heladas..." class="w-full p-2 border rounded-lg bg-white"></textarea>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-end gap-2 pt-2 border-t border-slate-200">
+                <button type="button" onclick="cancelCropForm();" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-200 text-slate-700">
+                  Cancelar
+                </button>
+                <button type="submit" class="px-4 py-1.5 rounded-lg text-xs font-bold bg-agro-700 text-white hover:bg-agro-800">
+                  Guardar Cultivo
+                </button>
+              </div>
+            </form>
+
+            <!-- Table of Crops -->
+            <div id="adminCropsList" class="space-y-2">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- TAB 2: PLAGAS ADMIN -->
+          <div id="adminPanePlagas" class="hidden space-y-6">
+            <div class="flex items-center justify-between">
+              <h4 class="text-sm font-bold text-slate-800">Listado y Registro de Plagas</h4>
+              <button onclick="openCreatePestForm();" class="px-3 py-1.5 bg-earth-700 text-white rounded-lg text-xs font-bold hover:bg-earth-800 flex items-center gap-1">
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                <span>Nueva Plaga</span>
+              </button>
+            </div>
+
+            <!-- Pest Form -->
+            <form id="formPest" onsubmit="handleSavePest(event);" class="hidden bg-slate-50 border border-slate-300 rounded-2xl p-4 space-y-3">
+              <h5 id="formPestTitle" class="text-xs font-bold uppercase tracking-wider text-earth-800">Agregar Nueva Plaga</h5>
+              <input type="hidden" id="pestFormId" />
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                <div>
+                  <label class="block font-semibold text-slate-700 mb-1">Nombre de la Plaga o Enfermedad *</label>
+                  <input type="text" id="pestFormName" required placeholder="Ej. Gusano Cogollero" class="w-full p-2 border rounded-lg bg-white" />
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-700 mb-1">Nombre Científico (opcional)</label>
+                  <input type="text" id="pestFormScientific" placeholder="Ej. Spodoptera frugiperda" class="w-full p-2 border rounded-lg bg-white" />
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-700 mb-1">Cultivos que afecta *</label>
+                  <input type="text" id="pestFormCrops" required placeholder="Ej. Maíz, Sorgo" class="w-full p-2 border rounded-lg bg-white" />
+                </div>
+              </div>
+
+              <div class="space-y-2 text-xs">
+                <div>
+                  <label class="block font-semibold text-slate-700 mb-1">Descripción de Síntomas *</label>
+                  <textarea id="pestFormSymptoms" rows="2" required placeholder="Hojas perforadas, manchas..." class="w-full p-2 border rounded-lg bg-white"></textarea>
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-700 mb-1">Control Preventivo *</label>
+                  <textarea id="pestFormPreventive" rows="2" required placeholder="Rotación, fechas de siembra..." class="w-full p-2 border rounded-lg bg-white"></textarea>
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-700 mb-1">Control Correctivo *</label>
+                  <textarea id="pestFormCorrective" rows="2" required placeholder="Aplicaciones orgánicas, biopreparados..." class="w-full p-2 border rounded-lg bg-white"></textarea>
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-700 mb-1">Receta de Biopreparado Orgánico Casero</label>
+                  <textarea id="pestFormRecipe" rows="2" placeholder="Fórmula tradicional de caldos minerales o extractos..." class="w-full p-2 border rounded-lg bg-white"></textarea>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-end gap-2 pt-2 border-t border-slate-200">
+                <button type="button" onclick="cancelPestForm();" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-200 text-slate-700">
+                  Cancelar
+                </button>
+                <button type="submit" class="px-4 py-1.5 rounded-lg text-xs font-bold bg-earth-700 text-white hover:bg-earth-800">
+                  Guardar Plaga
+                </button>
+              </div>
+            </form>
+
+            <div id="adminPestsList" class="space-y-2">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- TAB 3: CALENDARIO ADMIN -->
+          <div id="adminPaneCalendario" class="space-y-4 hidden">
+            <h4 class="text-sm font-bold text-slate-800">Edición de Labores Mensuales de Sopachuy</h4>
+            <div id="adminCalendarList" class="space-y-3">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- JAVASCRIPT: LOGIC, PERSISTENCE, SEARCH, MODALS, GEMINI -->
+  <!-- ======================================================== -->
+  <script>
+    /**
+     * INITIAL_DATA: Default agricultural knowledge base for Sopachuy, Chuquisaca
+     */
+    const INITIAL_DATA = {
+      crops: [
+        {
+          id: "cultivo-1",
+          category: "cultivo",
+          name: "Papa",
+          quechuaName: "Papa / Ch'oqe",
+          variety: "Variedad Imilla (Blanca y Negra)",
+          sowingPeriod: "Octubre - Noviembre (Inicio de lluvias de valle)",
+          harvestPeriod: "Marzo - Abril (Cosecha principal 'Aymoray')",
+          soilManagement: "Suelo franco y bien mullido con arado profundo (25-30 cm). Realizar aporque alto cuando la planta alcance 20-25 cm para proteger los tubérculos del sol y la polilla.",
+          organicManure: "Abono de estiércol fermentado de ovino o bovino (5 a 8 t/ha) mezclado con ceniza vegetal para aportar potasio y mejorar la resistencia.",
+          irrigation: "Riego por surcos cada 7 a 10 días durante la fase vegetativa. Suspender el riego 15 días antes de la cosecha para curar la piel.",
+          generalCare: "Monitoreo permanente de tizón tardío tras lluvias prolongadas y deshierbe manual oportuno antes de la floración.",
+          valleyTips: "En el valle de Sopachuy, sembrar en parcelas con buen drenaje para evitar encharcamientos en las laderas.",
+          iconName: "sprout"
+        },
+        {
+          id: "cultivo-2",
+          category: "cultivo",
+          name: "Maíz",
+          quechuaName: "Sara",
+          variety: "Variedad Choclero y Blanco Criollo",
+          sowingPeriod: "Septiembre - Octubre (Siembra 'Mishka' temprana bajo riego)",
+          harvestPeriod: "Febrero - Marzo (Choclo tierno) y Mayo (Grano seco)",
+          soilManagement: "Suelos profundos, fértiles y con buen contenido de materia orgánica. Surcado a 80 cm entre hileras y 30 cm entre plantas.",
+          organicManure: "Incorporación de compost maduro y aplicaciones foliares de biol cada 15 días hasta el espigado.",
+          irrigation: "Riego crítico en germinación, floración femenina (aparición de pelos de choclo) y llenado de grano.",
+          generalCare: "Aporque preventivo contra el acame por vientos de valle y control precoz del gusano cogollero.",
+          valleyTips: "Tradición agrícola en Sopachuy: alternar hileras con poroto o calabaza para fijar nitrógeno natural al suelo.",
+          iconName: "wheat"
+        },
+        {
+          id: "cultivo-3",
+          category: "cultivo",
+          name: "Trigo de Valle",
+          quechuaName: "Trigu / Triku",
+          variety: "Variedad Tarabuco y Criollo",
+          sowingPeriod: "Mayo - Junio (Siembra de invierno bajo riego en planicies)",
+          harvestPeriod: "Octubre - Noviembre",
+          soilManagement: "Preparación fina del terreno para asegurar emergencia uniforme. Densidad de siembra de 100-120 kg/ha.",
+          organicManure: "Abono verde previo (vicia o haba incorporada al suelo) más enmienda con humus de lombriz.",
+          irrigation: "Riego ligero por inundación o manto cada 12-15 días en la época seca de invierno de Sopachuy.",
+          generalCare: "Vigilar presencia de roya lineal y malezas de hoja ancha durante el macollaje.",
+          valleyTips: "Aprovechar los descansos de las parcelas de maíz para rotar con trigo de invierno.",
+          iconName: "wheat"
+        },
+        {
+          id: "cultivo-4",
+          category: "cultivo",
+          name: "Durazno de Valle",
+          quechuaName: "Duraznu",
+          variety: "Ulincate y Gumucio Reyes",
+          sowingPeriod: "Junio - Julio (Injertos y trasplante a raíz desnuda)",
+          harvestPeriod: "Diciembre - Febrero (Fruta fresca de temporada)",
+          soilManagement: "Hoyos amplios (60x60x60 cm) con sustrato enriquecido. Poda de formación en vaso abierto y poda de fructificación en invierno.",
+          organicManure: "Corona de estiércol maduro (15 kg por árbol) aplicado al inicio de brotación primaveral.",
+          irrigation: "Riego localizado por goteo o cajetes semanales durante el cuajado y engorde del fruto.",
+          generalCare: "Raleo de frutos cuando tienen tamaño de nuez para lograr calibres comerciales de primera calidad.",
+          valleyTips: "Proteger las flores de las heladas tardías de septiembre con riegos nocturnos preventivos.",
+          iconName: "apple"
+        },
+        {
+          id: "cultivo-5",
+          category: "cultivo",
+          name: "Hortalizas: Cebolla y Tomate",
+          quechuaName: "Cebolla / Tomati",
+          variety: "Cebolla Arequipeña Roja / Tomate Río Grande",
+          sowingPeriod: "Almácigos en Marzo-Abril; Trasplante en Mayo-Junio",
+          harvestPeriod: "Septiembre - Noviembre",
+          soilManagement: "Camellones elevados con cobertura de paja o rastrojo (mulch) para conservar humedad en época seca.",
+          organicManure: "Biol enriquecido con harina de roca y ceniza, aplicado al pie de cada planta.",
+          irrigation: "Riego frecuente pero sin encharcar el cuello de la raíz para evitar la caída de plántulas.",
+          generalCare: "Tutorado en tomate y despunte de flores sobrantes. Deshierbe manual continuo.",
+          valleyTips: "Ideal para huertos familiares y micro-parcelas escolares en Sopachuy.",
+          iconName: "carrot"
+        }
+      ],
+      pests: [
+        {
+          id: "plaga-1",
+          category: "plaga",
+          name: "Gusano Cogollero",
+          scientificName: "Spodoptera frugiperda",
+          targetCrops: "Maíz, Sorgo y Gramíneas",
+          symptoms: "Hojas tiernas perforadas tipo perdigonada, cogollo carcomido y presencia abundante de excremento húmedo similar a aserrín en la garganta de la planta.",
+          preventiveControl: "Siembra temprana en época adecuada. Conservación de avispas parasitoides (Trichogramma) y trampas con melaza fermentada.",
+          correctiveControl: "Aplicación directa al cogollo de ceniza cernida con arena fina, o bioinsecticida a base de Bacillus thuringiensis.",
+          organicRecipe: "Extracto de Ajo y Ají picante: Moler 5 cabezas de ajo y 5 locotos con 1 litro de agua y una pizca de jabón neutro. Filtrar y diluir al 10% en mochila fumigadora.",
+          iconName: "bug"
+        },
+        {
+          id: "plaga-2",
+          category: "plaga",
+          name: "Polilla de la Papa",
+          scientificName: "Phthorimaea operculella",
+          targetCrops: "Papa en campo y almacén",
+          symptoms: "Minas translúcidas en hojas y galerías profundas con restos fecales en los tubérculos tanto en tierra como en depósitos de acopio.",
+          preventiveControl: "Aporque alto y compacto para no dejar tubérculos descubiertos. Cosecha inmediata una vez maduro el cultivo.",
+          correctiveControl: "Almacenar la papa seleccionada en capas intercaladas con hojas secas de muña (Minthostachys) o eucalipto.",
+          organicRecipe: "Polvo de Muña protectora: Secar hojas de muña a la sombra, pulverizarlas y espolvorear 500 g por cada quintal de papa almacenada.",
+          iconName: "alert-triangle"
+        },
+        {
+          id: "plaga-3",
+          category: "plaga",
+          name: "Tizón Tardío (Lancha de la Papa)",
+          scientificName: "Phytophthora infestans",
+          targetCrops: "Papa, Tomate y Solanáceas",
+          symptoms: "Manchas necróticas pardas de aspecto aceitoso en las hojas con moho blanquecino en el envés bajo humedad alta; quema total del follaje.",
+          preventiveControl: "Evitar densidades excesivas de siembra, asegurar drenaje rápido del terreno y utilizar semilla certificada sana.",
+          correctiveControl: "Aplicación preventiva de Caldo Bordelés al 1% ante las primeras neblinas o lluvias continuas de valle.",
+          organicRecipe: "Caldo Bordelés tradicional: Disolver 100 g de sulfato de cobre en 5 litros de agua en balde plástico; por separado apagar 100 g de cal viva en 5 litros de agua. Mezclar volcando el cobre sobre la cal y aplicar de inmediato.",
+          iconName: "shield-alert"
+        },
+        {
+          id: "plaga-4",
+          category: "plaga",
+          name: "Pulgones de Hortalizas",
+          scientificName: "Aphis gossypii / Myzus persicae",
+          targetCrops: "Hortalizas, Haba, Frutales",
+          symptoms: "Hojas arrugadas y encrespadas hacia abajo, brotes amarillentos y secreción pegajosa (melaza) sobre la cual prolifera el hongo de fumagina negra.",
+          preventiveControl: "Siembra de plantas trampa y aromáticas repelentes en bordes de parcela (ruda, manzanilla, caléndula).",
+          correctiveControl: "Lavado con agua a presión e hidro-solución jabonosa orgánica biodegradable.",
+          organicRecipe: "Solución de Jabón Potásico o Ceniza: 200 g de ceniza tamizada de leña hervida en 5 litros de agua con 30 g de jabón neutro disuelto. Aplicar al atardecer sobre el envés foliar.",
+          iconName: "sparkles"
+        }
+      ],
+      calendarEvents: [
+        {
+          id: "mes-1",
+          month: 1,
+          monthName: "Enero",
+          title: "Deshierbe y Aporque en Lluvias Plenas",
+          crops: ["Papa", "Maíz", "Poroto"],
+          tasks: [
+            "Segundo aporque intensivo en parcelas de papa para evitar que el agua descubra tubérculos.",
+            "Monitoreo fitosanitario contra tizón tardío y orugas foliáceas.",
+            "Cosecha inicial de choclo tierno de siembras mishka."
+          ],
+          valleyWeatherNote: "Época de lluvias torrenciales en el valle de Sopachuy. Mantener zanjas de coronación limpias.",
+          quechuaSeason: "Poqoy Mita (Época de crecimiento y lluvias)"
+        },
+        {
+          id: "mes-2",
+          month: 2,
+          monthName: "Febrero",
+          title: "Cosecha de Choclo y Frutales de Valle",
+          crops: ["Maíz Choclero", "Durazno", "Haba verde"],
+          tasks: [
+            "Cosecha masiva de choclo dulce y selección de semilla criolla.",
+            "Recolección de duraznos en madurez comercial para venta y desecado tradicional (mocochinchi).",
+            "Control biológico en huertos de valle."
+          ],
+          valleyWeatherNote: "Humedad relativa alta y temperaturas templadas en el valle.",
+          quechuaSeason: "Pukllay Mita (Tiempo de abundancia y fiesta)"
+        },
+        {
+          id: "mes-3",
+          month: 3,
+          monthName: "Marzo",
+          title: "Gran Cosecha de Papa (Aymoray Inicial)",
+          crops: ["Papa Imilla", "Hortalizas", "Maíz"],
+          tasks: [
+            "Corte de follaje de papa 10 días antes para madurar la cáscara del tubérculo.",
+            "Inicio de cosecha de parcelas tempranas en laderas con buen drenaje.",
+            "Preparación de almácigos de hortalizas para la temporada invernal."
+          ],
+          valleyWeatherNote: "Disminución paulatina de lluvias; días soleados óptimos para secado de campos.",
+          quechuaSeason: "Aymoray Mita (Inicio de cosechas)"
+        },
+        {
+          id: "mes-4",
+          month: 4,
+          monthName: "Abril",
+          title: "Cosecha General y Almacenamiento Seguro",
+          crops: ["Papa Principal", "Maíz Grano", "Trigo"],
+          tasks: [
+            "Cosecha total de papa y selección estricta de semilla sana y libre de polilla.",
+            "Curado y almacenamiento de papa en lugares oscuros y ventilados con muña.",
+            "Doblado de cañas de maíz para favorecer el secado del grano en la mazorca."
+          ],
+          valleyWeatherNote: "Ambiente fresco al atardecer; cese de lluvias en Sopachuy.",
+          quechuaSeason: "Jawkay Killa (Mes de descanso de la tierra)"
+        },
+        {
+          id: "mes-5",
+          month: 5,
+          monthName: "Mayo",
+          title: "Preparación de Suelos de Invierno y Trigo",
+          crops: ["Trigo de Invierno", "Cebolla", "Ajo"],
+          tasks: [
+            "Roturación de rastrojos de maíz e incorporación al suelo.",
+            "Siembra de trigo de valle bajo sistema de riego por gravedad.",
+            "Trasplante de plántulas de cebolla y hortalizas resistentes a camellones."
+          ],
+          valleyWeatherNote: "Entrada del estiaje seco y descenso nocturno de temperatura.",
+          quechuaSeason: "Chiri Mita (Época de frío)"
+        },
+        {
+          id: "mes-6",
+          month: 6,
+          monthName: "Junio",
+          title: "Manejo de Heladas y Riego de Trigo",
+          crops: ["Trigo", "Hortalizas de invierno", "Frutales"],
+          tasks: [
+            "Riegos ligeros continuos al trigo para evitar deshidratación por frío seco.",
+            "Protección de almácigos con micro-túneles o cubiertas de paja contra heladas.",
+            "Limpieza fitosanitaria y descanso vegetativo en huertos frutales."
+          ],
+          valleyWeatherNote: "Riesgo de heladas en las partes bajas del valle de Sopachuy.",
+          quechuaSeason: "Qasa Pacha (Tiempo de helada)"
+        },
+        {
+          id: "mes-7",
+          month: 7,
+          monthName: "Julio",
+          title: "Poda de Frutales y Abonamiento Invernal",
+          crops: ["Durazno", "Manzana", "Cebada"],
+          tasks: [
+            "Poda técnica de invierno en durazneros: despeje del centro y ramas secas.",
+            "Sellado de cortes de poda con pasta bordelesa o ceniza para evitar hongos.",
+            "Aporte profundo de estiércol fermentado en corona alrededor de los frutales."
+          ],
+          valleyWeatherNote: "Pico de bajas temperaturas invernales; días despejados con fuerte sol diurno.",
+          quechuaSeason: "Chiri Killa (Mes más frío)"
+        },
+        {
+          id: "mes-8",
+          month: 8,
+          monthName: "Agosto",
+          title: "Macerados Orgánicos y Riego de Despertar",
+          crops: ["Frutales en brotación", "Hortalizas", "Ajo"],
+          tasks: [
+            "Riego de 'despertar' en frutales para estimular floración pareja.",
+            "Preparación de bioles y composteras con residuos de la comunidad.",
+            "Deshierbe manual en parcelas de hortalizas invernales."
+          ],
+          valleyWeatherNote: "Vientos característicos de agosto en la región de Tomina y Sopachuy.",
+          quechuaSeason: "Pachamama Killa (Mes de agradecimiento a la Madre Tierra)"
+        },
+        {
+          id: "mes-9",
+          month: 9,
+          monthName: "Septiembre",
+          title: "Siembra Temprana Mishka de Maíz",
+          crops: ["Maíz Mishka", "Papa temprana", "Zapallo"],
+          tasks: [
+            "Arado profundo y mullido de parcelas destinadas a siembras tempranas con riego.",
+            "Desinfección de semilla de maíz con extractos botánicos naturales.",
+            "Siembra en hileras de maíz choclero aprovechando canales de riego comunales."
+          ],
+          valleyWeatherNote: "Inicio de ascenso de temperatura; aire seco con primeras nubes aisladas.",
+          quechuaSeason: "Pawkar Waray (Renacimiento primaveral)"
+        },
+        {
+          id: "mes-10",
+          month: 10,
+          monthName: "Octubre",
+          title: "Preparación Principal de Terreno y Siembra de Papa",
+          crops: ["Papa Imilla Principal", "Maíz Blanco", "Poroto"],
+          tasks: [
+            "Preparación exhaustiva de suelo con estiércol ovino para la siembra grande de papa.",
+            "Siembra principal de tubérculos brotados sanos a 30 cm de distancia.",
+            "Cosecha del trigo de invierno sembrado en mayo."
+          ],
+          valleyWeatherNote: "Primeras lluvias moderadas de primavera en el valle de Sopachuy.",
+          quechuaSeason: "Tarpuy Mita (Época cumbre de siembras)"
+        },
+        {
+          id: "mes-11",
+          month: 11,
+          monthName: "Noviembre",
+          title: "Siembra General y Manejo de Malezas",
+          crops: ["Papa", "Maíz", "Haba", "Frutales"],
+          tasks: [
+            "Culminación de siembras de secano en laderas y terrazas.",
+            "Primer deshierbe y aporque temprano en parcelas de maíz y papa emergidas.",
+            "Monitoreo inicial de plagas emergentes como gusano cogollero."
+          ],
+          valleyWeatherNote: "Lluvias regulares y temperaturas cálidas favorables para la germinación.",
+          quechuaSeason: "Ayamarka Killa"
+        },
+        {
+          id: "mes-12",
+          month: 12,
+          monthName: "Diciembre",
+          title: "Manejo Integral de Follaje y Riego Complementario",
+          crops: ["Papa en floración", "Maíz en crecimiento", "Durazno verde"],
+          tasks: [
+            "Aplicaciones preventivas de bioles y caldo bordelés ante lluvias continuas.",
+            "Raleo de frutos en árboles de durazno para favorecer calibres grandes.",
+            "Limpieza de acequias comunales para regular excedentes de lluvia."
+          ],
+          valleyWeatherNote: "Temporada plena de lluvias de verano en Chuquisaca.",
+          quechuaSeason: "Qhapaq Inti Raymi (Solsticio de verano)"
+        }
+      ]
+    };
+
+    /**
+     * Microclimates of Sopachuy & Bioscience Data (Science Skills)
+     */
+    const SOPACHUY_MICROCLIMATE_ZONES = [
+      {
+        id: "sopachuy-centro",
+        name: "Sopachuy Centro (Valle Fértil)",
+        elevation: 2050,
+        lat: -19.4892,
+        lng: -64.4785,
+        climateType: "Valle mesotérmico templado subhúmedo",
+        frostRisk: "Moderado",
+        averageTemp: "16°C a 24°C",
+        annualRainfall: "550 - 650 mm",
+        topCrops: ["Papa Imilla", "Maíz Choclero", "Durazno", "Cebolla", "Tomate"],
+        sowingAdjustment: "Calendario estándar: siembra temprana (mishka) en septiembre y siembra principal a inicios de octubre.",
+        irrigationNote: "Riego por gravedad desde acequias comunales cada 8 a 10 días.",
+        soilAdvisory: "Suelos aluviales de vega con buena retención hídrica. Aportar materia orgánica compostada (5-8 t/ha).",
+        phytosanitaryAlert: "En veranos húmedos, vigilar tizón tardío por neblinas matutinas."
+      },
+      {
+        id: "laderas-amancaya",
+        name: "Laderas y Amancaya (Valle Medio)",
+        elevation: 2280,
+        lat: -19.4620,
+        lng: -64.4510,
+        climateType: "Valle de ladera templado semiárido",
+        frostRisk: "Moderado",
+        averageTemp: "14°C a 21°C",
+        annualRainfall: "500 - 580 mm",
+        topCrops: ["Papa Imilla", "Maíz Blanco Criollo", "Trigo de Valle", "Haba"],
+        sowingAdjustment: "Siembra sincronizada con las primeras lluvias firmes (mediados a fines de octubre) para asegurar germinación.",
+        irrigationNote: "Riego por turnos de canal o secano mejorado con zanjas de infiltración en curvas de nivel.",
+        soilAdvisory: "Pendiente pronunciada con susceptibilidad a erosión. Imprescindible siembra en contorno y aporque alto.",
+        phytosanitaryAlert: "Aumento de polilla de la papa en periodos secos; mantener cobertura de tubérculos."
+      },
+      {
+        id: "alturas-cabeceras",
+        name: "Cabeceras y Alturas (Valle Alto)",
+        elevation: 2580,
+        lat: -19.4180,
+        lng: -64.5120,
+        climateType: "Valle alto andino fresco con alta radiación UV",
+        frostRisk: "Alto",
+        averageTemp: "10°C a 18°C",
+        annualRainfall: "600 - 750 mm",
+        topCrops: ["Papa Huaycha rústica", "Cebada", "Haba", "Trigo Criollo"],
+        sowingAdjustment: "Adelantar siembras a principios de octubre o postergar a noviembre según el cese de heladas tardías.",
+        irrigationNote: "Aprovechar humedad residual de quebradas y riego ligero de supervivencia.",
+        soilAdvisory: "Suelos francos a franco-pedregosos. Requerimiento alto de fósforo y estiércol fermentado para generar calor en la rizosfera.",
+        phytosanitaryAlert: "Riesgo de heladas invernales severas; usar abrigos de paja en almácigos."
+      },
+      {
+        id: "ribera-san-pedro",
+        name: "Ribera Río San Pedro / Cañada",
+        elevation: 1900,
+        lat: -19.5310,
+        lng: -64.4390,
+        climateType: "Valle abrigado templado-cálido",
+        frostRisk: "Bajo",
+        averageTemp: "18°C a 27°C",
+        annualRainfall: "480 - 550 mm",
+        topCrops: ["Maíz Primicia", "Frutales (Durazno, Chirimoya, Cítricos)", "Hortalizas bajo riego"],
+        sowingAdjustment: "Permite siembras tempranas en agosto-septiembre sin riesgo de heladas, logrando precios de primicia.",
+        irrigationNote: "Riego permanente por bombeo o derivación directa del río San Pedro.",
+        soilAdvisory: "Suelos arenosos a franco-arenosos con drenaje ultra rápido; requiere enriquecimiento frecuente de humus.",
+        phytosanitaryAlert: "Mayor presión de plagas masticadoras (gusano cogollero) y pulgones por temperaturas cálidas."
+      }
+    ];
+
+    const BIOSCIENCE_DATA = {
+      "Papa": {
+        scientificName: "Solanum tuberosum L.",
+        family: "Solanaceae",
+        photosyntheticPathway: "C3",
+        thermalRange: "15°C a 20°C óptimo (inhibición de tuberización >25°C)",
+        optimalSoilPh: "5.2 - 6.5 (ácido moderado a neutro)",
+        biologicalActionMechanism: "Asimilación C3 sensible a fotorrespiración bajo altas temperaturas. Requiere noches frescas para translocar carbohidratos vía floema hacia el estolón.",
+        biochemicalCompounds: ["Solanina (defensa natural)", "Glicialcaloides", "Antocianinas en variedades nativas"],
+        scientificCitation: "CIP (Centro Internacional de la Papa) & FAO Agro-Ecology Compendium"
+      },
+      "Maíz": {
+        scientificName: "Zea mays L.",
+        family: "Poaceae (Gramineae)",
+        photosyntheticPathway: "C4",
+        thermalRange: "18°C a 30°C óptimo (alta eficiencia del uso del agua y radiación)",
+        optimalSoilPh: "5.8 - 7.2",
+        biologicalActionMechanism: "Anatomía foliar tipo Kranz con concentración de CO2 en células de la vaina, eliminando fotorrespiración y maximizando biomasa en valles cálidos.",
+        biochemicalCompounds: ["Ácido ferúlico en pericarpio", "Zeatina (fitohormona citoquinina)", "Almidón amilasa"],
+        scientificCitation: "CIMMYT World Maize Phenology and Andean Valley Adaptation"
+      },
+      "Trigo de Valle": {
+        scientificName: "Triticum aestivum L.",
+        family: "Poaceae",
+        photosyntheticPathway: "C3",
+        thermalRange: "12°C a 22°C (óptimo para invierno bajo riego)",
+        optimalSoilPh: "6.0 - 7.5",
+        biologicalActionMechanism: "Vía C3 con respuesta favorable a fotoperiodos soleados de invierno andino; macollaje estimulado por frío moderado nocturno.",
+        biochemicalCompounds: ["Glutenina y Gliadina", "Ácidos fenólicos antioxidantes"],
+        scientificCitation: "EMBL-EBI InterPro & USDA Cereal Chemistry"
+      },
+      "Durazno de Valle": {
+        scientificName: "Prunus persica (L.) Batsch",
+        family: "Rosaceae",
+        photosyntheticPathway: "C3",
+        thermalRange: "Requerimiento de 200 a 400 horas frío (<7°C) en invierno para romper dormancia",
+        optimalSoilPh: "6.0 - 6.8",
+        biologicalActionMechanism: "Fisiología perenne caducifolia. El reposo invernal sincroniza la diferenciación de yemas florales ante el aumento de temperatura en agosto.",
+        biochemicalCompounds: ["Amigdalina en semilla", "Polifenoles y flavonoides en epidermis"],
+        scientificCitation: "Bioversity International & EMBRAPA Fruticultura de Valle"
+      },
+      "Hortalizas: Cebolla y Tomate": {
+        scientificName: "Allium cepa L. / Solanum lycopersicum L.",
+        family: "Amaryllidaceae / Solanaceae",
+        photosyntheticPathway: "C3",
+        thermalRange: "13°C a 24°C según fenología",
+        optimalSoilPh: "6.0 - 7.0",
+        biologicalActionMechanism: "La cebolla requiere fotoperiodo crítico para bulbificación. El tomate sintetiza licopeno y fitohormonas auxínicas en floración.",
+        biochemicalCompounds: ["Disulfuro de alilpropilo (alicina)", "Licopeno antioxidante"],
+        scientificCitation: "AVRDC World Vegetable Center"
+      },
+      "Gusano Cogollero": {
+        scientificName: "Spodoptera frugiperda (J.E. Smith)",
+        family: "Noctuidae (Lepidoptera)",
+        photosyntheticPathway: "C3",
+        thermalRange: "Tasa reproductiva máxima entre 24°C y 28°C",
+        optimalSoilPh: "N/A",
+        biologicalActionMechanism: "Larvas masticadoras con tubo digestivo de pH alcalino (pH 9-10). Vulnerables a endotoxinas delta Cry de Bacillus thuringiensis y principios activos amargos (azadiractina, alicina).",
+        biochemicalCompounds: ["Feromona sexual Z-9-tetradecenil acetato", "Enzimas citocromo P450"],
+        scientificCitation: "CABI Compendium & Journal of Economic Entomology"
+      },
+      "Polilla de la Papa": {
+        scientificName: "Phthorimaea operculella (Zeller)",
+        family: "Gelechiidae (Lepidoptera)",
+        photosyntheticPathway: "C3",
+        thermalRange: "Actividad óptima 20°C a 27°C (favorecida por clima seco de valle)",
+        optimalSoilPh: "N/A",
+        biologicalActionMechanism: "Larvas minadoras de tubérculos y hojas. La pulegona y aceites esenciales de la muña (Minthostachys) bloquean los receptores olfativos y la oviposición.",
+        biochemicalCompounds: ["Pulegona repelente natural", "Mentol en hojas protectoras"],
+        scientificCitation: "CIP (Centro Internacional de la Papa) Entomology Series"
+      },
+      "Tizón Tardío (Lancha de la Papa)": {
+        scientificName: "Phytophthora infestans (Mont.) de Bary",
+        family: "Peronosporaceae (Oomycota)",
+        photosyntheticPathway: "C3",
+        thermalRange: "Esporulación a 15°C - 20°C con humedad relativa >90%",
+        optimalSoilPh: "N/A",
+        biologicalActionMechanism: "Oomiceto hemibiotrófico que secreta efectores RXLR que suprimen la inmunidad basal de la planta. El ión Cu2+ del Caldo Bordelés desnaturaliza las enzimas de germinación del zoosporangio.",
+        biochemicalCompounds: ["Ácido beta-glucano en pared celular", "Efectores proteicos AVR"],
+        scientificCitation: "RCSB PDB Structure 6V4L & Phytopathology"
+      },
+      "Pulgones de Hortalizas": {
+        scientificName: "Aphis gossypii Glover / Myzus persicae Sulzer",
+        family: "Aphididae (Hemiptera)",
+        photosyntheticPathway: "C3",
+        thermalRange: "18°C a 25°C",
+        optimalSoilPh: "N/A",
+        biologicalActionMechanism: "Insectos picadores-chupadores que extraen savia elaborada del floema. El jabón potásico disuelve la cutícula cerosa protectora causando desecación por ósmosis.",
+        biochemicalCompounds: ["Sales potásicas de ácidos grasos", "Capsaicina repelente"],
+        scientificCitation: "FAO Integrated Pest Management Guidelines"
+      }
+    };
+
+    function calculateDistanceKm(lat1, lon1, lat2, lon2) {
+      const R = 6371;
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLon = (lon2 - lon1) * Math.PI / 180;
+      const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      return R * c;
+    }
+
+    function findNearestMicroclimateZone(lat, lng) {
+      let nearest = SOPACHUY_MICROCLIMATE_ZONES[0];
+      let minDistance = Infinity;
+      for (const zone of SOPACHUY_MICROCLIMATE_ZONES) {
+        const dist = calculateDistanceKm(lat, lng, zone.lat, zone.lng);
+        if (dist < minDistance) {
+          minDistance = dist;
+          nearest = zone;
+        }
+      }
+      return nearest;
+    }
+
+    /**
+     * Microclimate agronomic advisory helpers
+     */
+    function getMicroclimateCropAdvisory(crop, zone) {
+      if (!crop || !zone) return '';
+      const isTop = zone.topCrops.some((tc) => tc.toLowerCase().includes(crop.name.toLowerCase()));
+      const isHighAltitude = zone.elevation >= 2400;
+      const isLowValley = zone.elevation <= 2000;
+
+      if (crop.name.toLowerCase().includes('papa')) {
+        if (isHighAltitude) {
+          return `Altitud ${zone.elevation} msnm ideal para tubérculos andinos rústicos. Cuidar de heladas tardías de primavera y aplicar abundante ceniza y estiércol fermentado para generar calor edáfico.`;
+        }
+        if (isLowValley) {
+          return `En cota ${zone.elevation} msnm con mayor temperatura, sincronizar con riego de vega y aporcar oportunamente para evitar sobrecalentamiento del camellón.`;
+        }
+        return `Valle medio (${zone.elevation} msnm): Siembra principal recomendada entre octubre y noviembre con primeras lluvias estables. Aporque a los 20 cm.`;
+      }
+
+      if (crop.name.toLowerCase().includes('maíz') || crop.name.toLowerCase().includes('maiz')) {
+        if (isHighAltitude) {
+          return `En cotas altas (${zone.elevation} msnm), el ciclo fenológico se alarga 20-30 días por menores temperaturas nocturnas. Proteger contra vientos fríos y preferir maíz blanco o variedades precoces.`;
+        }
+        if (isLowValley) {
+          return `Excelente respuesta fotosintética C4 al calor de ribera (${zone.elevation} msnm). Permite siembras tempranas mishka (septiembre) con alta productividad para choclo primicia.`;
+        }
+        return `Condición óptima de valle templado (${zone.elevation} msnm): Siembra en surcos a 80 cm, asociación recomendada con poroto para fijar nitrógeno.`;
+      }
+
+      if (crop.name.toLowerCase().includes('trigo')) {
+        if (isHighAltitude) {
+          return `Cereal rústico apto para secano alto y rastrojo. Buena tolerancia a temperaturas bajas durante el macollaje andino.`;
+        }
+        return `Siembra de invierno bajo riego en las planicies del valle (${zone.elevation} msnm). Requiere riegos regulares cada 12-15 días.`;
+      }
+
+      if (crop.name.toLowerCase().includes('durazno') || crop.name.toLowerCase().includes('frutales')) {
+        if (isHighAltitude) {
+          return `Sensible a heladas en floración primaveral. Plantar en laderas con buena circulación de aire térmico, nunca en fondos de quebrada cerrada.`;
+        }
+        return `Cumple holgadamente las horas frío invernales en ${zone.name}. Poda de fructificación en julio y abonamiento orgánico en corona profunda.`;
+      }
+
+      return isTop
+        ? `Cultivo altamente recomendado para la zona de ${zone.name} (${zone.elevation} msnm).`
+        : `Cultivo adaptable a ${zone.name}. Calibrar riego según la retención del suelo local.`;
+    }
+
+    function getMicroclimateCalendarAdvisory(month, zone) {
+      if (!zone) return '';
+      const isHighAltitude = zone.elevation >= 2400;
+      const isLowValley = zone.elevation <= 2000;
+
+      // Meses de heladas (Mayo - Agosto)
+      if (month >= 5 && month <= 8) {
+        if (isHighAltitude) {
+          return `Alerta de heladas severas en ${zone.name} (${zone.elevation} msnm). Proteger almácigos con microtúneles de paja y realizar riegos preventivos antes de noches despejadas.`;
+        }
+        if (isLowValley) {
+          return `Bajo riesgo de heladas destructivas en esta cota cálida (${zone.elevation} msnm). Aprovechar para cultivo continuo de hortalizas con riego del río.`;
+        }
+        return `Temporada de frío en el valle (${zone.elevation} msnm). Poda sanitaria de frutales en julio y aplicación de pasta protectora de ceniza o caldo bordelés.`;
+      }
+
+      // Meses de siembra (Septiembre - Noviembre)
+      if (month >= 9 && month <= 11) {
+        if (isHighAltitude) {
+          return `Monitorear el cese de heladas tardías en ${zone.name}. Concentrar la siembra principal de papa en octubre-noviembre cuando la temperatura del suelo sea estable.`;
+        }
+        if (isLowValley) {
+          return `Cota cálida favorable para siembras tempranas mishka desde septiembre. Vigilar eclosión temprana de gusano cogollero en plántulas tiernas.`;
+        }
+        return `Siembra general en ${zone.name}. Incorporar compost maduro y asegurar buena nivelación de surcos para drenar excesos de tormentas primaverales.`;
+      }
+
+      // Meses de cosecha (Marzo - Abril)
+      if (month === 3 || month === 4) {
+        if (isHighAltitude) {
+          return `Inicio de la gran cosecha andina en ${zone.name}. Cosechar en días soleados y seleccionar tubérculos libres de daño mecánico para semilla.`;
+        }
+        return `Cosecha general y doblado de maíz para secado de grano. Almacenar la papa con hojas secas de muña contra polilla en ambientes ventilados.`;
+      }
+
+      return `Labores regulares de manejo y deshierbe oportuno adaptadas a ${zone.name} (${zone.elevation} msnm).`;
+    }
+
+    function getMicroclimatePestAdvisory(pest, zone) {
+      if (!pest || !zone) return '';
+      const isLowValley = zone.elevation <= 2000;
+      const isHighAltitude = zone.elevation >= 2400;
+
+      if (pest.name.toLowerCase().includes('cogollero')) {
+        if (isLowValley) {
+          return `Alta incidencia por temperaturas templado-cálidas (${zone.averageTemp}) en ${zone.name}. Monitorear plántulas cada 3 días y aplicar extracto de ají/ceniza de inmediato.`;
+        }
+        if (isHighAltitude) {
+          return `Baja presión térmica de cogollero en cotas altas (${zone.elevation} msnm). Mantener control biológico preventivo sin aplicaciones agresivas.`;
+        }
+        return `Incidencia moderada en ${zone.name}. Control manual en el cogollo y rotación con leguminosas.`;
+      }
+
+      if (pest.name.toLowerCase().includes('tizón') || pest.name.toLowerCase().includes('lancha')) {
+        if (isHighAltitude || zone.annualRainfall.includes('750')) {
+          return `Mayor susceptibilidad en periodos de neblina o lluvias persistentes en ${zone.name}. Aplicación preventiva obligatoria de Caldo Bordelés al 1% tras lluvias.`;
+        }
+        return `Vigilar humedad relativa en el valle. Mantener aporque alto y buen drenaje de surcos.`;
+      }
+
+      return `Manejo agroecológico estándar recomendado para la zona de ${zone.name}.`;
+    }
+
+    /**
+     * Microclimate UI Rendering & GPS Integration
+     */
+    function renderMicroclimateSelector() {
+      const container = document.getElementById('microclimateZoneButtons');
+      if (!container) return;
+
+      container.innerHTML = SOPACHUY_MICROCLIMATE_ZONES.map((zone) => {
+        const isSelected = currentMicroclimateZone && currentMicroclimateZone.id === zone.id;
+        return `
+          <button
+            onclick="selectMicroclimateZone('${zone.id}');"
+            class="text-left p-2.5 rounded-xl transition-all touch-target flex flex-col justify-between ${
+              isSelected
+                ? 'bg-agro-700 text-white shadow-xs border-2 border-agro-800 scale-[1.02]'
+                : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 hover:border-slate-300'
+            }"
+            title="Ver recomendaciones para ${zone.name}"
+          >
+            <div class="flex items-center justify-between w-full">
+              <span class="font-bold text-xs truncate">${zone.name.split('(')[0].trim()}</span>
+              ${isSelected ? '<i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-agro-200 shrink-0"></i>' : ''}
+            </div>
+            <div class="flex items-center gap-1 text-[11px] mt-1 ${isSelected ? 'text-agro-100' : 'text-slate-500'}">
+              <i data-lucide="mountain" class="w-3 h-3"></i>
+              <span>${zone.elevation} msnm</span>
+            </div>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function renderMicroclimateSummary() {
+      const card = document.getElementById('microclimateSummaryCard');
+      if (!card) return;
+      const z = currentMicroclimateZone || SOPACHUY_MICROCLIMATE_ZONES[0];
+
+      const frostColor = z.frostRisk === 'Alto' ? 'text-red-700 bg-red-100 border-red-200' : (z.frostRisk === 'Moderado' ? 'text-amber-800 bg-amber-100 border-amber-200' : 'text-emerald-800 bg-emerald-100 border-emerald-200');
+
+      card.innerHTML = `
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-agro-200/80 pb-3">
+          <div>
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded-md text-xs font-bold bg-agro-700 text-white flex items-center gap-1">
+                <i data-lucide="map-pin" class="w-3 h-3"></i>
+                ${z.name}
+              </span>
+              <span class="px-2 py-0.5 rounded-md text-xs font-semibold bg-white text-slate-700 border border-slate-200">
+                ${z.elevation} msnm
+              </span>
+              <span class="px-2 py-0.5 rounded-md text-xs font-semibold border ${frostColor}">
+                Riesgo de Heladas: ${z.frostRisk}
+              </span>
+              ${currentGpsCoords ? `<span class="px-2 py-0.5 rounded-md text-[11px] font-mono text-emerald-800 bg-emerald-100 flex items-center gap-1"><i data-lucide="navigation" class="w-3 h-3"></i> GPS Sincronizado</span>` : ''}
+            </div>
+            <p class="text-xs text-slate-600 mt-1">
+              <strong>Tipo de clima:</strong> ${z.climateType} · Temp. media: ${z.averageTemp} · Lluvias: ${z.annualRainfall}
+            </p>
+          </div>
+
+          <div class="flex items-center gap-2 shrink-0">
+            <button
+              onclick="speakMicroclimateAdvisory();"
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-slate-50 text-slate-800 rounded-xl text-xs font-semibold border border-slate-200 shadow-2xs transition-colors"
+              title="Escuchar recomendaciones de este microclima"
+            >
+              <i data-lucide="volume-2" class="w-3.5 h-3.5 text-agro-700"></i>
+              <span>Escuchar</span>
+            </button>
+            <button
+              onclick="consultAgronomistAboutMicroclimate();"
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-agro-700 hover:bg-agro-800 text-white rounded-xl text-xs font-semibold shadow-2xs transition-colors"
+              title="Consultar al Asistente IA sobre este microclima"
+            >
+              <i data-lucide="bot" class="w-3.5 h-3.5"></i>
+              <span class="hidden sm:inline">Preguntar al Asistente IA</span>
+              <span class="sm:hidden">Preguntar IA</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+          <div class="bg-white p-3 rounded-xl border border-slate-200 space-y-1">
+            <div class="flex items-center gap-1.5 text-agro-800 font-bold">
+              <i data-lucide="calendar" class="w-3.5 h-3.5 text-agro-700"></i>
+              <span>Ajuste de Siembra y Cosecha</span>
+            </div>
+            <p class="text-slate-600 leading-relaxed">${z.sowingAdjustment}</p>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl border border-slate-200 space-y-1">
+            <div class="flex items-center gap-1.5 text-blue-800 font-bold">
+              <i data-lucide="droplet" class="w-3.5 h-3.5 text-blue-600"></i>
+              <span>Manejo de Suelo y Riego</span>
+            </div>
+            <p class="text-slate-600 leading-relaxed">${z.soilAdvisory} ${z.irrigationNote}</p>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl border border-slate-200 space-y-1">
+            <div class="flex items-center gap-1.5 text-earth-800 font-bold">
+              <i data-lucide="alert-triangle" class="w-3.5 h-3.5 text-earth-700"></i>
+              <span>Alerta Fitosanitaria de Zona</span>
+            </div>
+            <p class="text-slate-600 leading-relaxed">${z.phytosanitaryAlert}</p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-1.5 pt-1 text-xs">
+          <span class="font-bold text-slate-700">Cultivos más recomendados para esta cota:</span>
+          ${z.topCrops.map(c => `
+            <button
+              onclick="document.getElementById('searchInput').value = '${c.split(' ')[0]}'; handleSearchAndFilter();"
+              class="px-2 py-0.5 rounded-md bg-white hover:bg-agro-100 text-slate-800 border border-slate-200 hover:border-agro-300 font-medium transition-colors"
+            >
+              🌱 ${c}
+            </button>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function selectMicroclimateZone(zoneId) {
+      const found = SOPACHUY_MICROCLIMATE_ZONES.find(z => z.id === zoneId);
+      if (!found) return;
+      currentMicroclimateZone = found;
+      renderMicroclimateSelector();
+      renderMicroclimateSummary();
+      handleSearchAndFilter();
+      initLucide();
+    }
+
+    function detectUserLocation() {
+      const btnText = document.getElementById('btnDetectGPSText');
+      const btn = document.getElementById('btnDetectGPS');
+      const coordsBadge = document.getElementById('gpsCoordsBadge');
+
+      if (!('geolocation' in navigator)) {
+        showLocationNotification('Tu navegador o dispositivo no soporta geolocalización GPS. Puedes elegir manualmente tu microclima en los botones de abajo.', true);
+        return;
+      }
+
+      btn.disabled = true;
+      btnText.textContent = 'Obteniendo GPS...';
+
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          const accuracy = Math.round(position.coords.accuracy || 0);
+
+          currentGpsCoords = { lat, lng, accuracy };
+
+          // Distance to Sopachuy Centro (-19.4892, -64.4785)
+          const distanceToCenter = calculateDistanceKm(lat, lng, -19.4892, -64.4785);
+          const matchedZone = findNearestMicroclimateZone(lat, lng);
+          currentMicroclimateZone = matchedZone;
+
+          coordsBadge.classList.remove('hidden');
+          coordsBadge.innerHTML = `<i data-lucide="map-pin" class="w-3 h-3 inline mr-1"></i>GPS: ${lat.toFixed(4)}, ${lng.toFixed(4)} (${distanceToCenter < 2 ? 'En Sopachuy' : distanceToCenter.toFixed(1) + ' km'})`;
+
+          btn.disabled = false;
+          btnText.textContent = 'GPS Sincronizado';
+
+          renderMicroclimateSelector();
+          renderMicroclimateSummary();
+          handleSearchAndFilter();
+          initLucide();
+
+          showLocationNotification(`Ubicación detectada exitosamente (${lat.toFixed(3)}, ${lng.toFixed(3)}). Se ajustaron automáticamente las recomendaciones al microclima de "${matchedZone.name}" (${matchedZone.elevation} msnm).`);
+        },
+        (error) => {
+          console.warn('Geolocation error:', error);
+          btn.disabled = false;
+          btnText.textContent = 'Detectar Ubicación GPS';
+
+          let msg = 'No se pudo obtener la señal GPS directa.';
+          if (error.code === 1) {
+            msg = 'Permiso de ubicación GPS no concedido. Puedes seleccionar tu comunidad o microclima directamente con los botones de abajo.';
+          } else if (error.code === 2) {
+            msg = 'Ubicación no disponible en este momento. Selecciona tu microclima de Sopachuy con los botones.';
+          } else if (error.code === 3) {
+            msg = 'Tiempo de espera agotado al consultar GPS. Selecciona tu microclima con los botones.';
+          }
+
+          showLocationNotification(msg, true);
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 60000
+        }
+      );
+    }
+
+    function showLocationNotification(message, isWarning = false) {
+      let toast = document.getElementById('locationNotificationToast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'locationNotificationToast';
+        document.body.appendChild(toast);
+      }
+
+      if (isWarning) {
+        toast.className = 'fixed top-20 right-4 left-4 sm:left-auto sm:max-w-md z-50 p-4 rounded-2xl shadow-xl transition-all duration-300 bg-amber-50 text-amber-950 border border-amber-300 text-xs sm:text-sm font-medium flex items-start gap-3';
+        toast.innerHTML = `
+          <i data-lucide="alert-triangle" class="w-5 h-5 text-amber-600 shrink-0 mt-0.5"></i>
+          <div class="flex-1 space-y-1">
+            <strong class="font-bold block text-amber-900">Aviso de Geolocalización</strong>
+            <p>${message}</p>
+          </div>
+          <button onclick="this.parentElement.remove();" class="text-amber-800 hover:text-amber-950 p-1">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        `;
+      } else {
+        toast.className = 'fixed top-20 right-4 left-4 sm:left-auto sm:max-w-md z-50 p-4 rounded-2xl shadow-xl transition-all duration-300 bg-agro-700 text-white shadow-lg text-xs sm:text-sm font-medium flex items-start gap-3';
+        toast.innerHTML = `
+          <i data-lucide="check-circle" class="w-5 h-5 text-agro-200 shrink-0 mt-0.5"></i>
+          <div class="flex-1 space-y-1">
+            <strong class="font-bold block text-agro-100">Microclima Calibrado</strong>
+            <p>${message}</p>
+          </div>
+          <button onclick="this.parentElement.remove();" class="text-white/80 hover:text-white p-1">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        `;
+      }
+
+      initLucide();
+      setTimeout(() => {
+        if (toast && toast.parentElement) {
+          toast.remove();
+        }
+      }, 7000);
+    }
+
+    function speakMicroclimateAdvisory() {
+      const z = currentMicroclimateZone || SOPACHUY_MICROCLIMATE_ZONES[0];
+      const text = `Recomendación técnica para la zona de ${z.name}, a ${z.elevation} metros sobre el nivel del mar. Riesgo de heladas: ${z.frostRisk}. En cuanto al calendario de siembra: ${z.sowingAdjustment}. Manejo del suelo y riego: ${z.soilAdvisory}. ${z.irrigationNote}. Alerta fitosanitaria: ${z.phytosanitaryAlert}. Cultivos principales recomendados: ${z.topCrops.join(', ')}.`;
+      speakItemQuick(`Microclima ${z.name}`, text);
+    }
+
+    function consultAgronomistAboutMicroclimate() {
+      const z = currentMicroclimateZone || SOPACHUY_MICROCLIMATE_ZONES[0];
+      openChatModal();
+      const prompt = `Hola, mi parcela está ubicada en la zona de "${z.name}" (${z.elevation} msnm) en Sopachuy. Con un riesgo de heladas ${z.frostRisk} y suelo de ladera/valle, ¿qué labores prioritarias me recomiendas realizar en este momento para mis cultivos?`;
+      document.getElementById('chatInput').value = prompt;
+      document.getElementById('chatInput').focus();
+    }
+
+    async function fetchLiveWeather() {
+      const modal = document.getElementById('weatherModal');
+      const container = document.getElementById('weatherContentContainer');
+      const sourcesContainer = document.getElementById('weatherSourcesContainer');
+      const sourcesList = document.getElementById('weatherSourcesList');
+
+      modal.classList.remove('hidden');
+      sourcesContainer.classList.add('hidden');
+      sourcesList.innerHTML = '';
+
+      container.innerHTML = `
+        <div class="flex items-center gap-2 text-slate-500 text-xs py-6 justify-center">
+          <i data-lucide="loader" class="w-5 h-5 animate-spin text-blue-600"></i>
+          <span>Consultando fuentes meteorológicas para ${currentMicroclimateZone.name} y Sopachuy...</span>
+        </div>
+      `;
+      initLucide();
+
+      try {
+        const response = await fetch('/api/weather-search', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            query: `clima actual en Sopachuy y provincia Tomina Chuquisaca temperatura lluvia microclima ${currentMicroclimateZone.name}`
+          })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          container.innerHTML = `
+            <div class="bg-blue-50 p-4 rounded-2xl border border-blue-200 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-blue-800 uppercase tracking-wider">Pronóstico para ${currentMicroclimateZone.name}</span>
+                <span class="text-xs font-semibold text-blue-700">${currentMicroclimateZone.elevation} msnm</span>
+              </div>
+              <div class="text-xs sm:text-sm text-slate-800 whitespace-pre-line leading-relaxed">
+                ${formatMarkdownSimple(data.analysis || 'Clima de valle interandino con días templados a cálidos y noches frescas.')}
+              </div>
+            </div>
+            <div class="text-xs text-slate-600 bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <strong class="text-slate-800">Consejo agroclimático para esta semana:</strong>
+              <p class="mt-0.5">${currentMicroclimateZone.sowingAdjustment}</p>
+            </div>
+          `;
+
+          if (Array.isArray(data.groundingSources) && data.groundingSources.length > 0) {
+            sourcesContainer.classList.remove('hidden');
+            sourcesList.innerHTML = data.groundingSources.map(s => `
+              <a href="${s.uri}" target="_blank" rel="noopener noreferrer" class="text-blue-700 hover:underline flex items-center gap-1.5 truncate">
+                <i data-lucide="external-link" class="w-3.5 h-3.5 shrink-0"></i>
+                <span class="truncate">${s.title}</span>
+              </a>
+            `).join('');
+          }
+        } else {
+          throw new Error('Servicio de clima no disponible temporalmente');
+        }
+      } catch (err) {
+        console.warn('Weather fallback:', err);
+        container.innerHTML = `
+          <div class="bg-blue-50 p-4 rounded-2xl border border-blue-200 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-blue-800 uppercase tracking-wider">Microclima ${currentMicroclimateZone.name}</span>
+              <span class="text-xs font-semibold text-blue-700">${currentMicroclimateZone.elevation} msnm</span>
+            </div>
+            <div class="text-xs sm:text-sm text-slate-800 space-y-1.5">
+              <p><strong>Régimen térmico habitual:</strong> ${currentMicroclimateZone.averageTemp}</p>
+              <p><strong>Precipitaciones anuales:</strong> ${currentMicroclimateZone.annualRainfall}</p>
+              <p><strong>Riesgo de heladas:</strong> ${currentMicroclimateZone.frostRisk}</p>
+              <p><strong>Comportamiento hídrico:</strong> ${currentMicroclimateZone.irrigationNote}</p>
+            </div>
+          </div>
+          <div class="text-xs text-slate-600 bg-slate-50 p-3 rounded-xl border border-slate-200">
+            <strong class="text-slate-800">Recomendación para tu parcela:</strong>
+            <p class="mt-0.5">${currentMicroclimateZone.soilAdvisory}</p>
+          </div>
+        `;
+      }
+
+      initLucide();
+    }
+
+    function closeWeatherModal() {
+      const modal = document.getElementById('weatherModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    /**
+     * Application State with LocalStorage Persistence
+     */
+    const STORAGE_KEY = 'sopachuy_agricola_manual_v1';
+    let appData = loadData();
+    let currentFilter = 'all';
+    let currentSearchTerm = '';
+    let selectedMonth = 10; // Default: Octubre (peak sowing season in Sopachuy)
+    let activeDetailItem = null;
+    let chatHistory = [];
+    let currentPlayingAudio = null;
+    let currentMicroclimateZone = SOPACHUY_MICROCLIMATE_ZONES[0];
+    let currentGpsCoords = null;
+    let microclimateAiData = null;
+
+    function loadData() {
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (parsed && Array.isArray(parsed.crops) && Array.isArray(parsed.pests)) {
+            return parsed;
+          }
+        }
+      } catch (e) {
+        console.warn('Error reading from localStorage, using INITIAL_DATA', e);
+      }
+      saveData(INITIAL_DATA);
+      return JSON.parse(JSON.stringify(INITIAL_DATA));
+    }
+
+    function saveData(data) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      } catch (e) {
+        console.error('Error saving to localStorage', e);
+      }
+    }
+
+    function resetToDefaultData() {
+      if (confirm('¿Deseas restablecer todos los datos del manual a los valores originales de Sopachuy? Se borrarán las ediciones personalizadas.')) {
+        appData = JSON.parse(JSON.stringify(INITIAL_DATA));
+        saveData(appData);
+        renderAll();
+        renderAdminLists();
+        alert('Datos restablecidos exitosamente.');
+      }
+    }
+
+    /**
+     * DOM References
+     */
+    const searchInput = document.getElementById('searchInput');
+    const btnClearSearch = document.getElementById('btnClearSearch');
+    const searchFeedback = document.getElementById('searchFeedback');
+    const searchFeedbackText = document.getElementById('searchFeedbackText');
+    const btnResetFilters = document.getElementById('btnResetFilters');
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    
+    const sectionCultivos = document.getElementById('sectionCultivos');
+    const sectionPlagas = document.getElementById('sectionPlagas');
+    const sectionCalendario = document.getElementById('sectionCalendario');
+    const gridCultivos = document.getElementById('gridCultivos');
+    const gridPlagas = document.getElementById('gridPlagas');
+    const noResultsState = document.getElementById('noResultsState');
+    const badgeCountCultivos = document.getElementById('badgeCountCultivos');
+    const badgeCountPlagas = document.getElementById('badgeCountPlagas');
+
+    const monthSelectorContainer = document.getElementById('monthSelectorContainer');
+    const monthDetailCard = document.getElementById('monthDetailCard');
+    const currentMonthIndicator = document.getElementById('currentMonthIndicator');
+
+    // Modals
+    const detailModal = document.getElementById('detailModal');
+    const chatModal = document.getElementById('chatModal');
+    const imageGenModal = document.getElementById('imageGenModal');
+    const adminModal = document.getElementById('adminModal');
+
+    /**
+     * Initialization on DOM ready
+     */
+    document.addEventListener('DOMContentLoaded', () => {
+      setupEventListeners();
+      renderAll();
+      initLucide();
+    });
+
+    function initLucide() {
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+    }
+
+    /**
+     * Event Listeners Setup
+     */
+    function setupEventListeners() {
+      // Search Input
+      searchInput.addEventListener('input', (e) => {
+        currentSearchTerm = e.target.value.trim().toLowerCase();
+        btnClearSearch.classList.toggle('hidden', !currentSearchTerm);
+        handleSearchAndFilter();
+      });
+
+      btnClearSearch.addEventListener('click', () => {
+        searchInput.value = '';
+        currentSearchTerm = '';
+        btnClearSearch.classList.add('hidden');
+        handleSearchAndFilter();
+        searchInput.focus();
+      });
+
+      btnResetFilters.addEventListener('click', () => {
+        searchInput.value = '';
+        currentSearchTerm = '';
+        btnClearSearch.classList.add('hidden');
+        setFilterTab('all');
+      });
+
+      // Filter Tabs
+      filterTabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          setFilterTab(tab.getAttribute('data-filter'));
+        });
+      });
+
+      // Header Buttons
+      document.getElementById('btnOpenChatbot').addEventListener('click', openChatModal);
+      document.getElementById('btnOpenImageGen').addEventListener('click', openImageGenModal);
+      document.getElementById('btnOpenAdminModal').addEventListener('click', openAdminModal);
+
+      // Detail TTS Button
+      document.getElementById('btnPlayDetailTTS').addEventListener('click', playDetailItemTTS);
+    }
+
+    /**
+     * Filter Tabs Handler
+     */
+    function setFilterTab(category) {
+      currentFilter = category;
+      filterTabs.forEach((tab) => {
+        const isActive = tab.getAttribute('data-filter') === category;
+        if (isActive) {
+          tab.classList.add('bg-white', 'text-slate-900', 'shadow-xs');
+          tab.classList.remove('text-slate-600');
+        } else {
+          tab.classList.remove('bg-white', 'text-slate-900', 'shadow-xs');
+          tab.classList.add('text-slate-600');
+        }
+      });
+      handleSearchAndFilter();
+    }
+
+    /**
+     * Search and Filter Engine
+     */
+    function handleSearchAndFilter() {
+      const q = currentSearchTerm;
+      let hasFilterOrSearch = q.length > 0 || currentFilter !== 'all';
+
+      if (hasFilterOrSearch) {
+        searchFeedback.classList.remove('hidden');
+        let desc = [];
+        if (q) desc.push(`Búsqueda: "${q}"`);
+        if (currentFilter !== 'all') {
+          const map = { cultivos: 'Cultivos', plagas: 'Plagas y Enfermedades', calendario: 'Calendario' };
+          desc.push(`Categoría: ${map[currentFilter] || currentFilter}`);
+        }
+        searchFeedbackText.textContent = desc.join(' · ');
+      } else {
+        searchFeedback.classList.add('hidden');
+      }
+
+      // Filter crops
+      const filteredCrops = appData.crops.filter((c) => {
+        if (currentFilter === 'plagas' || currentFilter === 'calendario') return false;
+        if (!q) return true;
+        return (
+          c.name.toLowerCase().includes(q) ||
+          c.variety.toLowerCase().includes(q) ||
+          (c.quechuaName && c.quechuaName.toLowerCase().includes(q)) ||
+          c.sowingPeriod.toLowerCase().includes(q) ||
+          c.harvestPeriod.toLowerCase().includes(q) ||
+          c.soilManagement.toLowerCase().includes(q) ||
+          c.organicManure.toLowerCase().includes(q) ||
+          c.irrigation.toLowerCase().includes(q) ||
+          c.generalCare.toLowerCase().includes(q) ||
+          c.valleyTips.toLowerCase().includes(q)
+        );
+      });
+
+      // Filter pests
+      const filteredPests = appData.pests.filter((p) => {
+        if (currentFilter === 'cultivos' || currentFilter === 'calendario') return false;
+        if (!q) return true;
+        return (
+          p.name.toLowerCase().includes(q) ||
+          (p.scientificName && p.scientificName.toLowerCase().includes(q)) ||
+          p.targetCrops.toLowerCase().includes(q) ||
+          p.symptoms.toLowerCase().includes(q) ||
+          p.preventiveControl.toLowerCase().includes(q) ||
+          p.correctiveControl.toLowerCase().includes(q) ||
+          p.organicRecipe.toLowerCase().includes(q)
+        );
+      });
+
+      // Toggle Section Visibility
+      const showCropsSection = currentFilter === 'all' || currentFilter === 'cultivos';
+      const showPestsSection = currentFilter === 'all' || currentFilter === 'plagas';
+      const showCalendarSection = currentFilter === 'all' || currentFilter === 'calendario';
+
+      sectionCultivos.classList.toggle('hidden', !showCropsSection || filteredCrops.length === 0);
+      sectionPlagas.classList.toggle('hidden', !showPestsSection || filteredPests.length === 0);
+      sectionCalendario.classList.toggle('hidden', !showCalendarSection || (q.length > 0 && currentFilter !== 'calendario'));
+
+      // Empty State
+      const totalResults = (showCropsSection ? filteredCrops.length : 0) + 
+                           (showPestsSection ? filteredPests.length : 0) + 
+                           (showCalendarSection && q.length === 0 ? 1 : 0);
+      noResultsState.classList.toggle('hidden', totalResults > 0);
+
+      renderCropsGrid(filteredCrops);
+      renderPestsGrid(filteredPests);
+      renderCalendar();
+      initLucide();
+    }
+
+    /**
+     * Render Everything
+     */
+    function renderAll() {
+      renderMicroclimateSelector();
+      renderMicroclimateSummary();
+      handleSearchAndFilter();
+    }
+
+    /**
+     * Render Crops Grid
+     */
+    function renderCropsGrid(crops) {
+      badgeCountCultivos.textContent = `${crops.length} disponible${crops.length === 1 ? '' : 's'}`;
+      gridCultivos.innerHTML = crops.map((crop) => {
+        const isTopCrop = currentMicroclimateZone && currentMicroclimateZone.topCrops.some((tc) => tc.toLowerCase().includes(crop.name.toLowerCase()));
+        const microAdvisory = getMicroclimateCropAdvisory(crop, currentMicroclimateZone);
+
+        return `
+          <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between group">
+            <div class="space-y-3">
+              <!-- Top Row: Icon + Quechua tag + Microclimate Top Badge -->
+              <div class="flex items-center justify-between gap-1 flex-wrap">
+                <div class="flex items-center gap-2">
+                  <div class="w-10 h-10 rounded-xl bg-agro-100 text-agro-800 flex items-center justify-center font-bold">
+                    <i data-lucide="${crop.iconName || 'sprout'}" class="w-5 h-5"></i>
+                  </div>
+                  ${crop.quechuaName ? `<span class="text-[11px] font-semibold text-agro-700 bg-agro-50 px-2 py-0.5 rounded-md">${crop.quechuaName}</span>` : ''}
+                </div>
+                ${isTopCrop ? `<span class="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-md"><i data-lucide="award" class="w-3 h-3 text-emerald-600"></i> Top ${currentMicroclimateZone.name.split('(')[0].trim()}</span>` : ''}
+              </div>
+
+              <!-- Title & Variety -->
+              <div>
+                <h4 class="text-base font-bold text-slate-900 group-hover:text-agro-700 transition-colors">
+                  ${crop.name}
+                </h4>
+                <p class="text-xs text-slate-500 font-medium">${crop.variety}</p>
+              </div>
+
+              <!-- Sowing and Harvest quick snippets -->
+              <div class="space-y-1.5 text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                <div class="flex items-start gap-1.5">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 text-agro-700 shrink-0 mt-0.5"></i>
+                  <span><strong class="text-slate-800">Siembra:</strong> ${crop.sowingPeriod}</span>
+                </div>
+                <div class="flex items-start gap-1.5">
+                  <i data-lucide="check-circle" class="w-3.5 h-3.5 text-earth-700 shrink-0 mt-0.5"></i>
+                  <span><strong class="text-slate-800">Cosecha:</strong> ${crop.harvestPeriod}</span>
+                </div>
+              </div>
+
+              <!-- Dynamic Microclimate Advisory Callout -->
+              <div class="text-xs bg-agro-50/80 p-2.5 rounded-xl border border-agro-200/90 text-agro-950 space-y-0.5">
+                <div class="flex items-center gap-1 font-bold text-agro-800 text-[11px]">
+                  <i data-lucide="compass" class="w-3.5 h-3.5 text-agro-700 shrink-0"></i>
+                  <span>Ajuste en ${currentMicroclimateZone.name.split('(')[0].trim()} (${currentMicroclimateZone.elevation} msnm):</span>
+                </div>
+                <p class="text-[11px] leading-relaxed text-slate-700">${microAdvisory}</p>
+              </div>
+            </div>
+
+            <!-- Card Actions -->
+            <div class="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+              <button
+                onclick="openCropDetail('${crop.id}');"
+                class="flex-1 py-2 px-3 bg-agro-700 hover:bg-agro-800 text-white rounded-xl text-xs font-semibold transition-colors flex items-center justify-center gap-1 touch-target shadow-2xs"
+              >
+                <span>Ver Ficha Completa</span>
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              </button>
+
+              <button
+                onclick="speakItemQuick('${crop.name}', '${crop.variety}. Siembra: ${crop.sowingPeriod}. Cosecha: ${crop.harvestPeriod}. En ${currentMicroclimateZone.name}: ${microAdvisory}');"
+                class="p-2 rounded-xl text-slate-500 hover:text-agro-700 hover:bg-agro-50 transition-colors touch-target flex items-center justify-center border border-slate-200"
+                title="Escuchar audio con ajuste de microclima"
+                aria-label="Escuchar resumen de ${crop.name}"
+              >
+                <i data-lucide="volume-2" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    /**
+     * Render Pests Grid
+     */
+    function renderPestsGrid(pests) {
+      badgeCountPlagas.textContent = `${pests.length} identificada${pests.length === 1 ? '' : 's'}`;
+      gridPlagas.innerHTML = pests.map((pest) => {
+        return `
+          <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between group">
+            <div class="space-y-3">
+              <!-- Top Row: Icon + Target Crop -->
+              <div class="flex items-center justify-between">
+                <div class="w-10 h-10 rounded-xl bg-earth-100 text-earth-800 flex items-center justify-center font-bold">
+                  <i data-lucide="${pest.iconName || 'bug'}" class="w-5 h-5"></i>
+                </div>
+                <span class="text-[11px] font-semibold text-earth-800 bg-earth-50 px-2 py-0.5 rounded-md truncate max-w-[150px]">
+                  ${pest.targetCrops}
+                </span>
+              </div>
+
+              <!-- Title & Scientific Name -->
+              <div>
+                <h4 class="text-base font-bold text-slate-900 group-hover:text-earth-700 transition-colors">
+                  ${pest.name}
+                </h4>
+                <p class="text-xs text-slate-400 italic">${pest.scientificName || 'Plaga de valle'}</p>
+              </div>
+
+              <!-- Symptoms snippet -->
+              <div class="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                <p class="font-semibold text-slate-800 mb-0.5 flex items-center gap-1">
+                  <i data-lucide="alert-circle" class="w-3.5 h-3.5 text-earth-600"></i>
+                  <span>Síntomas visibles:</span>
+                </p>
+                <p class="line-clamp-2 text-slate-600">${pest.symptoms}</p>
+              </div>
+            </div>
+
+            <!-- Card Actions -->
+            <div class="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+              <button
+                onclick="openPestDetail('${pest.id}');"
+                class="flex-1 py-2 px-3 bg-earth-700 hover:bg-earth-800 text-white rounded-xl text-xs font-semibold transition-colors flex items-center justify-center gap-1 touch-target shadow-2xs"
+              >
+                <span>Control y Receta</span>
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              </button>
+
+              <button
+                onclick="speakItemQuick('${pest.name}', 'Afecta a: ${pest.targetCrops}. Síntomas: ${pest.symptoms}. Control preventivo: ${pest.preventiveControl}');"
+                class="p-2 rounded-xl text-slate-500 hover:text-earth-700 hover:bg-earth-50 transition-colors touch-target flex items-center justify-center border border-slate-200"
+                title="Escuchar audio rápido"
+                aria-label="Escuchar resumen de ${pest.name}"
+              >
+                <i data-lucide="volume-2" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    /**
+     * Render Calendar
+     */
+    function renderCalendar() {
+      // Month Buttons (1 to 12)
+      const months = appData.calendarEvents;
+      monthSelectorContainer.innerHTML = months.map((m) => {
+        const isSelected = m.month === selectedMonth;
+        return `
+          <button
+            onclick="selectCalendarMonth(${m.month});"
+            class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all shrink-0 touch-target ${
+              isSelected
+                ? 'bg-agro-700 text-white shadow-xs scale-102'
+                : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+            }"
+          >
+            ${m.monthName}
+          </button>
+        `;
+      }).join('');
+
+      // Selected Month Detail
+      const event = months.find((m) => m.month === selectedMonth) || months[0];
+      currentMonthIndicator.textContent = `Mes activo: ${event.monthName}`;
+
+      monthDetailCard.innerHTML = `
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold uppercase tracking-wider text-agro-700 bg-agro-50 px-2.5 py-0.5 rounded-md">
+                ${event.monthName} · Mes ${event.month}
+              </span>
+              ${event.quechuaSeason ? `<span class="text-xs text-earth-700 font-semibold">· ${event.quechuaSeason}</span>` : ''}
+            </div>
+            <h4 class="text-lg sm:text-xl font-bold text-slate-900 mt-1">${event.title}</h4>
+          </div>
+
+          <button
+            onclick="speakItemQuick('Mes de ${event.monthName} en Sopachuy', '${event.title}. Clima: ${event.valleyWeatherNote}. Labores recomendadas: ${event.tasks.join(', ')}');"
+            class="self-start sm:self-center inline-flex items-center gap-1.5 px-3 py-1.5 bg-agro-50 hover:bg-agro-100 text-agro-800 rounded-lg text-xs font-semibold transition-colors"
+          >
+            <i data-lucide="volume-2" class="w-3.5 h-3.5"></i>
+            <span>Escuchar Labores</span>
+          </button>
+        </div>
+
+        <!-- Weather Note for Sopachuy -->
+        <div class="p-3 bg-amber-50/80 border border-amber-200 rounded-xl text-xs text-amber-900 flex items-start gap-2.5">
+          <i data-lucide="cloud-sun" class="w-4 h-4 text-amber-700 shrink-0 mt-0.5"></i>
+          <div>
+            <strong class="font-bold">Comportamiento del clima en el valle de Sopachuy:</strong>
+            <p class="mt-0.5">${event.valleyWeatherNote}</p>
+          </div>
+        </div>
+
+        <!-- Microclimate Specific Adjustment Note -->
+        <div class="p-3 bg-agro-50/80 border border-agro-200 rounded-xl text-xs text-agro-900 flex items-start gap-2.5">
+          <i data-lucide="compass" class="w-4 h-4 text-agro-700 shrink-0 mt-0.5"></i>
+          <div>
+            <strong class="font-bold text-agro-800">Ajuste para tu microclima activo (${currentMicroclimateZone.name} · ${currentMicroclimateZone.elevation} msnm):</strong>
+            <p class="mt-0.5 text-slate-700">${getMicroclimateCalendarAdvisory(event.month, currentMicroclimateZone)}</p>
+          </div>
+        </div>
+
+        <!-- Crops in Focus -->
+        <div>
+          <p class="text-xs font-bold text-slate-800 uppercase tracking-wide mb-1.5">Cultivos en foco este mes:</p>
+          <div class="flex flex-wrap gap-1.5">
+            ${event.crops.map((c) => `<span class="px-2.5 py-1 bg-agro-100 text-agro-900 rounded-lg text-xs font-semibold">${c}</span>`).join('')}
+          </div>
+        </div>
+
+        <!-- Tasks list -->
+        <div>
+          <p class="text-xs font-bold text-slate-800 uppercase tracking-wide mb-2">Labores y cuidados recomendados:</p>
+          <ul class="space-y-2 text-xs sm:text-sm text-slate-700">
+            ${event.tasks.map((task) => `
+              <li class="flex items-start gap-2 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                <i data-lucide="check" class="w-4 h-4 text-agro-600 shrink-0 mt-0.5"></i>
+                <span>${task}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+      `;
+    }
+
+    function selectCalendarMonth(monthNumber) {
+      selectedMonth = monthNumber;
+      renderCalendar();
+      initLucide();
+    }
+
+    /**
+     * MODAL DETAIL: CROP
+     */
+    function openCropDetail(cropId) {
+      const crop = appData.crops.find((c) => c.id === cropId);
+      if (!crop) return;
+
+      activeDetailItem = crop;
+      document.getElementById('detailBadgeCategory').textContent = 'Ficha de Cultivo';
+      document.getElementById('detailQuechua').textContent = crop.quechuaName ? `Quechua: ${crop.quechuaName}` : '';
+      document.getElementById('detailTitle').textContent = crop.name;
+      document.getElementById('detailSubtitle').textContent = crop.variety;
+
+      const body = document.getElementById('detailModalBody');
+      body.innerHTML = `
+        <!-- Sowing & Harvest Strip -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-agro-50/70 p-4 rounded-2xl border border-agro-200">
+          <div class="space-y-0.5">
+            <span class="text-xs font-bold uppercase tracking-wider text-agro-800 flex items-center gap-1.5">
+              <i data-lucide="calendar" class="w-4 h-4 text-agro-700"></i>
+              Época de Siembra (Tarpuy)
+            </span>
+            <p class="text-sm font-semibold text-slate-900">${crop.sowingPeriod}</p>
+          </div>
+          <div class="space-y-0.5">
+            <span class="text-xs font-bold uppercase tracking-wider text-earth-800 flex items-center gap-1.5">
+              <i data-lucide="check-circle" class="w-4 h-4 text-earth-700"></i>
+              Época de Cosecha (Aymoray)
+            </span>
+            <p class="text-sm font-semibold text-slate-900">${crop.harvestPeriod}</p>
+          </div>
+        </div>
+
+        <!-- Technical Sections -->
+        <div class="space-y-4">
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 space-y-1">
+            <h5 class="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
+              <i data-lucide="layers" class="w-4 h-4 text-agro-700"></i>
+              Manejo del Suelo y Aporque
+            </h5>
+            <p class="text-slate-600 leading-relaxed">${crop.soilManagement}</p>
+          </div>
+
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 space-y-1">
+            <h5 class="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
+              <i data-lucide="sparkles" class="w-4 h-4 text-earth-700"></i>
+              Abono Orgánico Recomendado
+            </h5>
+            <p class="text-slate-600 leading-relaxed">${crop.organicManure}</p>
+          </div>
+
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 space-y-1">
+            <h5 class="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
+              <i data-lucide="droplet" class="w-4 h-4 text-blue-600"></i>
+              Frecuencia y Manejo del Riego
+            </h5>
+            <p class="text-slate-600 leading-relaxed">${crop.irrigation}</p>
+          </div>
+
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 space-y-1">
+            <h5 class="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
+              <i data-lucide="shield-check" class="w-4 h-4 text-agro-700"></i>
+              Cuidados Generales y Consejos de Valle
+            </h5>
+            <p class="text-slate-600 leading-relaxed">${crop.generalCare}</p>
+            ${crop.valleyTips ? `<p class="mt-2 text-xs text-agro-800 font-medium bg-agro-50 p-2.5 rounded-xl border border-agro-100"><strong>Dato local Sopachuy:</strong> ${crop.valleyTips}</p>` : ''}
+          </div>
+
+          <!-- Microclimate Custom Advisory Box -->
+          <div class="bg-gradient-to-r from-agro-50 to-emerald-50 p-4 rounded-2xl border border-agro-300 space-y-1">
+            <h5 class="text-xs font-bold uppercase tracking-wider text-agro-900 flex items-center gap-2">
+              <i data-lucide="compass" class="w-4 h-4 text-agro-700"></i>
+              Recomendación Específica para tu Microclima (${currentMicroclimateZone.name} · ${currentMicroclimateZone.elevation} msnm)
+            </h5>
+            <p class="text-xs sm:text-sm text-agro-950 font-medium leading-relaxed">
+              ${getMicroclimateCropAdvisory(crop, currentMicroclimateZone)}
+            </p>
+          </div>
+        </div>
+      `;
+
+      detailModal.classList.remove('hidden');
+      initLucide();
+    }
+
+    /**
+     * MODAL DETAIL: PEST
+     */
+    function openPestDetail(pestId) {
+      const pest = appData.pests.find((p) => p.id === pestId);
+      if (!pest) return;
+
+      activeDetailItem = pest;
+      document.getElementById('detailBadgeCategory').textContent = 'Plaga / Enfermedad';
+      document.getElementById('detailQuechua').textContent = pest.scientificName ? `Científico: ${pest.scientificName}` : '';
+      document.getElementById('detailTitle').textContent = pest.name;
+      document.getElementById('detailSubtitle').textContent = `Cultivos afectados: ${pest.targetCrops}`;
+
+      const body = document.getElementById('detailModalBody');
+      body.innerHTML = `
+        <!-- Symptoms Alert Box -->
+        <div class="bg-red-50/80 p-4 rounded-2xl border border-red-200 space-y-1 text-red-950">
+          <h5 class="text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 text-red-800">
+            <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+            Identificación de Síntomas en la Planta
+          </h5>
+          <p class="text-sm font-medium leading-relaxed">${pest.symptoms}</p>
+        </div>
+
+        <!-- Microclimate Pest Behavior Box -->
+        <div class="bg-amber-50/80 p-4 rounded-2xl border border-amber-200 space-y-1 text-amber-950">
+          <h5 class="text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 text-amber-900">
+            <i data-lucide="compass" class="w-4 h-4 text-amber-700"></i>
+            Presión y Comportamiento en ${currentMicroclimateZone.name} (${currentMicroclimateZone.elevation} msnm)
+          </h5>
+          <p class="text-xs sm:text-sm text-slate-800 leading-relaxed font-medium">
+            ${getMicroclimatePestAdvisory(pest, currentMicroclimateZone)}
+          </p>
+        </div>
+
+        <!-- Controls Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 space-y-1">
+            <h5 class="text-xs font-bold uppercase tracking-wider text-agro-800 flex items-center gap-1.5">
+              <i data-lucide="shield" class="w-4 h-4 text-agro-600"></i>
+              Manejo Preventivo
+            </h5>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">${pest.preventiveControl}</p>
+          </div>
+
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 space-y-1">
+            <h5 class="text-xs font-bold uppercase tracking-wider text-earth-800 flex items-center gap-1.5">
+              <i data-lucide="zap" class="w-4 h-4 text-earth-600"></i>
+              Manejo Correctivo Ecológico
+            </h5>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">${pest.correctiveControl}</p>
+          </div>
+        </div>
+
+        <!-- Traditional Organic Recipe Box -->
+        <div class="bg-agro-50/80 p-4 rounded-2xl border border-agro-200 space-y-1 text-agro-950">
+          <h5 class="text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 text-agro-800">
+            <i data-lucide="sparkles" class="w-4 h-4 text-agro-700"></i>
+            Receta Orgánica Casera (Biopreparado)
+          </h5>
+          <p class="text-sm leading-relaxed">${pest.organicRecipe}</p>
+          <p class="text-xs text-agro-700 font-medium pt-1">
+            * Aplicar preferentemente en horas de la tarde para evitar que el sol degrade los extractos botánicos.
+          </p>
+        </div>
+      `;
+
+      detailModal.classList.remove('hidden');
+      initLucide();
+    }
+
+    function closeDetailModal() {
+      detailModal.classList.add('hidden');
+      stopAudio();
+    }
+
+    /**
+     * TEXT-TO-SPEECH (TTS) SYSTEM (gemini-3.8-flash-tts with WebSpeech Fallback)
+     */
+    async function playDetailItemTTS() {
+      if (!activeDetailItem) return;
+
+      const btn = document.getElementById('btnPlayDetailTTS');
+      const btnText = document.getElementById('btnPlayDetailTTSText');
+
+      // If currently playing, stop it
+      if (currentPlayingAudio) {
+        stopAudio();
+        btnText.textContent = 'Escuchar Ficha (Audio TTS)';
+        return;
+      }
+
+      let speechText = '';
+      if (activeDetailItem.category === 'cultivo') {
+        speechText = `Ficha técnica del cultivo de ${activeDetailItem.name}, ${activeDetailItem.variety}. Época de siembra en Sopachuy: ${activeDetailItem.sowingPeriod}. Época de cosecha: ${activeDetailItem.harvestPeriod}. En cuanto al suelo: ${activeDetailItem.soilManagement}. Sobre abono orgánico: ${activeDetailItem.organicManure}. Riego: ${activeDetailItem.irrigation}. Cuidados generales: ${activeDetailItem.generalCare}.`;
+      } else {
+        speechText = `Ficha de control de la plaga o enfermedad: ${activeDetailItem.name}. Afecta principalmente a: ${activeDetailItem.targetCrops}. Síntomas visibles: ${activeDetailItem.symptoms}. Control preventivo: ${activeDetailItem.preventiveControl}. Control correctivo: ${activeDetailItem.correctiveControl}. Receta orgánica recomendada: ${activeDetailItem.organicRecipe}.`;
+      }
+
+      btnText.textContent = 'Generando audio...';
+      btn.disabled = true;
+
+      try {
+        // Attempt Gemini 3.8 Flash TTS via server backend
+        const response = await fetch('/api/tts', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            text: speechText,
+            voiceName: 'Kore'
+          })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.audioBase64) {
+            playBase64WavAudio(data.audioBase64);
+            btnText.textContent = 'Detener Audio';
+            btn.disabled = false;
+            return;
+          }
+        }
+        throw new Error('Respuesta de audio no disponible del backend');
+      } catch (err) {
+        console.warn('Fallback to browser SpeechSynthesis:', err.message);
+        playSpeechSynthesisFallback(speechText);
+        btnText.textContent = 'Detener Audio';
+        btn.disabled = false;
+      }
+    }
+
+    function playBase64WavAudio(base64Data) {
+      stopAudio();
+      const audio = new Audio('data:audio/wav;base64,' + base64Data);
+      currentPlayingAudio = audio;
+      audio.play().catch(e => console.error('Audio play error', e));
+      audio.onended = () => {
+        currentPlayingAudio = null;
+        document.getElementById('btnPlayDetailTTSText').textContent = 'Escuchar Ficha (Audio TTS)';
+      };
+    }
+
+    function playSpeechSynthesisFallback(text) {
+      stopAudio();
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'es-BO';
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+        currentPlayingAudio = { pause: () => window.speechSynthesis.cancel() };
+        utterance.onend = () => {
+          currentPlayingAudio = null;
+          document.getElementById('btnPlayDetailTTSText').textContent = 'Escuchar Ficha (Audio TTS)';
+        };
+      }
+    }
+
+    function speakItemQuick(title, content) {
+      stopAudio();
+      const fullText = `${title}. ${content}`;
+      
+      // Try Gemini backend TTS first
+      fetch('/api/tts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: fullText.slice(0, 400), voiceName: 'Kore' })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.audioBase64) {
+          playBase64WavAudio(data.audioBase64);
+        } else {
+          playSpeechSynthesisFallback(fullText);
+        }
+      })
+      .catch(() => {
+        playSpeechSynthesisFallback(fullText);
+      });
+    }
+
+    function stopAudio() {
+      if (currentPlayingAudio) {
+        try {
+          if (typeof currentPlayingAudio.pause === 'function') {
+            currentPlayingAudio.pause();
+          }
+        } catch (e) {}
+        currentPlayingAudio = null;
+      }
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+    }
+
+    /**
+     * GEMINI MULTI-TURN CHATBOT
+     */
+    function openChatModal() {
+      chatModal.classList.remove('hidden');
+      document.getElementById('chatInput').focus();
+      initLucide();
+    }
+
+    function closeChatModal() {
+      chatModal.classList.add('hidden');
+    }
+
+    function sendQuickPrompt(promptText) {
+      document.getElementById('chatInput').value = promptText;
+      handleChatSubmit(new Event('submit'));
+    }
+
+    async function handleChatSubmit(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const modelSelect = document.getElementById('chatModelSelect');
+      const selectedModel = modelSelect.value || 'gemini-3.8-flash';
+
+      // Append user message to UI
+      appendChatMessage('user', text);
+      input.value = '';
+
+      // Append to memory history
+      chatHistory.push({ role: 'user', text: text });
+
+      // Append temporary loading placeholder
+      const loadingBubbleId = 'chat-loading-' + Date.now();
+      appendChatLoading(loadingBubbleId);
+
+      try {
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            messages: chatHistory,
+            modelChoice: selectedModel
+          })
+        });
+
+        removeChatLoading(loadingBubbleId);
+
+        if (response.ok) {
+          const data = await response.json();
+          const reply = data.reply || 'No se obtuvo respuesta del asistente.';
+          chatHistory.push({ role: 'model', text: reply });
+          appendChatMessage('model', reply);
+        } else {
+          const errData = await response.json().catch(() => ({}));
+          throw new Error(errData.error || 'Error al conectar con el servidor.');
+        }
+      } catch (err) {
+        removeChatLoading(loadingBubbleId);
+        console.warn('Chat request failed, providing local agronomist knowledge:', err.message);
+        
+        // Smart contextual fallback based on Sopachuy agriculture
+        let fallbackReply = `(Respuesta local): Para cultivos en Sopachuy recomendamos mantener buenas zanjas de drenaje y aplicar abono orgánico fermentado. Si tienes problemas de plagas como gusano cogollero, usa ceniza o caldo de ajo y ají.`;
+        if (text.toLowerCase().includes('tizón') || text.toLowerCase().includes('lancha')) {
+          fallbackReply = `Para el tizón tardío en Sopachuy: Aplica Caldo Bordelés al 1% preventivamente tras lluvias continuas. Asegúrate de aporcar alto y cosechar a tiempo.`;
+        } else if (text.toLowerCase().includes('siembra') || text.toLowerCase().includes('fecha')) {
+          fallbackReply = `En Sopachuy la siembra grande de papa y maíz se realiza en Octubre y Noviembre al comenzar las lluvias de valle. Las siembras tempranas mishka se hacen en Septiembre bajo riego.`;
+        }
+
+        chatHistory.push({ role: 'model', text: fallbackReply });
+        appendChatMessage('model', fallbackReply);
+      }
+    }
+
+    function appendChatMessage(role, text) {
+      const thread = document.getElementById('chatMessagesThread');
+      const isUser = role === 'user';
+
+      const div = document.createElement('div');
+      div.className = `flex items-start gap-2.5 ${isUser ? 'justify-end' : ''} max-w-[85%] ${isUser ? 'ml-auto' : ''}`;
+
+      if (isUser) {
+        div.innerHTML = `
+          <div class="bg-agro-700 text-white p-3.5 rounded-2xl rounded-tr-xs shadow-2xs space-y-1">
+            <p class="whitespace-pre-wrap">${escapeHtml(text)}</p>
+          </div>
+        `;
+      } else {
+        div.innerHTML = `
+          <div class="w-7 h-7 rounded-lg bg-agro-700 text-white flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="bot" class="w-4 h-4"></i>
+          </div>
+          <div class="bg-white p-3.5 rounded-2xl rounded-tl-xs border border-slate-200 shadow-2xs text-slate-800 space-y-1">
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-bold text-agro-800 text-[11px]">Asistente Agrónomo IA</span>
+              <button onclick="speakItemQuick('Respuesta del Asistente', '${escapeAttr(text.slice(0, 300))}');" class="text-slate-400 hover:text-agro-700 text-xs">
+                <i data-lucide="volume-2" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+            <p class="whitespace-pre-wrap leading-relaxed">${formatMarkdownSimple(text)}</p>
+          </div>
+        `;
+      }
+
+      thread.appendChild(div);
+      thread.scrollTop = thread.scrollHeight;
+      initLucide();
+    }
+
+    function appendChatLoading(id) {
+      const thread = document.getElementById('chatMessagesThread');
+      const div = document.createElement('div');
+      div.id = id;
+      div.className = 'flex items-center gap-2 text-slate-400 text-xs py-2';
+      div.innerHTML = `
+        <div class="w-6 h-6 rounded-lg bg-agro-100 text-agro-700 flex items-center justify-center">
+          <i data-lucide="loader" class="w-3.5 h-3.5 animate-spin"></i>
+        </div>
+        <span>El agrónomo de Sopachuy está redactando su respuesta...</span>
+      `;
+      thread.appendChild(div);
+      thread.scrollTop = thread.scrollHeight;
+      initLucide();
+    }
+
+    function removeChatLoading(id) {
+      const el = document.getElementById(id);
+      if (el) el.remove();
+    }
+
+    function formatMarkdownSimple(text) {
+      // Basic formatting for bullet points and bolding
+      return escapeHtml(text)
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\n\* /g, '<br>• ')
+        .replace(/\n- /g, '<br>• ');
+    }
+
+    function escapeHtml(text) {
+      return text.replace(/[&<>"']/g, function(m) {
+        return {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#039;'
+        }[m];
+      });
+    }
+
+    function escapeAttr(text) {
+      return text.replace(/['"]/g, '');
+    }
+
+    /**
+     * GEMINI HIGH QUALITY IMAGE GENERATION (gemini-3-pro-image-preview with 1K, 2K, 4K affordance)
+     */
+    function openImageGenModal() {
+      imageGenModal.classList.remove('hidden');
+      initLucide();
+    }
+
+    function closeImageGenModal() {
+      imageGenModal.classList.add('hidden');
+    }
+
+    async function triggerImageGeneration() {
+      const promptInput = document.getElementById('imagePromptInput');
+      const prompt = promptInput.value.trim();
+      if (!prompt) {
+        alert('Por favor ingresa una breve descripción del cultivo o plaga.');
+        promptInput.focus();
+        return;
+      }
+
+      const sizeRadio = document.querySelector('input[name="imageResolution"]:checked');
+      const selectedSize = sizeRadio ? sizeRadio.value : '1K';
+
+      const btn = document.getElementById('btnGenerateImage');
+      const btnText = document.getElementById('btnGenerateImageText');
+      btn.disabled = true;
+      btnText.textContent = `Generando imagen ${selectedSize} con Gemini...`;
+
+      const previewContainer = document.getElementById('imagePreviewContainer');
+      const previewImg = document.getElementById('generatedImageResult');
+      const metaSpan = document.getElementById('generatedImageMeta');
+      const downloadLink = document.getElementById('btnDownloadGenImage');
+
+      try {
+        const response = await fetch('/api/generate-image', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            prompt: prompt,
+            size: selectedSize,
+            aspectRatio: '4:3'
+          })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.imageBase64) {
+            const dataUrl = `data:${data.mimeType || 'image/png'};base64,${data.imageBase64}`;
+            previewImg.src = dataUrl;
+            downloadLink.href = dataUrl;
+            metaSpan.textContent = `Resolución: ${selectedSize} · Modelo: gemini-3-pro-image-preview`;
+            previewContainer.classList.remove('hidden');
+            btnText.textContent = 'Generar Fotografía con IA';
+            btn.disabled = false;
+            initLucide();
+            return;
+          }
+        }
+        throw new Error('No se recibió la imagen del servidor');
+      } catch (err) {
+        console.error('Image generation error:', err);
+        alert('Nota: Para generar imágenes con gemini-3-pro-image-preview se requiere que el backend esté ejecutándose con su API Key válida.');
+        btnText.textContent = 'Generar Fotografía con IA';
+        btn.disabled = false;
+      }
+    }
+
+    /**
+     * ADMIN PANEL & CRUD SYSTEM (PIN: 1234)
+     */
+    let adminAuthenticated = false;
+
+    function openAdminModal() {
+      adminModal.classList.remove('hidden');
+      if (!adminAuthenticated) {
+        document.getElementById('adminPinGate').classList.remove('hidden');
+        document.getElementById('adminDashboard').classList.add('hidden');
+        document.getElementById('adminPinInput').value = '';
+        document.getElementById('adminPinError').classList.add('hidden');
+        document.getElementById('adminPinInput').focus();
+      } else {
+        document.getElementById('adminPinGate').classList.add('hidden');
+        document.getElementById('adminDashboard').classList.remove('hidden');
+        renderAdminLists();
+      }
+      initLucide();
+    }
+
+    function closeAdminModal() {
+      adminModal.classList.add('hidden');
+    }
+
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      const pin = document.getElementById('adminPinInput').value.trim();
+      if (pin === '1234') {
+        adminAuthenticated = true;
+        document.getElementById('adminPinGate').classList.add('hidden');
+        document.getElementById('adminDashboard').classList.remove('hidden');
+        renderAdminLists();
+        initLucide();
+      } else {
+        document.getElementById('adminPinError').classList.remove('hidden');
+      }
+    }
+
+    function adminLogout() {
+      adminAuthenticated = false;
+      document.getElementById('adminPinGate').classList.remove('hidden');
+      document.getElementById('adminDashboard').classList.add('hidden');
+      document.getElementById('adminPinInput').value = '';
+    }
+
+    function switchAdminTab(tab) {
+      document.getElementById('adminPaneCultivos').classList.toggle('hidden', tab !== 'cultivos');
+      document.getElementById('adminPanePlagas').classList.toggle('hidden', tab !== 'plagas');
+      document.getElementById('adminPaneCalendario').classList.toggle('hidden', tab !== 'calendario');
+
+      const btnCultivos = document.getElementById('adminTabBtnCultivos');
+      const btnPlagas = document.getElementById('adminTabBtnPlagas');
+      const btnCalendario = document.getElementById('adminTabBtnCalendario');
+
+      [btnCultivos, btnPlagas, btnCalendario].forEach(b => {
+        b.className = 'px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-900';
+      });
+
+      if (tab === 'cultivos') btnCultivos.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-900 shadow-xs';
+      if (tab === 'plagas') btnPlagas.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-900 shadow-xs';
+      if (tab === 'calendario') btnCalendario.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-900 shadow-xs';
+
+      initLucide();
+    }
+
+    function renderAdminLists() {
+      // 1. Admin Crops List
+      const cropsList = document.getElementById('adminCropsList');
+      cropsList.innerHTML = appData.crops.map((c) => `
+        <div class="flex items-center justify-between p-3 bg-white border border-slate-200 rounded-xl">
+          <div>
+            <h5 class="text-xs font-bold text-slate-900">${c.name} (${c.variety})</h5>
+            <p class="text-[11px] text-slate-500">Siembra: ${c.sowingPeriod} · Cosecha: ${c.harvestPeriod}</p>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <button onclick="openEditCropForm('${c.id}');" class="p-1.5 text-agro-700 hover:bg-agro-50 rounded-lg text-xs font-semibold">
+              <i data-lucide="edit-2" class="w-4 h-4"></i>
+            </button>
+            <button onclick="deleteCrop('${c.id}');" class="p-1.5 text-red-600 hover:bg-red-50 rounded-lg text-xs font-semibold">
+              <i data-lucide="trash-2" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      // 2. Admin Pests List
+      const pestsList = document.getElementById('adminPestsList');
+      pestsList.innerHTML = appData.pests.map((p) => `
+        <div class="flex items-center justify-between p-3 bg-white border border-slate-200 rounded-xl">
+          <div>
+            <h5 class="text-xs font-bold text-slate-900">${p.name}</h5>
+            <p class="text-[11px] text-slate-500">Afecta: ${p.targetCrops}</p>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <button onclick="openEditPestForm('${p.id}');" class="p-1.5 text-earth-700 hover:bg-earth-50 rounded-lg text-xs font-semibold">
+              <i data-lucide="edit-2" class="w-4 h-4"></i>
+            </button>
+            <button onclick="deletePest('${p.id}');" class="p-1.5 text-red-600 hover:bg-red-50 rounded-lg text-xs font-semibold">
+              <i data-lucide="trash-2" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      // 3. Admin Calendar List
+      const calList = document.getElementById('adminCalendarList');
+      calList.innerHTML = appData.calendarEvents.map((m) => `
+        <div class="p-3 bg-white border border-slate-200 rounded-xl space-y-1.5">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-agro-800">${m.monthName} (Mes ${m.month})</span>
+            <span class="text-[11px] text-slate-400">${m.quechuaSeason || ''}</span>
+          </div>
+          <p class="text-xs font-semibold text-slate-900">${m.title}</p>
+          <p class="text-[11px] text-slate-500 line-clamp-1">${m.tasks.join(' · ')}</p>
+        </div>
+      `).join('');
+
+      initLucide();
+    }
+
+    // --- CROP CRUD ---
+    function openCreateCropForm() {
+      const form = document.getElementById('formCrop');
+      form.reset();
+      document.getElementById('cropFormId').value = '';
+      document.getElementById('formCropTitle').textContent = 'Agregar Nuevo Cultivo a Sopachuy';
+      form.classList.remove('hidden');
+    }
+
+    function openEditCropForm(cropId) {
+      const crop = appData.crops.find((c) => c.id === cropId);
+      if (!crop) return;
+
+      document.getElementById('formCrop').classList.remove('hidden');
+      document.getElementById('formCropTitle').textContent = `Editar Cultivo: ${crop.name}`;
+      document.getElementById('cropFormId').value = crop.id;
+      document.getElementById('cropFormName').value = crop.name;
+      document.getElementById('cropFormVariety').value = crop.variety;
+      document.getElementById('cropFormQuechua').value = crop.quechuaName || '';
+      document.getElementById('cropFormSowing').value = crop.sowingPeriod;
+      document.getElementById('cropFormHarvest').value = crop.harvestPeriod;
+      document.getElementById('cropFormIrrigation').value = crop.irrigation;
+      document.getElementById('cropFormSoil').value = crop.soilManagement;
+      document.getElementById('cropFormManure').value = crop.organicManure;
+      document.getElementById('cropFormCare').value = crop.generalCare;
+    }
+
+    function cancelCropForm() {
+      document.getElementById('formCrop').classList.add('hidden');
+    }
+
+    function handleSaveCrop(e) {
+      e.preventDefault();
+      const id = document.getElementById('cropFormId').value;
+      const cropData = {
+        name: document.getElementById('cropFormName').value.trim(),
+        variety: document.getElementById('cropFormVariety').value.trim(),
+        quechuaName: document.getElementById('cropFormQuechua').value.trim(),
+        sowingPeriod: document.getElementById('cropFormSowing').value.trim(),
+        harvestPeriod: document.getElementById('cropFormHarvest').value.trim(),
+        irrigation: document.getElementById('cropFormIrrigation').value.trim(),
+        soilManagement: document.getElementById('cropFormSoil').value.trim(),
+        organicManure: document.getElementById('cropFormManure').value.trim(),
+        generalCare: document.getElementById('cropFormCare').value.trim(),
+        valleyTips: 'Práctica agroecológica validada en el valle de Sopachuy.',
+        iconName: 'sprout',
+        category: 'cultivo'
+      };
+
+      if (id) {
+        // Edit existing
+        const index = appData.crops.findIndex((c) => c.id === id);
+        if (index !== -1) {
+          appData.crops[index] = { ...appData.crops[index], ...cropData };
+        }
+      } else {
+        // Create new
+        const newCrop = {
+          id: 'cultivo-' + Date.now(),
+          ...cropData
+        };
+        appData.crops.push(newCrop);
+      }
+
+      saveData(appData);
+      cancelCropForm();
+      renderAll();
+      renderAdminLists();
+      alert('Cultivo guardado con éxito y actualizado en la aplicación.');
+    }
+
+    function deleteCrop(cropId) {
+      if (confirm('¿Estás seguro de eliminar este cultivo del manual?')) {
+        appData.crops = appData.crops.filter((c) => c.id !== cropId);
+        saveData(appData);
+        renderAll();
+        renderAdminLists();
+      }
+    }
+
+    // --- PEST CRUD ---
+    function openCreatePestForm() {
+      const form = document.getElementById('formPest');
+      form.reset();
+      document.getElementById('pestFormId').value = '';
+      document.getElementById('formPestTitle').textContent = 'Registrar Nueva Plaga o Enfermedad';
+      form.classList.remove('hidden');
+    }
+
+    function openEditPestForm(pestId) {
+      const pest = appData.pests.find((p) => p.id === pestId);
+      if (!pest) return;
+
+      document.getElementById('formPest').classList.remove('hidden');
+      document.getElementById('formPestTitle').textContent = `Editar Plaga: ${pest.name}`;
+      document.getElementById('pestFormId').value = pest.id;
+      document.getElementById('pestFormName').value = pest.name;
+      document.getElementById('pestFormScientific').value = pest.scientificName || '';
+      document.getElementById('pestFormCrops').value = pest.targetCrops;
+      document.getElementById('pestFormSymptoms').value = pest.symptoms;
+      document.getElementById('pestFormPreventive').value = pest.preventiveControl;
+      document.getElementById('pestFormCorrective').value = pest.correctiveControl;
+      document.getElementById('pestFormRecipe').value = pest.organicRecipe || '';
+    }
+
+    function cancelPestForm() {
+      document.getElementById('formPest').classList.add('hidden');
+    }
+
+    function handleSavePest(e) {
+      e.preventDefault();
+      const id = document.getElementById('pestFormId').value;
+      const pestData = {
+        name: document.getElementById('pestFormName').value.trim(),
+        scientificName: document.getElementById('pestFormScientific').value.trim(),
+        targetCrops: document.getElementById('pestFormCrops').value.trim(),
+        symptoms: document.getElementById('pestFormSymptoms').value.trim(),
+        preventiveControl: document.getElementById('pestFormPreventive').value.trim(),
+        correctiveControl: document.getElementById('pestFormCorrective').value.trim(),
+        organicRecipe: document.getElementById('pestFormRecipe').value.trim() || 'Infusión de aromáticas repelentes locales.',
+        iconName: 'shield-alert',
+        category: 'plaga'
+      };
+
+      if (id) {
+        const index = appData.pests.findIndex((p) => p.id === id);
+        if (index !== -1) {
+          appData.pests[index] = { ...appData.pests[index], ...pestData };
+        }
+      } else {
+        const newPest = {
+          id: 'plaga-' + Date.now(),
+          ...pestData
+        };
+        appData.pests.push(newPest);
+      }
+
+      saveData(appData);
+      cancelPestForm();
+      renderAll();
+      renderAdminLists();
+      alert('Plaga guardada con éxito y actualizada en la aplicación.');
+    }
+
+    function deletePest(pestId) {
+      if (confirm('¿Estás seguro de eliminar esta plaga del manual?')) {
+        appData.pests = appData.pests.filter((p) => p.id !== pestId);
+        saveData(appData);
+        renderAll();
+        renderAdminLists();
+      }
+    }
+  </script>
+</body>
+</html>
