@@ -60,7 +60,7 @@ app.get('/api/health', (_req, res) => {
  */
 app.post('/api/chat', async (req: Request, res: Response): Promise<void> => {
   try {
-    const { messages, modelChoice = 'gemini-3.8-flash' } = req.body;
+    const { messages, modelChoice = 'gemini-3.1-flash-lite' } = req.body;
 
     if (!apiKey) {
       res.status(500).json({ error: 'La clave GEMINI_API_KEY no está configurada en las variables de entorno.' });
@@ -72,11 +72,11 @@ app.post('/api/chat', async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    let selectedModel = 'gemini-3.8-flash';
+    let selectedModel = 'gemini-3.1-flash-lite';
     if (modelChoice === 'gemini-4-argon') {
       selectedModel = 'gemini-4-argon';
-    } else if (modelChoice === 'gemini-3.1-flash-lite') {
-      selectedModel = 'gemini-3.1-flash-lite';
+    } else if (modelChoice === 'gemini-3.8-flash') {
+      selectedModel = 'gemini-3.8-flash';
     }
 
     const contents = messages.map((m: { role: string; text: string }) => ({

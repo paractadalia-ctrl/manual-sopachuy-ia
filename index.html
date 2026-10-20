@@ -7,8 +7,13 @@
   <meta name="description" content="Manual técnico e interactivo de cultivos, plagas y calendario agrícola para los productores y estudiantes de Sopachuy, Chuquisaca, Bolivia. Por Claudio Jimenez Aramayo." />
   <meta property="og:title" content="Manual Digital Agrícola de Sopachuy" />
   <meta property="og:description" content="Guía agrícola de valle: cultivos, plagas, abonos orgánicos y calendario lunar/climático de Sopachuy, Chuquisaca." />
-  <meta property="og:type" content="website" />
   <meta name="theme-color" content="#15803d" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%2315803d'/%3E%3Cpath d='M50 20 C35 35 25 50 25 65 C25 80 35 88 50 88 C65 88 75 80 75 65 C75 50 65 35 50 20 Z' fill='%2386efac'/%3E%3Ccircle cx='70' cy='30' r='10' fill='%23fef08a'/%3E%3C/svg%3E" />
 
   <!-- Tailwind CSS via CDN with custom agricultural palette -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -124,12 +129,55 @@
           <i data-lucide="image" class="w-4 h-4"></i>
           <span class="hidden md:inline">Generar Imagen</span>
         </button>
+
+        <button
+          id="btnHeaderInstall"
+          onclick="installAndroidPwa();"
+          class="hidden inline-flex items-center gap-1.5 px-2.5 py-2 text-xs font-semibold rounded-lg bg-agro-100 text-agro-800 hover:bg-agro-200 transition-colors shadow-2xs touch-target"
+          title="Instalar en tu celular Android"
+        >
+          <i data-lucide="smartphone" class="w-4 h-4 text-agro-700"></i>
+          <span class="text-[11px] font-bold">App</span>
+        </button>
       </div>
     </div>
   </header>
 
   <!-- MAIN CONTAINER -->
   <main class="max-w-6xl mx-auto px-4 py-5 flex-1 w-full space-y-6">
+
+    <!-- ANDROID APP INSTALL PROMPT BANNER -->
+    <div id="androidInstallBanner" class="hidden p-3 bg-gradient-to-r from-agro-900 via-agro-800 to-indigo-950 text-white rounded-2xl border border-agro-600/50 shadow-md flex items-center justify-between gap-3 animate-in fade-in slide-in-from-top-2 duration-200">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center shrink-0 border border-white/20">
+          <i data-lucide="smartphone" class="w-5 h-5 text-amber-300"></i>
+        </div>
+        <div>
+          <p class="text-xs font-bold leading-tight flex items-center gap-1.5">
+            <span>Instalar Manual en tu Celular Android</span>
+            <span class="text-[10px] px-1.5 py-0.2 rounded bg-amber-400 text-slate-900 font-extrabold uppercase">PWA</span>
+          </p>
+          <p class="text-[11px] text-agro-200">Úsalo en la parcela sin conexión y con acceso directo</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <button
+          onclick="installAndroidPwa();"
+          class="px-3 py-1.5 bg-amber-400 hover:bg-amber-300 active:scale-95 text-slate-900 rounded-xl text-xs font-bold transition-all shadow-xs flex items-center gap-1 touch-target"
+        >
+          <i data-lucide="download" class="w-3.5 h-3.5"></i>
+          <span>Instalar</span>
+        </button>
+        <button
+          onclick="dismissAndroidInstall();"
+          class="p-1.5 text-agro-300 hover:text-white rounded-lg text-xs touch-target"
+          title="Cerrar aviso"
+          aria-label="Cerrar aviso de instalación"
+        >
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
 
     <!-- HERO & CONTEXT BANNER -->
     <section class="bg-gradient-to-br from-agro-800 via-agro-700 to-earth-800 rounded-2xl text-white p-5 sm:p-7 shadow-sm relative overflow-hidden">
@@ -309,18 +357,22 @@
         </div>
       </section>
 
-      <!-- SECTION: CALENDARIO AGRÍCOLA DIGITAL INTERACTIVO -->
+      <!-- SECTION: CALENDARIO AGRÍCOLA Y FASES LUNARES ANDINAS -->
       <section id="sectionCalendario" class="space-y-4">
-        <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+        <div class="flex items-center justify-between border-b border-slate-200 pb-2 flex-wrap gap-2">
           <div class="flex items-center gap-2">
-            <div class="w-7 h-7 rounded-lg bg-agro-100 text-agro-700 flex items-center justify-center">
-              <i data-lucide="calendar" class="w-4 h-4"></i>
+            <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-900 to-agro-800 text-amber-300 flex items-center justify-center shadow-xs shrink-0">
+              <i data-lucide="moon" class="w-4 h-4"></i>
             </div>
             <div>
-              <h3 class="text-lg font-bold text-slate-900">Calendario Agrícola Digital de Sopachuy</h3>
-              <p class="text-xs text-slate-500">Ciclos de siembra, cosecha y labores del valle mes a mes</p>
+              <h3 class="text-lg font-bold text-slate-900">Calendario Agrícola y Fases Lunares de Sopachuy</h3>
+              <p class="text-xs text-slate-500">Ciclos de siembra (Tarpuy), cosecha (Aymoray) e influencia lunar andina tradicional</p>
             </div>
           </div>
+          <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200 inline-flex items-center gap-1.5">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-indigo-600"></i>
+            <span>Bio-ritmo Killa Pacha</span>
+          </span>
         </div>
 
         <!-- Monthly Navigation Pills -->
@@ -388,32 +440,39 @@
     </div>
   </footer>
 
-  <!-- MOBILE BOTTOM BAR (Touch-First Quick Actions) -->
-  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-4 py-2 flex items-center justify-around shadow-lg">
+  <!-- MOBILE BOTTOM BAR (Touch-First Quick Actions with Android Haptics) -->
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-2 py-1.5 flex items-center justify-around shadow-lg">
     <button
-      onclick="setFilterTab('cultivos');"
-      class="flex flex-col items-center gap-0.5 text-slate-600 hover:text-agro-700 touch-target focus:outline-hidden"
+      onclick="setFilterTab('cultivos'); triggerHaptic();"
+      class="flex flex-col items-center gap-0.5 text-slate-600 hover:text-agro-700 active:scale-90 transition-transform touch-target focus:outline-hidden"
     >
       <i data-lucide="sprout" class="w-5 h-5"></i>
       <span class="text-[10px] font-medium">Cultivos</span>
     </button>
     <button
-      onclick="setFilterTab('plagas');"
-      class="flex flex-col items-center gap-0.5 text-slate-600 hover:text-earth-700 touch-target focus:outline-hidden"
+      onclick="setFilterTab('plagas'); triggerHaptic();"
+      class="flex flex-col items-center gap-0.5 text-slate-600 hover:text-earth-700 active:scale-90 transition-transform touch-target focus:outline-hidden"
     >
       <i data-lucide="shield-alert" class="w-5 h-5"></i>
       <span class="text-[10px] font-medium">Plagas</span>
     </button>
     <button
-      onclick="setFilterTab('calendario');"
-      class="flex flex-col items-center gap-0.5 text-slate-600 hover:text-agro-700 touch-target focus:outline-hidden"
+      onclick="setFilterTab('calendario'); triggerHaptic();"
+      class="flex flex-col items-center gap-0.5 text-indigo-800 hover:text-indigo-900 active:scale-90 transition-transform touch-target focus:outline-hidden"
     >
-      <i data-lucide="calendar" class="w-5 h-5"></i>
-      <span class="text-[10px] font-medium">Calendario</span>
+      <i data-lucide="moon" class="w-5 h-5 text-indigo-600"></i>
+      <span class="text-[10px] font-bold">Luna & Mes</span>
     </button>
     <button
-      onclick="openChatModal();"
-      class="flex flex-col items-center gap-0.5 text-agro-700 font-semibold touch-target focus:outline-hidden"
+      onclick="document.getElementById('sectionMicroclima')?.scrollIntoView({ behavior: 'smooth' }); triggerHaptic();"
+      class="flex flex-col items-center gap-0.5 text-slate-600 hover:text-agro-700 active:scale-90 transition-transform touch-target focus:outline-hidden"
+    >
+      <i data-lucide="compass" class="w-5 h-5"></i>
+      <span class="text-[10px] font-medium">Microclima</span>
+    </button>
+    <button
+      onclick="openChatModal(); triggerHaptic();"
+      class="flex flex-col items-center gap-0.5 text-agro-700 font-semibold active:scale-90 transition-transform touch-target focus:outline-hidden"
     >
       <i data-lucide="bot" class="w-5 h-5"></i>
       <span class="text-[10px]">Asistente IA</span>
@@ -495,9 +554,9 @@
             class="bg-agro-900 text-agro-100 text-[11px] py-1 px-2 rounded-lg border border-agro-600 focus:outline-hidden"
             title="Seleccionar modelo Gemini"
           >
-            <option value="gemini-3.8-flash" selected>gemini-3.8-flash (General)</option>
+            <option value="gemini-3.1-flash-lite" selected>gemini-3.1-flash-lite (Predeterminado · Rápido)</option>
+            <option value="gemini-3.8-flash">gemini-3.8-flash (General)</option>
             <option value="gemini-4-argon">gemini-4-argon (Razonamiento Complejo)</option>
-            <option value="gemini-3.1-flash-lite">gemini-3.1-flash-lite (Rápido)</option>
           </select>
 
           <button
@@ -1079,7 +1138,13 @@
             "Cosecha inicial de choclo tierno de siembras mishka."
           ],
           valleyWeatherNote: "Época de lluvias torrenciales en el valle de Sopachuy. Mantener zanjas de coronación limpias.",
-          quechuaSeason: "Poqoy Mita (Época de crecimiento y lluvias)"
+          quechuaSeason: "Poqoy Mita (Época de crecimiento y lluvias)",
+          faseLunar: {
+            fase: "Cuarto Creciente (Killa Wiñay)",
+            icono: "moon",
+            influencia: "La savia asciende con fuerza estimulada por las lluvias plenas de verano.",
+            recomendacionAndina: "Realizar el segundo aporque de la papa antes de luna llena para vigorizar las raíces. Momento ideal para pulverizar bioles caseros nutritivos sobre el follaje del maíz."
+          }
         },
         {
           id: "mes-2",
@@ -1093,7 +1158,13 @@
             "Control biológico en huertos de valle."
           ],
           valleyWeatherNote: "Humedad relativa alta y temperaturas templadas en el valle.",
-          quechuaSeason: "Pukllay Mita (Tiempo de abundancia y fiesta)"
+          quechuaSeason: "Pukllay Mita (Tiempo de abundancia y fiesta)",
+          faseLunar: {
+            fase: "Luna Llena (Pura Killa)",
+            icono: "circle",
+            influencia: "Máxima concentración de humedad y azúcares en la parte aérea del cultivo.",
+            recomendacionAndina: "Cosechar choclos tiernos y duraznos en Pura Killa para mayor dulzura y terneza. Evitar podar ramas gruesas ya que la savia fluye intensamente."
+          }
         },
         {
           id: "mes-3",
@@ -1107,7 +1178,13 @@
             "Preparación de almácigos de hortalizas para la temporada invernal."
           ],
           valleyWeatherNote: "Disminución paulatina de lluvias; días soleados óptimos para secado de campos.",
-          quechuaSeason: "Aymoray Mita (Inicio de cosechas)"
+          quechuaSeason: "Aymoray Mita (Inicio de cosechas)",
+          faseLunar: {
+            fase: "Cuarto Menguante (Killa Wañuy)",
+            icono: "moon",
+            influencia: "La savia desciende y se concentra en los tubérculos bajo tierra.",
+            recomendacionAndina: "Inicio del Aymoray: cosechar la papa en luna menguante asegura que los tubérculos tengan piel firme, cicatricen rápido y resistan el ataque de la polilla en el almacén comunal."
+          }
         },
         {
           id: "mes-4",
@@ -1121,7 +1198,13 @@
             "Doblado de cañas de maíz para favorecer el secado del grano en la mazorca."
           ],
           valleyWeatherNote: "Ambiente fresco al atardecer; cese de lluvias en Sopachuy.",
-          quechuaSeason: "Jawkay Killa (Mes de descanso de la tierra)"
+          quechuaSeason: "Jawkay Killa (Mes de descanso de la tierra)",
+          faseLunar: {
+            fase: "Cuarto Menguante a Luna Nueva (Wañuy Killa)",
+            icono: "moon",
+            influencia: "Mínima humedad interna en los tejidos; reposo de la savia en la tierra.",
+            recomendacionAndina: "Cosecha y troje de maíz seco y papa principal. Tradición de Sopachuy: guardar la semilla con ramas de muña en luna menguante para repeler gorgojos."
+          }
         },
         {
           id: "mes-5",
@@ -1135,7 +1218,13 @@
             "Trasplante de plántulas de cebolla y hortalizas resistentes a camellones."
           ],
           valleyWeatherNote: "Entrada del estiaje seco y descenso nocturno de temperatura.",
-          quechuaSeason: "Chiri Mita (Época de frío)"
+          quechuaSeason: "Chiri Mita (Época de frío)",
+          faseLunar: {
+            fase: "Luna Nueva (Mosoq Killa)",
+            icono: "disc",
+            influencia: "Reposo vegetativo total en el suelo; baja actividad de malezas.",
+            recomendacionAndina: "Arado y desmenuzado profundo en luna nueva para desenterrar plagas y frenar rebrotes. Sembrar el trigo de invierno en los días previos a cuarto creciente con riego."
+          }
         },
         {
           id: "mes-6",
@@ -1149,7 +1238,13 @@
             "Limpieza fitosanitaria y descanso vegetativo en huertos frutales."
           ],
           valleyWeatherNote: "Riesgo de heladas en las partes bajas del valle de Sopachuy.",
-          quechuaSeason: "Qasa Pacha (Tiempo de helada)"
+          quechuaSeason: "Qasa Pacha (Tiempo de helada)",
+          faseLunar: {
+            fase: "Cuarto Creciente (Killa Wiñay)",
+            icono: "moon",
+            influencia: "La savia comienza a subir hacia los brotes y espigas jóvenes.",
+            recomendacionAndina: "Riego por manto o acequia en las mañanas de creciente para que el trigo absorba agua y minerales antes de las heladas nocturnas de invierno."
+          }
         },
         {
           id: "mes-7",
@@ -1163,7 +1258,13 @@
             "Aporte profundo de estiércol fermentado en corona alrededor de los frutales."
           ],
           valleyWeatherNote: "Pico de bajas temperaturas invernales; días despejados con fuerte sol diurno.",
-          quechuaSeason: "Chiri Killa (Mes más frío)"
+          quechuaSeason: "Chiri Killa (Mes más frío)",
+          faseLunar: {
+            fase: "Cuarto Menguante (Killa Wañuy)",
+            icono: "moon",
+            influencia: "Los árboles frutales se encuentran en dormancia y la savia se refugia en las raíces.",
+            recomendacionAndina: "Poda invernal de durazneros y frutales exclusivamente en luna menguante. Los cortes no sangran y cicatrizan rápido sellándolos con ceniza vegetal o caldo bordelés."
+          }
         },
         {
           id: "mes-8",
@@ -1177,7 +1278,13 @@
             "Deshierbe manual en parcelas de hortalizas invernales."
           ],
           valleyWeatherNote: "Vientos característicos de agosto en la región de Tomina y Sopachuy.",
-          quechuaSeason: "Pachamama Killa (Mes de agradecimiento a la Madre Tierra)"
+          quechuaSeason: "Pachamama Killa (Mes de agradecimiento a la Madre Tierra)",
+          faseLunar: {
+            fase: "Luna Llena (Pura Killa - Pachamama)",
+            icono: "circle",
+            influencia: "Despertar de la fuerza telúrica y circulación de energía en la corteza vegetal.",
+            recomendacionAndina: "Mes de respeto a la Pachamama. Aplicar el 'riego de despertar' en luna llena para inducir floración pareja y preparar bioles fermentados con guano y ceniza."
+          }
         },
         {
           id: "mes-9",
@@ -1191,7 +1298,13 @@
             "Siembra en hileras de maíz choclero aprovechando canales de riego comunales."
           ],
           valleyWeatherNote: "Inicio de ascenso de temperatura; aire seco con primeras nubes aisladas.",
-          quechuaSeason: "Pawkar Waray (Renacimiento primaveral)"
+          quechuaSeason: "Pawkar Waray (Renacimiento primaveral)",
+          faseLunar: {
+            fase: "Cuarto Creciente (Killa Wiñay)",
+            icono: "moon",
+            influencia: "Atracción ascendente de la luna que acelera la germinación y desarrollo de tallos.",
+            recomendacionAndina: "Siembra de maíz temprano 'Mishka' en luna creciente con agua de acequia. La semilla brota vigorosa y desarrolla cañas gruesas resistentes al viento de primavera."
+          }
         },
         {
           id: "mes-10",
@@ -1205,7 +1318,13 @@
             "Cosecha del trigo de invierno sembrado en mayo."
           ],
           valleyWeatherNote: "Primeras lluvias moderadas de primavera en el valle de Sopachuy.",
-          quechuaSeason: "Tarpuy Mita (Época cumbre de siembras)"
+          quechuaSeason: "Tarpuy Mita (Época cumbre de siembras)",
+          faseLunar: {
+            fase: "Cuarto Menguante (Killa Wañuy)",
+            icono: "moon",
+            influencia: "La savia baja hacia el interior de la tierra, favoreciendo el enraizamiento profundo.",
+            recomendacionAndina: "Regla de oro de los agricultores de Sopachuy: la siembra grande de papa (Tarpuy) se hace en luna menguante para que la energía se concentre bajo tierra y rinda tubérculos grandes y abundantes."
+          }
         },
         {
           id: "mes-11",
@@ -1219,7 +1338,13 @@
             "Monitoreo inicial de plagas emergentes como gusano cogollero."
           ],
           valleyWeatherNote: "Lluvias regulares y temperaturas cálidas favorables para la germinación.",
-          quechuaSeason: "Ayamarka Killa"
+          quechuaSeason: "Ayamarka Killa",
+          faseLunar: {
+            fase: "Cuarto Creciente (Killa Wiñay)",
+            icono: "moon",
+            influencia: "Impulso vigoroso a la emergencia de hojas, brotes y vainas aéreas.",
+            recomendacionAndina: "Siembra de porotos, habas y maíz tardío de secano en creciente. El deshierbe manual conviene realizarlo en la fase menguante previa para evitar que las malas hierbas vuelvan a brotar."
+          }
         },
         {
           id: "mes-12",
@@ -1233,7 +1358,13 @@
             "Limpieza de acequias comunales para regular excedentes de lluvia."
           ],
           valleyWeatherNote: "Temporada plena de lluvias de verano en Chuquisaca.",
-          quechuaSeason: "Qhapaq Inti Raymi (Solsticio de verano)"
+          quechuaSeason: "Qhapaq Inti Raymi (Solsticio de verano)",
+          faseLunar: {
+            fase: "Luna Llena (Pura Killa - Solsticio)",
+            icono: "circle",
+            influencia: "Máxima luz nocturna y expansión foliar en coincidencia con el solsticio de verano (Qhapaq Raymi).",
+            recomendacionAndina: "Monitoreo nocturno intensivo: mariposas de polilla y orugas cogolleras están más activas bajo Pura Killa. Aplicar trampas de luz o extractos botánicos de ajo y ají al atardecer."
+          }
         }
       ]
     };
@@ -1895,6 +2026,15 @@
         if (stored) {
           const parsed = JSON.parse(stored);
           if (parsed && Array.isArray(parsed.crops) && Array.isArray(parsed.pests)) {
+            if (Array.isArray(parsed.calendarEvents)) {
+              parsed.calendarEvents = parsed.calendarEvents.map((evt) => {
+                const initialEvt = INITIAL_DATA.calendarEvents.find((e) => e.month === evt.month);
+                if (initialEvt && (!evt.faseLunar || !evt.faseLunar.fase)) {
+                  evt.faseLunar = initialEvt.faseLunar;
+                }
+                return evt;
+              });
+            }
             return parsed;
           }
         }
@@ -1953,9 +2093,47 @@
     const adminModal = document.getElementById('adminModal');
 
     /**
-     * Initialization on DOM ready
+     * Initialization on DOM ready & Android PWA setup
      */
+    let deferredInstallPrompt = null;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredInstallPrompt = e;
+      const banner = document.getElementById('androidInstallBanner');
+      if (banner) banner.classList.remove('hidden');
+      const btnHeader = document.getElementById('btnHeaderInstall');
+      if (btnHeader) btnHeader.classList.remove('hidden');
+    });
+
+    function installAndroidPwa() {
+      triggerHaptic(20);
+      if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+        deferredInstallPrompt.userChoice.then((choice) => {
+          if (choice && choice.outcome === 'accepted') {
+            const banner = document.getElementById('androidInstallBanner');
+            if (banner) banner.classList.add('hidden');
+          }
+          deferredInstallPrompt = null;
+        });
+      } else {
+        alert('Para instalar en Android: abre el menú de opciones de tu navegador (tres puntos ⋮) y selecciona "Agregar a la pantalla principal" o "Instalar aplicación".');
+      }
+    }
+
+    function dismissAndroidInstall() {
+      const banner = document.getElementById('androidInstallBanner');
+      if (banner) banner.classList.add('hidden');
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
+      // Register Service Worker for offline PWA functionality on Android devices
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').catch((err) => {
+          console.log('SW registration note:', err);
+        });
+      }
+
       setupEventListeners();
       renderAll();
       initLucide();
@@ -2248,6 +2426,43 @@
       }).join('');
     }
 
+    function getMoonGlyph(faseName) {
+      if (!faseName) return '🌙';
+      if (faseName.includes('Llena')) return '🌕';
+      if (faseName.includes('Nueva')) return '🌑';
+      if (faseName.includes('Creciente')) return '🌓';
+      if (faseName.includes('Menguante')) return '🌗';
+      return '🌙';
+    }
+
+    function triggerHaptic(duration = 15) {
+      if (typeof navigator !== 'undefined' && navigator.vibrate) {
+        try { navigator.vibrate(duration); } catch (e) {}
+      }
+    }
+
+    function shareCalendarMonth(monthNumber) {
+      triggerHaptic(25);
+      const m = appData.calendarEvents.find((e) => e.month === monthNumber);
+      if (!m) return;
+      const lunarInfo = m.faseLunar ? `🌙 Fase Lunar Andina: ${m.faseLunar.fase}\n${m.faseLunar.recomendacionAndina}\n` : '';
+      const text = `🌾 Manual Digital Agrícola de Sopachuy (Chuquisaca)\n📅 Mes ${m.month}: ${m.monthName} - ${m.title}\n\n${lunarInfo}\n🌿 Labores clave:\n- ${m.tasks.join('\n- ')}\n\nConsúltalo en el Manual Agrícola de Sopachuy.`;
+
+      if (navigator.share) {
+        navigator.share({
+          title: `Calendario Sopachuy · ${m.monthName}`,
+          text: text,
+          url: window.location.href,
+        }).catch(() => {});
+      } else {
+        navigator.clipboard.writeText(text).then(() => {
+          alert(`Resumen del mes de ${m.monthName} y su fase lunar copiado al portapapeles.`);
+        }).catch(() => {
+          alert(text);
+        });
+      }
+    }
+
     /**
      * Render Calendar
      */
@@ -2256,16 +2471,20 @@
       const months = appData.calendarEvents;
       monthSelectorContainer.innerHTML = months.map((m) => {
         const isSelected = m.month === selectedMonth;
+        const moonGlyph = getMoonGlyph(m.faseLunar?.fase);
         return `
           <button
-            onclick="selectCalendarMonth(${m.month});"
-            class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all shrink-0 touch-target ${
+            onclick="selectCalendarMonth(${m.month}); triggerHaptic();"
+            class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all shrink-0 touch-target flex items-center gap-1.5 active:scale-95 snap-start ${
               isSelected
-                ? 'bg-agro-700 text-white shadow-xs scale-102'
-                : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                ? 'bg-agro-700 text-white shadow-xs scale-102 ring-2 ring-agro-500'
+                : 'bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900'
             }"
+            title="${m.monthName} · ${m.faseLunar?.fase || ''}"
+            aria-label="${m.monthName}, fase lunar ${m.faseLunar?.fase || ''}"
           >
-            ${m.monthName}
+            <span>${m.monthName}</span>
+            <span class="text-[11px] opacity-85">${moonGlyph}</span>
           </button>
         `;
       }).join('');
@@ -2275,25 +2494,81 @@
       currentMonthIndicator.textContent = `Mes activo: ${event.monthName}`;
 
       monthDetailCard.innerHTML = `
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
           <div>
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 flex-wrap">
               <span class="text-xs font-bold uppercase tracking-wider text-agro-700 bg-agro-50 px-2.5 py-0.5 rounded-md">
                 ${event.monthName} · Mes ${event.month}
               </span>
               ${event.quechuaSeason ? `<span class="text-xs text-earth-700 font-semibold">· ${event.quechuaSeason}</span>` : ''}
+              ${event.faseLunar ? `
+                <span class="text-xs font-semibold px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-700 border border-indigo-200 inline-flex items-center gap-1">
+                  <span>${getMoonGlyph(event.faseLunar.fase)}</span>
+                  <span>${event.faseLunar.fase}</span>
+                </span>
+              ` : ''}
             </div>
             <h4 class="text-lg sm:text-xl font-bold text-slate-900 mt-1">${event.title}</h4>
           </div>
 
-          <button
-            onclick="speakItemQuick('Mes de ${event.monthName} en Sopachuy', '${event.title}. Clima: ${event.valleyWeatherNote}. Labores recomendadas: ${event.tasks.join(', ')}');"
-            class="self-start sm:self-center inline-flex items-center gap-1.5 px-3 py-1.5 bg-agro-50 hover:bg-agro-100 text-agro-800 rounded-lg text-xs font-semibold transition-colors"
-          >
-            <i data-lucide="volume-2" class="w-3.5 h-3.5"></i>
-            <span>Escuchar Labores</span>
-          </button>
+          <div class="flex items-center gap-2 self-start sm:self-center flex-wrap">
+            <button
+              onclick="speakItemQuick('Mes de ${event.monthName} en Sopachuy', '${event.title}. Fase lunar: ${event.faseLunar ? event.faseLunar.fase + '. ' + event.faseLunar.recomendacionAndina : ''}. Clima: ${event.valleyWeatherNote}. Labores recomendadas: ${event.tasks.join(', ')}'); triggerHaptic();"
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-agro-50 hover:bg-agro-100 active:scale-95 text-agro-800 rounded-lg text-xs font-semibold transition-all touch-target"
+              title="Escuchar labores y recomendación lunar"
+            >
+              <i data-lucide="volume-2" class="w-3.5 h-3.5"></i>
+              <span>Escuchar Labores</span>
+            </button>
+
+            <button
+              onclick="shareCalendarMonth(${event.month});"
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-700 rounded-lg text-xs font-semibold transition-all touch-target"
+              title="Compartir en WhatsApp o aplicaciones en Android"
+            >
+              <i data-lucide="share-2" class="w-3.5 h-3.5"></i>
+              <span>Compartir</span>
+            </button>
+          </div>
         </div>
+
+        <!-- Andean Lunar Influence Card -->
+        ${event.faseLunar ? `
+        <div class="p-4 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white rounded-2xl border border-indigo-500/30 shadow-xs space-y-3">
+          <div class="flex items-center justify-between gap-2 flex-wrap">
+            <div class="flex items-center gap-2.5">
+              <span class="w-8 h-8 rounded-xl bg-amber-400/20 text-amber-300 flex items-center justify-center shrink-0 border border-amber-400/30">
+                <i data-lucide="moon" class="w-4 h-4 text-amber-300"></i>
+              </span>
+              <div>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-amber-300/90">Influencia Lunar Andina · Killa Pacha</span>
+                <h5 class="text-sm font-bold text-white flex items-center gap-1.5">
+                  <span>${getMoonGlyph(event.faseLunar.fase)}</span>
+                  <span>${event.faseLunar.fase}</span>
+                </h5>
+              </div>
+            </div>
+            <span class="text-[10px] font-semibold px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-200 border border-indigo-400/30">
+              Tradición de Valle
+            </span>
+          </div>
+
+          <!-- Traditional Andean Note on Sowing/Harvest Influence -->
+          <div class="bg-indigo-950/70 p-3 rounded-xl border border-indigo-500/20 text-xs">
+            <p class="font-semibold text-amber-300 mb-1 flex items-center gap-1.5">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-300 shrink-0"></i>
+              <span>Influencia en siembra y cosecha según la tradición local:</span>
+            </p>
+            <p class="leading-relaxed text-slate-100">${event.faseLunar.recomendacionAndina}</p>
+          </div>
+
+          <!-- Bio-rhythm / sap movement explanation -->
+          <div class="flex items-start gap-1.5 text-[11px] text-indigo-200/90 px-0.5">
+            <i data-lucide="info" class="w-3.5 h-3.5 text-indigo-400 shrink-0 mt-0.5"></i>
+            <p><strong class="text-indigo-100">Dinámica de savia y enraizamiento:</strong> ${event.faseLunar.influencia}</p>
+          </div>
+        </div>
+        ` : ''}
 
         <!-- Weather Note for Sopachuy -->
         <div class="p-3 bg-amber-50/80 border border-amber-200 rounded-xl text-xs text-amber-900 flex items-start gap-2.5">
@@ -2338,6 +2613,7 @@
 
     function selectCalendarMonth(monthNumber) {
       selectedMonth = monthNumber;
+      triggerHaptic(15);
       renderCalendar();
       initLucide();
     }
@@ -2646,7 +2922,7 @@
       if (!text) return;
 
       const modelSelect = document.getElementById('chatModelSelect');
-      const selectedModel = modelSelect.value || 'gemini-3.8-flash';
+      const selectedModel = modelSelect.value || 'gemini-3.1-flash-lite';
 
       // Append user message to UI
       appendChatMessage('user', text);

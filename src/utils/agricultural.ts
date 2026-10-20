@@ -38,6 +38,13 @@ export interface PestItem {
   image?: string;
 }
 
+export interface LunarPhaseInfo {
+  fase: string;
+  icono: string;
+  influencia: string;
+  recomendacionAndina: string;
+}
+
 export interface CalendarEvent {
   id: string;
   month: number; // 1 = Enero, 12 = Diciembre
@@ -47,6 +54,7 @@ export interface CalendarEvent {
   tasks: string[];
   valleyWeatherNote: string;
   quechuaSeason?: string;
+  faseLunar: LunarPhaseInfo;
 }
 
 export interface InitialData {
@@ -196,7 +204,13 @@ export const INITIAL_DATA: InitialData = {
         "Cosecha inicial de choclo tierno de siembras mishka."
       ],
       valleyWeatherNote: "Época de lluvias torrenciales en el valle de Sopachuy. Mantener zanjas de coronación limpias.",
-      quechuaSeason: "Poqoy Mita (Época de crecimiento y lluvias)"
+      quechuaSeason: "Poqoy Mita (Época de crecimiento y lluvias)",
+      faseLunar: {
+        fase: "Cuarto Creciente (Killa Wiñay)",
+        icono: "moon",
+        influencia: "La savia asciende con fuerza estimulada por las lluvias plenas de verano.",
+        recomendacionAndina: "Realizar el segundo aporque de la papa antes de luna llena para vigorizar las raíces. Momento ideal para pulverizar bioles caseros nutritivos sobre el follaje del maíz."
+      }
     },
     {
       id: "mes-2",
@@ -210,7 +224,13 @@ export const INITIAL_DATA: InitialData = {
         "Control biológico en huertos de valle."
       ],
       valleyWeatherNote: "Humedad relativa alta y temperaturas templadas en el valle.",
-      quechuaSeason: "Pukllay Mita (Tiempo de abundancia y fiesta)"
+      quechuaSeason: "Pukllay Mita (Tiempo de abundancia y fiesta)",
+      faseLunar: {
+        fase: "Luna Llena (Pura Killa)",
+        icono: "circle",
+        influencia: "Máxima concentración de humedad y azúcares en la parte aérea del cultivo.",
+        recomendacionAndina: "Cosechar choclos tiernos y duraznos en Pura Killa para mayor dulzura y terneza. Evitar podar ramas gruesas ya que la savia fluye intensamente."
+      }
     },
     {
       id: "mes-3",
@@ -224,7 +244,13 @@ export const INITIAL_DATA: InitialData = {
         "Preparación de almácigos de hortalizas para la temporada invernal."
       ],
       valleyWeatherNote: "Disminución paulatina de lluvias; días soleados óptimos para secado de campos.",
-      quechuaSeason: "Aymoray Mita (Inicio de cosechas)"
+      quechuaSeason: "Aymoray Mita (Inicio de cosechas)",
+      faseLunar: {
+        fase: "Cuarto Menguante (Killa Wañuy)",
+        icono: "moon",
+        influencia: "La savia desciende y se concentra en los tubérculos bajo tierra.",
+        recomendacionAndina: "Inicio del Aymoray: cosechar la papa en luna menguante asegura que los tubérculos tengan piel firme, cicatricen rápido y resistan el ataque de la polilla en el almacén comunal."
+      }
     },
     {
       id: "mes-4",
@@ -238,7 +264,13 @@ export const INITIAL_DATA: InitialData = {
         "Doblado de cañas de maíz para favorecer el secado del grano en la mazorca."
       ],
       valleyWeatherNote: "Ambiente fresco al atardecer; cese de lluvias en Sopachuy.",
-      quechuaSeason: "Jawkay Killa (Mes de descanso de la tierra)"
+      quechuaSeason: "Jawkay Killa (Mes de descanso de la tierra)",
+      faseLunar: {
+        fase: "Cuarto Menguante a Luna Nueva (Wañuy Killa)",
+        icono: "moon",
+        influencia: "Mínima humedad interna en los tejidos; reposo de la savia en la tierra.",
+        recomendacionAndina: "Cosecha y troje de maíz seco y papa principal. Tradición de Sopachuy: guardar la semilla con ramas de muña en luna menguante para repeler gorgojos."
+      }
     },
     {
       id: "mes-5",
@@ -252,7 +284,13 @@ export const INITIAL_DATA: InitialData = {
         "Trasplante de plántulas de cebolla y hortalizas resistentes a camellones."
       ],
       valleyWeatherNote: "Entrada del estiaje seco y descenso nocturno de temperatura.",
-      quechuaSeason: "Chiri Mita (Época de frío)"
+      quechuaSeason: "Chiri Mita (Época de frío)",
+      faseLunar: {
+        fase: "Luna Nueva (Mosoq Killa)",
+        icono: "disc",
+        influencia: "Reposo vegetativo total en el suelo; baja actividad de malezas.",
+        recomendacionAndina: "Arado y desmenuzado profundo en luna nueva para desenterrar plagas y frenar rebrotes. Sembrar el trigo de invierno en los días previos a cuarto creciente con riego."
+      }
     },
     {
       id: "mes-6",
@@ -266,7 +304,13 @@ export const INITIAL_DATA: InitialData = {
         "Limpieza fitosanitaria y descanso vegetativo en huertos frutales."
       ],
       valleyWeatherNote: "Riesgo de heladas en las partes bajas del valle de Sopachuy.",
-      quechuaSeason: "Qasa Pacha (Tiempo de helada)"
+      quechuaSeason: "Qasa Pacha (Tiempo de helada)",
+      faseLunar: {
+        fase: "Cuarto Creciente (Killa Wiñay)",
+        icono: "moon",
+        influencia: "La savia comienza a subir hacia los brotes y espigas jóvenes.",
+        recomendacionAndina: "Riego por manto o acequia en las mañanas de creciente para que el trigo absorba agua y minerales antes de las heladas nocturnas de invierno."
+      }
     },
     {
       id: "mes-7",
@@ -280,7 +324,13 @@ export const INITIAL_DATA: InitialData = {
         "Aporte profundo de estiércol fermentado en corona alrededor de los frutales."
       ],
       valleyWeatherNote: "Pico de bajas temperaturas invernales; días despejados con fuerte sol diurno.",
-      quechuaSeason: "Chiri Killa (Mes más frío)"
+      quechuaSeason: "Chiri Killa (Mes más frío)",
+      faseLunar: {
+        fase: "Cuarto Menguante (Killa Wañuy)",
+        icono: "moon",
+        influencia: "Los árboles frutales se encuentran en dormancia y la savia se refugia en las raíces.",
+        recomendacionAndina: "Poda invernal de durazneros y frutales exclusivamente en luna menguante. Los cortes no sangran y cicatrizan rápido sellándolos con ceniza vegetal o caldo bordelés."
+      }
     },
     {
       id: "mes-8",
@@ -294,7 +344,13 @@ export const INITIAL_DATA: InitialData = {
         "Deshierbe manual en parcelas de hortalizas invernales."
       ],
       valleyWeatherNote: "Vientos característicos de agosto en la región de Tomina y Sopachuy.",
-      quechuaSeason: "Pachamama Killa (Mes de agradecimiento a la Madre Tierra)"
+      quechuaSeason: "Pachamama Killa (Mes de agradecimiento a la Madre Tierra)",
+      faseLunar: {
+        fase: "Luna Llena (Pura Killa - Pachamama)",
+        icono: "circle",
+        influencia: "Despertar de la fuerza telúrica y circulación de energía en la corteza vegetal.",
+        recomendacionAndina: "Mes de respeto a la Pachamama. Aplicar el 'riego de despertar' en luna llena para inducir floración pareja y preparar bioles fermentados con guano y ceniza."
+      }
     },
     {
       id: "mes-9",
@@ -308,7 +364,13 @@ export const INITIAL_DATA: InitialData = {
         "Siembra en hileras de maíz choclero aprovechando canales de riego comunales."
       ],
       valleyWeatherNote: "Inicio de ascenso de temperatura; aire seco con primeras nubes aisladas.",
-      quechuaSeason: "Pawkar Waray (Renacimiento primaveral)"
+      quechuaSeason: "Pawkar Waray (Renacimiento primaveral)",
+      faseLunar: {
+        fase: "Cuarto Creciente (Killa Wiñay)",
+        icono: "moon",
+        influencia: "Atracción ascendente de la luna que acelera la germinación y desarrollo de tallos.",
+        recomendacionAndina: "Siembra de maíz temprano 'Mishka' en luna creciente con agua de acequia. La semilla brota vigorosa y desarrolla cañas gruesas resistentes al viento de primavera."
+      }
     },
     {
       id: "mes-10",
@@ -322,7 +384,13 @@ export const INITIAL_DATA: InitialData = {
         "Cosecha del trigo de invierno sembrado en mayo."
       ],
       valleyWeatherNote: "Primeras lluvias moderadas de primavera en el valle de Sopachuy.",
-      quechuaSeason: "Tarpuy Mita (Época cumbre de siembras)"
+      quechuaSeason: "Tarpuy Mita (Época cumbre de siembras)",
+      faseLunar: {
+        fase: "Cuarto Menguante (Killa Wañuy)",
+        icono: "moon",
+        influencia: "La savia baja hacia el interior de la tierra, favoreciendo el enraizamiento profundo.",
+        recomendacionAndina: "Regla de oro de los agricultores de Sopachuy: la siembra grande de papa (Tarpuy) se hace en luna menguante para que la energía se concentre bajo tierra y rinda tubérculos grandes y abundantes."
+      }
     },
     {
       id: "mes-11",
@@ -336,7 +404,13 @@ export const INITIAL_DATA: InitialData = {
         "Monitoreo inicial de plagas emergentes como gusano cogollero."
       ],
       valleyWeatherNote: "Lluvias regulares y temperaturas cálidas favorables para la germinación.",
-      quechuaSeason: "Ayamarka Killa"
+      quechuaSeason: "Ayamarka Killa",
+      faseLunar: {
+        fase: "Cuarto Creciente (Killa Wiñay)",
+        icono: "moon",
+        influencia: "Impulso vigoroso a la emergencia de hojas, brotes y vainas aéreas.",
+        recomendacionAndina: "Siembra de porotos, habas y maíz tardío de secano en creciente. El deshierbe manual conviene realizarlo en la fase menguante previa para evitar que las malas hierbas vuelvan a brotar."
+      }
     },
     {
       id: "mes-12",
@@ -350,7 +424,13 @@ export const INITIAL_DATA: InitialData = {
         "Limpieza de acequias comunales para regular excedentes de lluvia."
       ],
       valleyWeatherNote: "Temporada plena de lluvias de verano en Chuquisaca.",
-      quechuaSeason: "Qhapaq Inti Raymi (Solsticio de verano)"
+      quechuaSeason: "Qhapaq Inti Raymi (Solsticio de verano)",
+      faseLunar: {
+        fase: "Luna Llena (Pura Killa - Solsticio)",
+        icono: "circle",
+        influencia: "Máxima luz nocturna y expansión foliar en coincidencia con el solsticio de verano (Qhapaq Raymi).",
+        recomendacionAndina: "Monitoreo nocturno intensivo: mariposas de polilla y orugas cogolleras están más activas bajo Pura Killa. Aplicar trampas de luz o extractos botánicos de ajo y ají al atardecer."
+      }
     }
   ]
 };

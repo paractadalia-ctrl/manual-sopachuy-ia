@@ -162,3 +162,24 @@ test('getMicroclimatePestAdvisory calibrates pest risk by thermal zone', async (
   assert.match(cogolleroAltas, /baja presión térmica/i);
 });
 
+test('calendarEvents include Andean lunar phases (faseLunar) and traditional advice for all 12 months', () => {
+  assert.equal(INITIAL_DATA.calendarEvents.length, 12);
+  for (const event of INITIAL_DATA.calendarEvents) {
+    assert.ok(event.faseLunar, `Month ${event.month} should have faseLunar`);
+    assert.ok(event.faseLunar.fase, `Month ${event.month} should have a defined lunar phase name`);
+    assert.ok(event.faseLunar.influencia, `Month ${event.month} should describe lunar influence on sap/growth`);
+    assert.ok(event.faseLunar.recomendacionAndina, `Month ${event.month} should include traditional Andean sowing/harvest advice`);
+  }
+
+  // October (Month 10) - Great Potato Sowing in Wañuy (Menguante)
+  const oct = INITIAL_DATA.calendarEvents.find((e) => e.month === 10)!;
+  assert.match(oct.faseLunar.fase, /Menguante|Wañuy/i);
+  assert.match(oct.faseLunar.recomendacionAndina, /papa|tierra|tubérculos/i);
+
+  // February (Month 2) - Corn and Peach harvest in Pura Killa (Llena)
+  const feb = INITIAL_DATA.calendarEvents.find((e) => e.month === 2)!;
+  assert.match(feb.faseLunar.fase, /Llena|Pura Killa/i);
+  assert.match(feb.faseLunar.recomendacionAndina, /choclo|durazno/i);
+});
+
+

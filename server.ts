@@ -18,6 +18,8 @@ const PORT = process.env.PORT || 3000;
 async function startServer() {
   const isDev = process.env.NODE_ENV !== 'production';
 
+  app.use(express.static(path.resolve(__dirname, 'public')));
+
   if (isDev) {
     const vite = await createViteServer({
       server: { middlewareMode: true },
