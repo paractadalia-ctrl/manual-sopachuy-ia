@@ -86,6 +86,120 @@
     .custom-scrollbar::-webkit-scrollbar-thumb:hover {
       background: #94a3b8;
     }
+
+    /* Voice Search Pulse, Radar Waves & Equalizer Animations */
+    @keyframes voiceRipple {
+      0% {
+        transform: scale(0.97);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.8), 0 0 20px rgba(16, 185, 129, 0.4);
+      }
+      50% {
+        transform: scale(1.06);
+        box-shadow: 0 0 0 16px rgba(16, 185, 129, 0), 0 0 35px rgba(16, 185, 129, 0.6);
+      }
+      100% {
+        transform: scale(0.97);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0), 0 0 10px rgba(16, 185, 129, 0);
+      }
+    }
+
+    @keyframes voiceGlowShimmer {
+      0%, 100% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    @keyframes voiceBarAnim {
+      0%, 100% {
+        height: 6px;
+        opacity: 0.6;
+      }
+      50% {
+        height: 22px;
+        opacity: 1;
+      }
+    }
+
+    .voice-listening-pulse {
+      animation: voiceRipple 1.4s infinite cubic-bezier(0.4, 0, 0.6, 1);
+    }
+
+    .voice-shimmer-btn {
+      background-size: 200% 200%;
+      animation: voiceGlowShimmer 4s ease infinite;
+    }
+
+    .voice-bar {
+      display: inline-block;
+      width: 3.5px;
+      border-radius: 9999px;
+      animation: voiceBarAnim 0.75s ease-in-out infinite;
+    }
+    .voice-bar:nth-child(1) { background: #34d399; animation-delay: 0.05s; }
+    .voice-bar:nth-child(2) { background: #6ee7b7; animation-delay: 0.20s; }
+    .voice-bar:nth-child(3) { background: #a7f3d0; animation-delay: 0.40s; }
+    .voice-bar:nth-child(4) { background: #fde047; animation-delay: 0.15s; }
+    .voice-bar:nth-child(5) { background: #38bdf8; animation-delay: 0.32s; }
+
+    /* Striking Search Frame Glow Effect when Listening */
+    .search-frame-active {
+      box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.45), 0 16px 36px -4px rgba(5, 150, 105, 0.3) !important;
+      border-color: #10b981 !important;
+      background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%) !important;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+
+    /* Voice Chips with Vibrant Gradient Hover */
+    .voice-chip {
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+    .voice-chip:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 6px 14px -3px rgba(16, 185, 129, 0.3);
+    }
+    .voice-chip:active {
+      transform: scale(0.94);
+    }
+
+    /* Advanced UI Polish & Aesthetics */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(226, 232, 240, 0.85);
+    }
+
+    .agro-card-hover {
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .agro-card-hover:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 32px -8px rgba(21, 128, 61, 0.16);
+      border-color: rgba(34, 197, 94, 0.45);
+    }
+
+    @keyframes floatSubtle {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-4px); }
+    }
+    .animate-float {
+      animation: floatSubtle 5s ease-in-out infinite;
+    }
+
+    .agro-badge {
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+      border: 1px solid #bbf7d0;
+      color: #166534;
+    }
+
+    .lunar-gradient-card {
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #090d16 100%);
+      box-shadow: 0 10px 25px -5px rgba(30, 27, 75, 0.4);
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col bg-slate-50 selection:bg-agro-200 selection:text-agro-900 pb-20 md:pb-8">
@@ -262,54 +376,170 @@
       </div>
     </section>
 
-    <!-- MODULE A: BUSCADOR EN TIEMPO REAL & FILTROS RÁPIDOS -->
+    <!-- MODULE A: BUSCADOR EN TIEMPO REAL & BÚSQUEDA POR VOZ LLAMATIVA -->
     <section class="space-y-3">
-      <!-- Search Bar -->
-      <div class="relative">
-        <label for="searchInput" class="sr-only">Buscar por cultivo, variedad o síntoma</label>
-        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-          <i data-lucide="search" class="w-5 h-5"></i>
+      <!-- Voice Search Prominent Feature Badge -->
+      <div class="flex items-center justify-between gap-2 flex-wrap">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-emerald-500/15 via-agro-500/15 to-teal-500/15 border border-emerald-500/30 text-emerald-900 font-bold text-xs shadow-xs">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-600"></span>
+          </span>
+          <i data-lucide="mic" class="w-3.5 h-3.5 text-emerald-700"></i>
+          <span>Búsqueda por Voz · Pronuncia el cultivo o plaga</span>
         </div>
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Busca cultivo ('papa', 'maíz') o síntoma ('hojas amarillas', 'gusano', 'manchas')..."
-          class="w-full pl-11 pr-10 py-3.5 bg-white border border-slate-300 rounded-xl text-slate-900 placeholder-slate-400 text-sm sm:text-base focus:outline-hidden focus:ring-2 focus:ring-agro-600 focus:border-agro-600 shadow-2xs transition-all"
-        />
+        <span class="text-[11px] text-slate-500 hidden sm:inline font-medium">Reconocimiento de voz nativo en español para el campo</span>
+      </div>
+
+      <!-- Search Bar & Voice Search Component -->
+      <div id="searchBarContainer" class="relative group bg-white border-2 border-slate-300 hover:border-agro-500 focus-within:border-emerald-600 focus-within:ring-2 focus-within:ring-emerald-400/30 rounded-2xl shadow-xs transition-all duration-200">
+        <label for="searchInput" class="sr-only">Buscar por cultivo, plaga o síntoma</label>
+        
+        <div class="flex items-center w-full pr-1.5 pl-3.5 py-1.5">
+          <div class="flex items-center pointer-events-none text-slate-400 shrink-0">
+            <i data-lucide="search" class="w-5 h-5 text-agro-700"></i>
+          </div>
+
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Escribe o pulsa 'Voz' para buscar ('Papa', 'Gusano', 'Maíz')..."
+            class="w-full px-3 py-2 bg-transparent border-none text-slate-900 placeholder-slate-400 text-sm sm:text-base focus:outline-hidden focus:ring-0"
+            autocomplete="off"
+          />
+
+          <!-- Clear Search Button -->
+          <button
+            id="btnClearSearch"
+            class="hidden p-2 text-slate-400 hover:text-slate-600 rounded-lg shrink-0 touch-target transition-colors"
+            title="Limpiar búsqueda"
+            aria-label="Limpiar búsqueda"
+          >
+            <i data-lucide="x-circle" class="w-5 h-5"></i>
+          </button>
+
+          <!-- Striking & Radiant Voice Search Button -->
+          <div class="relative shrink-0 pl-1">
+            <button
+              id="btnVoiceSearch"
+              onclick="toggleVoiceSearch();"
+              class="voice-shimmer-btn relative flex items-center gap-2 px-3.5 sm:px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm text-white bg-gradient-to-r from-emerald-600 via-agro-600 to-teal-500 hover:from-emerald-500 hover:via-agro-500 hover:to-teal-400 active:scale-95 shadow-md shadow-emerald-700/30 hover:shadow-lg hover:shadow-emerald-700/40 border border-emerald-400/40 transition-all touch-target select-none cursor-pointer"
+              title="Buscar por voz diciendo el nombre del cultivo o plaga en voz alta"
+              aria-label="Buscar por voz"
+            >
+              <!-- Normal State Icon & Label -->
+              <span id="voiceIconNormal" class="flex items-center gap-1.5">
+                <i data-lucide="mic" class="w-4 h-4 text-white"></i>
+                <span class="font-bold">Voz</span>
+              </span>
+
+              <!-- Listening State (equalizer bars) -->
+              <span id="voiceIconListening" class="hidden flex items-center gap-2">
+                <span class="flex items-center gap-0.5 h-4">
+                  <span class="voice-bar"></span>
+                  <span class="voice-bar"></span>
+                  <span class="voice-bar"></span>
+                  <span class="voice-bar"></span>
+                  <span class="voice-bar"></span>
+                </span>
+                <span class="font-bold text-white text-xs">Escuchando...</span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Voice Listening Status Banner -->
+      <div id="voiceSearchStatusBanner" class="hidden p-3 bg-gradient-to-r from-slate-900 via-agro-950 to-slate-900 text-white rounded-2xl border border-agro-500/40 shadow-sm animate-in fade-in slide-in-from-top-1 duration-150 space-y-1.5">
+        <div class="flex items-center justify-between gap-2">
+          <div class="flex items-center gap-2 text-xs font-semibold text-emerald-300">
+            <span class="relative flex h-2.5 w-2.5">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span>
+            </span>
+            <span>Micrófono activado · Di en voz alta lo que deseas buscar:</span>
+          </div>
+          <button
+            onclick="cancelVoiceSearch();"
+            class="text-[11px] px-2 py-0.5 rounded-lg bg-white/10 hover:bg-white/20 text-slate-200 transition-colors"
+          >
+            Detener
+          </button>
+        </div>
+        <p id="voiceLiveTranscript" class="text-sm font-bold text-white italic pl-3 border-l-2 border-emerald-400 min-h-[20px]">
+          "Habla ahora..."
+        </p>
+      </div>
+
+      <!-- Quick Suggestion Chips for Farmers -->
+      <div class="flex items-center gap-1.5 overflow-x-auto pb-1 pt-0.5 custom-scrollbar text-xs">
+        <span class="text-slate-400 shrink-0 flex items-center gap-1 font-medium text-[11px]">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-agro-600"></i>
+          <span>Prueba decir:</span>
+        </span>
         <button
-          id="btnClearSearch"
-          class="hidden absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600"
-          aria-label="Limpiar búsqueda"
+          onclick="quickVoicePrompt('Papa');"
+          class="voice-chip px-2.5 py-1 rounded-lg bg-agro-50 text-agro-800 border border-agro-200 hover:bg-agro-100 font-medium shrink-0 shadow-2xs"
         >
-          <i data-lucide="x-circle" class="w-5 h-5"></i>
+          🥔 "Papa"
+        </button>
+        <button
+          onclick="quickVoicePrompt('Maíz');"
+          class="voice-chip px-2.5 py-1 rounded-lg bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100 font-medium shrink-0 shadow-2xs"
+        >
+          🌽 "Maíz"
+        </button>
+        <button
+          onclick="quickVoicePrompt('Gusano cogollero');"
+          class="voice-chip px-2.5 py-1 rounded-lg bg-red-50 text-red-800 border border-red-200 hover:bg-red-100 font-medium shrink-0 shadow-2xs"
+        >
+          🐛 "Gusano cogollero"
+        </button>
+        <button
+          onclick="quickVoicePrompt('Tizón tardío');"
+          class="voice-chip px-2.5 py-1 rounded-lg bg-purple-50 text-purple-800 border border-purple-200 hover:bg-purple-100 font-medium shrink-0 shadow-2xs"
+        >
+          🍄 "Tizón tardío"
+        </button>
+        <button
+          onclick="quickVoicePrompt('Durazno');"
+          class="voice-chip px-2.5 py-1 rounded-lg bg-orange-50 text-orange-800 border border-orange-200 hover:bg-orange-100 font-medium shrink-0 shadow-2xs"
+        >
+          🍑 "Durazno"
+        </button>
+        <button
+          onclick="quickVoicePrompt('Trigo');"
+          class="voice-chip px-2.5 py-1 rounded-lg bg-yellow-50 text-yellow-800 border border-yellow-200 hover:bg-yellow-100 font-medium shrink-0 shadow-2xs"
+        >
+          🌾 "Trigo"
         </button>
       </div>
 
-      <!-- Quick Filter Buttons / Segmented Tabs -->
-      <div class="flex items-center gap-1.5 p-1 bg-slate-200/70 rounded-xl overflow-x-auto custom-scrollbar">
+      <!-- Quick Filter Buttons / Segmented Tabs (Centered Responsive Grid for Mobile) -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 p-2 bg-slate-200/80 rounded-2xl shadow-xs">
         <button
           data-filter="all"
-          class="filter-tab flex-1 min-w-[75px] py-2 px-3 text-xs sm:text-sm font-semibold rounded-lg transition-all text-center touch-target bg-white text-slate-900 shadow-xs"
+          class="filter-tab py-2.5 px-3 text-xs sm:text-sm font-bold rounded-xl transition-all text-center touch-target bg-white text-slate-900 shadow-xs flex items-center justify-center gap-1.5"
         >
-          Todos
+          <span>🌱 Todos</span>
         </button>
         <button
           data-filter="cultivos"
-          class="filter-tab flex-1 min-w-[85px] py-2 px-3 text-xs sm:text-sm font-semibold rounded-lg transition-all text-center touch-target text-slate-600 hover:text-slate-900"
+          class="filter-tab py-2.5 px-3 text-xs sm:text-sm font-bold rounded-xl transition-all text-center touch-target text-slate-700 hover:text-slate-900 hover:bg-white/50 flex items-center justify-center gap-1.5"
         >
-          Cultivos
+          <span>🌾 Cultivos</span>
         </button>
         <button
           data-filter="plagas"
-          class="filter-tab flex-1 min-w-[150px] py-2 px-3 text-xs sm:text-sm font-semibold rounded-lg transition-all text-center touch-target text-slate-600 hover:text-slate-900"
+          class="filter-tab py-2.5 px-3 text-xs sm:text-sm font-bold rounded-xl transition-all text-center touch-target text-slate-700 hover:text-slate-900 hover:bg-white/50 flex items-center justify-center gap-1.5 col-span-2 sm:col-span-1"
         >
-          Plagas y Enfermedades
+          <span>🛡️ Plagas y Enfermedades</span>
         </button>
         <button
           data-filter="calendario"
-          class="filter-tab flex-1 min-w-[95px] py-2 px-3 text-xs sm:text-sm font-semibold rounded-lg transition-all text-center touch-target text-slate-600 hover:text-slate-900"
+          class="filter-tab py-2.5 px-3 text-xs sm:text-sm font-bold rounded-xl transition-all text-center touch-target text-slate-700 hover:text-slate-900 hover:bg-white/50 flex items-center justify-center gap-1.5 col-span-2 sm:col-span-1"
         >
-          Calendario
+          <span>📅 Calendario Lunar</span>
         </button>
       </div>
 
@@ -456,19 +686,21 @@
       <i data-lucide="shield-alert" class="w-5 h-5"></i>
       <span class="text-[10px] font-medium">Plagas</span>
     </button>
+    <!-- Raised Center Voice Search FAB for Android Easy-Access -->
+    <button
+      onclick="toggleVoiceSearch(); triggerHaptic([30, 25]);"
+      class="-mt-5 w-12 h-12 rounded-full bg-gradient-to-tr from-emerald-600 via-agro-600 to-teal-500 text-white flex items-center justify-center shadow-lg shadow-emerald-700/40 ring-4 ring-white active:scale-95 transition-transform cursor-pointer"
+      title="Buscar por voz diciendo cultivo o plaga"
+      aria-label="Buscar por voz"
+    >
+      <i data-lucide="mic" class="w-6 h-6"></i>
+    </button>
     <button
       onclick="setFilterTab('calendario'); triggerHaptic();"
       class="flex flex-col items-center gap-0.5 text-indigo-800 hover:text-indigo-900 active:scale-90 transition-transform touch-target focus:outline-hidden"
     >
       <i data-lucide="moon" class="w-5 h-5 text-indigo-600"></i>
       <span class="text-[10px] font-bold">Luna & Mes</span>
-    </button>
-    <button
-      onclick="document.getElementById('sectionMicroclima')?.scrollIntoView({ behavior: 'smooth' }); triggerHaptic();"
-      class="flex flex-col items-center gap-0.5 text-slate-600 hover:text-agro-700 active:scale-90 transition-transform touch-target focus:outline-hidden"
-    >
-      <i data-lucide="compass" class="w-5 h-5"></i>
-      <span class="text-[10px] font-medium">Microclima</span>
     </button>
     <button
       onclick="openChatModal(); triggerHaptic();"
@@ -496,8 +728,8 @@
           <p id="detailSubtitle" class="text-xs sm:text-sm text-agro-100"></p>
         </div>
         <button
-          onclick="closeDetailModal();"
-          class="text-white/80 hover:text-white p-1 rounded-lg touch-target flex items-center justify-center"
+          onclick="closeDetailModal(); triggerHaptic(15);"
+          class="text-white/90 hover:text-white p-2.5 rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 transition-all touch-target flex items-center justify-center cursor-pointer shrink-0"
           aria-label="Cerrar ventana"
         >
           <i data-lucide="x" class="w-6 h-6"></i>
@@ -554,14 +786,14 @@
             class="bg-agro-900 text-agro-100 text-[11px] py-1 px-2 rounded-lg border border-agro-600 focus:outline-hidden"
             title="Seleccionar modelo Gemini"
           >
-            <option value="gemini-3.1-flash-lite" selected>gemini-3.1-flash-lite (Predeterminado · Rápido)</option>
-            <option value="gemini-3.8-flash">gemini-3.8-flash (General)</option>
-            <option value="gemini-4-argon">gemini-4-argon (Razonamiento Complejo)</option>
+            <option value="gemini-3.1-flash-lite" selected>Gemini 3.1 Flash (Predeterminado · Rápido)</option>
+            <option value="gemini-3.8-flash">Gemini 3.8 Flash (General)</option>
+            <option value="gemini-4-argon">Gemini 4 Argon (Razonamiento Complejo)</option>
           </select>
 
           <button
-            onclick="closeChatModal();"
-            class="text-white/80 hover:text-white p-1 rounded-lg touch-target flex items-center justify-center"
+            onclick="closeChatModal(); triggerHaptic(15);"
+            class="text-white/90 hover:text-white p-2.5 rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 transition-all touch-target flex items-center justify-center cursor-pointer shrink-0"
             aria-label="Cerrar Chatbot"
           >
             <i data-lucide="x" class="w-5 h-5"></i>
@@ -640,7 +872,7 @@
             <p class="text-xs text-earth-200">Modelo Gemini 3 Pro con selección de resolución</p>
           </div>
         </div>
-        <button onclick="closeImageGenModal();" class="text-white/80 hover:text-white p-1 rounded-lg">
+        <button onclick="closeImageGenModal(); triggerHaptic(15);" class="text-white/90 hover:text-white p-2.5 rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 transition-all touch-target flex items-center justify-center cursor-pointer shrink-0" aria-label="Cerrar">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
@@ -723,7 +955,7 @@
             <p class="text-xs text-blue-200">Datos verificados en tiempo real con Google Search</p>
           </div>
         </div>
-        <button onclick="closeWeatherModal();" class="text-white/80 hover:text-white p-1 rounded-lg">
+        <button onclick="closeWeatherModal(); triggerHaptic(15);" class="text-white/90 hover:text-white p-2.5 rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 transition-all touch-target flex items-center justify-center cursor-pointer shrink-0" aria-label="Cerrar">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
@@ -771,7 +1003,7 @@
             <p class="text-xs text-slate-400">Gestión de Cultivos, Plagas y Calendario de Sopachuy</p>
           </div>
         </div>
-        <button onclick="closeAdminModal();" class="text-slate-400 hover:text-white p-1 rounded-lg">
+        <button onclick="closeAdminModal(); triggerHaptic(15);" class="text-slate-300 hover:text-white p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 active:scale-95 transition-all touch-target flex items-center justify-center cursor-pointer shrink-0" aria-label="Cerrar Panel">
           <i data-lucide="x" class="w-6 h-6"></i>
         </button>
       </div>
@@ -2195,11 +2427,11 @@
       filterTabs.forEach((tab) => {
         const isActive = tab.getAttribute('data-filter') === category;
         if (isActive) {
-          tab.classList.add('bg-white', 'text-slate-900', 'shadow-xs');
-          tab.classList.remove('text-slate-600');
+          tab.classList.add('bg-white', 'text-slate-900', 'shadow-xs', 'font-bold');
+          tab.classList.remove('text-slate-700', 'hover:bg-white/50');
         } else {
           tab.classList.remove('bg-white', 'text-slate-900', 'shadow-xs');
-          tab.classList.add('text-slate-600');
+          tab.classList.add('text-slate-700', 'hover:bg-white/50');
         }
       });
       handleSearchAndFilter();
@@ -2280,6 +2512,193 @@
     }
 
     /**
+     * Web Speech API - Voice Search Engine for Rural Farmers
+     */
+    let speechRecognitionInstance = null;
+    let isVoiceListening = false;
+
+    function getSpeechRecognition() {
+      if (typeof window === 'undefined') return null;
+      return window.SpeechRecognition || window.webkitSpeechRecognition || null;
+    }
+
+    function initVoiceSearch() {
+      const SpeechRecognitionClass = getSpeechRecognition();
+      if (!SpeechRecognitionClass) {
+        console.warn('Web Speech API not supported on this browser.');
+        return null;
+      }
+      try {
+        const recognition = new SpeechRecognitionClass();
+        recognition.lang = 'es-BO'; // Bolivian Spanish
+        recognition.continuous = false;
+        recognition.interimResults = true;
+        recognition.maxAlternatives = 1;
+
+        recognition.onstart = () => {
+          isVoiceListening = true;
+          updateVoiceSearchUI(true);
+          triggerHaptic([30, 40, 30]);
+        };
+
+        recognition.onresult = (event) => {
+          let interimTranscript = '';
+          let finalTranscript = '';
+
+          for (let i = event.resultIndex; i < event.results.length; ++i) {
+            const transcript = event.results[i][0].transcript;
+            if (event.results[i].isFinal) {
+              finalTranscript += transcript;
+            } else {
+              interimTranscript += transcript;
+            }
+          }
+
+          const currentText = finalTranscript || interimTranscript;
+          if (currentText) {
+            const liveTranscriptEl = document.getElementById('voiceLiveTranscript');
+            if (liveTranscriptEl) {
+              liveTranscriptEl.textContent = `"${currentText}"`;
+            }
+          }
+
+          if (finalTranscript) {
+            const cleanedQuery = finalTranscript.trim().replace(/[.,;!?]+$/, '');
+            searchInput.value = cleanedQuery;
+            currentSearchTerm = cleanedQuery.toLowerCase();
+            btnClearSearch.classList.toggle('hidden', !currentSearchTerm);
+            handleSearchAndFilter();
+            triggerHaptic(50);
+            
+            const liveTranscriptEl = document.getElementById('voiceLiveTranscript');
+            if (liveTranscriptEl) {
+              liveTranscriptEl.textContent = `Buscando: "${cleanedQuery}" ✅`;
+            }
+            setTimeout(() => {
+              stopVoiceSearch();
+            }, 750);
+          }
+        };
+
+        recognition.onerror = (event) => {
+          console.warn('Speech recognition error:', event.error);
+          const liveTranscriptEl = document.getElementById('voiceLiveTranscript');
+          if (liveTranscriptEl) {
+            if (event.error === 'not-allowed') {
+              liveTranscriptEl.textContent = 'Permiso de micrófono denegado en tu navegador. Habilita el acceso para buscar por voz.';
+            } else if (event.error === 'no-speech') {
+              liveTranscriptEl.textContent = 'No se detectó voz. Vuelve a pulsar "Voz" y habla cerca del micrófono.';
+            } else {
+              liveTranscriptEl.textContent = `Aviso de audio (${event.error}). Puedes usar los botones de acceso rápido.`;
+            }
+          }
+          triggerHaptic(100);
+          setTimeout(() => {
+            stopVoiceSearch();
+          }, 2400);
+        };
+
+        recognition.onend = () => {
+          isVoiceListening = false;
+          updateVoiceSearchUI(false);
+        };
+
+        return recognition;
+      } catch (err) {
+        console.error('Error instantiating SpeechRecognition:', err);
+        return null;
+      }
+    }
+
+    function toggleVoiceSearch() {
+      triggerHaptic(20);
+      const SpeechRecognitionClass = getSpeechRecognition();
+      if (!SpeechRecognitionClass) {
+        alert('Tu navegador no cuenta con la API de Reconocimiento de Voz nativa. Puedes escribir o pulsar los botones de búsqueda rápida (Papa, Maíz, Gusano...).');
+        return;
+      }
+
+      if (isVoiceListening) {
+        stopVoiceSearch();
+      } else {
+        startVoiceSearch();
+      }
+    }
+
+    function startVoiceSearch() {
+      if (!speechRecognitionInstance) {
+        speechRecognitionInstance = initVoiceSearch();
+      }
+      if (!speechRecognitionInstance) return;
+
+      try {
+        const liveTranscriptEl = document.getElementById('voiceLiveTranscript');
+        if (liveTranscriptEl) {
+          liveTranscriptEl.textContent = 'Habla ahora... Di un cultivo ("Papa", "Maíz") o una plaga ("Gusano", "Tizón").';
+        }
+        speechRecognitionInstance.start();
+      } catch (e) {
+        console.warn('Error starting voice recognition:', e);
+      }
+    }
+
+    function stopVoiceSearch() {
+      if (speechRecognitionInstance) {
+        try {
+          speechRecognitionInstance.stop();
+        } catch (e) {}
+      }
+      isVoiceListening = false;
+      updateVoiceSearchUI(false);
+    }
+
+    function cancelVoiceSearch() {
+      if (speechRecognitionInstance) {
+        try {
+          speechRecognitionInstance.abort();
+        } catch (e) {}
+      }
+      isVoiceListening = false;
+      updateVoiceSearchUI(false);
+      triggerHaptic(20);
+    }
+
+    function quickVoicePrompt(term) {
+      triggerHaptic(30);
+      searchInput.value = term;
+      currentSearchTerm = term.toLowerCase();
+      btnClearSearch.classList.toggle('hidden', !currentSearchTerm);
+      handleSearchAndFilter();
+      const catalogEl = document.getElementById('sectionCultivos');
+      if (catalogEl && !catalogEl.classList.contains('hidden')) {
+        catalogEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function updateVoiceSearchUI(listening) {
+      const btnVoice = document.getElementById('btnVoiceSearch');
+      const voiceIconNormal = document.getElementById('voiceIconNormal');
+      const voiceIconListening = document.getElementById('voiceIconListening');
+      const statusBanner = document.getElementById('voiceSearchStatusBanner');
+      const searchContainer = document.getElementById('searchBarContainer');
+
+      if (listening) {
+        btnVoice?.classList.add('voice-listening-pulse', 'ring-4', 'ring-emerald-400/50', 'from-emerald-600', 'to-teal-600');
+        voiceIconNormal?.classList.add('hidden');
+        voiceIconListening?.classList.remove('hidden');
+        statusBanner?.classList.remove('hidden');
+        searchContainer?.classList.add('search-frame-active');
+      } else {
+        btnVoice?.classList.remove('voice-listening-pulse', 'ring-4', 'ring-emerald-400/50', 'from-emerald-600', 'to-teal-600');
+        voiceIconNormal?.classList.remove('hidden');
+        voiceIconListening?.classList.add('hidden');
+        statusBanner?.classList.add('hidden');
+        searchContainer?.classList.remove('search-frame-active');
+      }
+      initLucide();
+    }
+
+    /**
      * Render Everything
      */
     function renderAll() {
@@ -2298,7 +2717,7 @@
         const microAdvisory = getMicroclimateCropAdvisory(crop, currentMicroclimateZone);
 
         return `
-          <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between group">
+          <div class="agro-card-hover bg-white rounded-2xl border border-slate-200/90 p-4 shadow-xs flex flex-col justify-between group">
             <div class="space-y-3">
               <!-- Top Row: Icon + Quechua tag + Microclimate Top Badge -->
               <div class="flex items-center justify-between gap-1 flex-wrap">
@@ -2372,7 +2791,7 @@
       badgeCountPlagas.textContent = `${pests.length} identificada${pests.length === 1 ? '' : 's'}`;
       gridPlagas.innerHTML = pests.map((pest) => {
         return `
-          <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between group">
+          <div class="agro-card-hover bg-white rounded-2xl border border-slate-200/90 p-4 shadow-xs flex flex-col justify-between group">
             <div class="space-y-3">
               <!-- Top Row: Icon + Target Crop -->
               <div class="flex items-center justify-between">

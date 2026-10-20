@@ -77,6 +77,8 @@ app.post('/api/chat', async (req: Request, res: Response): Promise<void> => {
       selectedModel = 'gemini-4-argon';
     } else if (modelChoice === 'gemini-3.8-flash') {
       selectedModel = 'gemini-3.8-flash';
+    } else if (modelChoice === 'gemini-3.1-flash' || modelChoice === 'gemini-3.1-flash-lite') {
+      selectedModel = 'gemini-3.1-flash-lite';
     }
 
     const contents = messages.map((m: { role: string; text: string }) => ({
